@@ -606,9 +606,6 @@ input[type="number"] {
   gap: 0.625rem 1.875rem;
   align-items: start;
 }
-.faq-spoilers--cols {
-  grid-template-columns: repeat(2, 1fr);
-}
 .faq-spoilers__item {
   border-bottom: 0.125rem solid #e0d9cf;
 }
@@ -4141,6 +4138,10 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
+  }}
+@media (min-width: 43.74875em){
+  .faq-spoilers--cols {
+    grid-template-columns: repeat(2, 1fr);
   }}
 @media (min-width: 47.99875em) and (max-width: 61.99875em){
   .footer__social {
