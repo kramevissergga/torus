@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Профіль</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,335 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<div class="page__profile profile">
+					<div class="profile__container">
+						<div class="profile__wrapper">
+							<div data-fls-spoilers="767.98, max" class="profile__aside">
+								<details>
+									<summary class="profile__user user-profile _icon-user">
+										<div class="user-profile__body">
+											<h3 class="user-profile__title">Андрій Гаврилов</h3>
+											<div class="user-profile__email">andriyko@gmail.com</div>
+										</div>
+										<div class="user-profile__icon _icon-ch-down"></div>
+									</summary>
+									<div class="profile__content">
+										<div class="profile__menu">
+											<a href="profile-data.html" class="profile__menu-item _icon-info">
+												<span>Особисті дані</span>
+											</a>
+											<a href="profile-edit.html" class="profile__menu-item _icon-info">
+												<span>Особисті дані(ред.)</span>
+											</a>
+											<a href="profile-orders.html" class="profile__menu-item _icon-orders --active">
+												<span>Мої замовлення</span>
+											</a>
+											<a href="profile-address.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса</span>
+											</a>
+											<a href="profile-address-add.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса(дод.)</span>
+											</a>
+											<a href="profile-cart.html" class="profile__menu-item _icon-cart">
+												<span>Кошик</span>
+											</a>
+											<a href="profile-history.html" class="profile__menu-item _icon-eye">
+												<span>Переглянуті товари</span>
+											</a>
+											<a href="profile-wishlist.html" class="profile__menu-item _icon-heart">
+												<span>Обрані товари</span>
+											</a>
+											<a href="profile-bonuses.html" class="profile__menu-item _icon-gift-card">
+												<span>Бонусні бали</span>
+											</a>
+										</div>
+										<button class="profile__logout _icon-exit">Вихід</button>
+									</div>
+								</details>
+							</div>
+							<div class="profile__body">
+								<h1 data-fls-dynamic=".profile__container, 767.98, first" class="profile__title title">Мої замовлення</h1>
+								<div class="profile__orders orders-profile">
+									<div class="orders-profile__navigation">
+										<a href="profile-orders.html" class="orders-profile__link --active">Всі замовлення</a>
+										<a href="profile-refund.html" class="orders-profile__link">Гарантія та повернення</a>
+									</div>
+									<div class="orders-profile__actions">
+										<form action="#" class="orders-profile__search search">
+											<input type="text" name="search" placeholder="Пошук товару або замовлення" class="search__input input">
+											<button class="search__submit button _icon-search"></button>
+										</form>
+										<select data-fls-select="" data-fls-select-modif="orders">
+											<option value="1" selected>За весь час</option>
+											<option value="2">За останні 30 днів</option>
+											<option value="3">За 6 місяців</option>
+											<option value="4">2025</option>
+											<option value="5">2024</option>
+											<option value="6">2023</option>
+											<option value="7">2022</option>
+											<option value="8">2021</option>
+										</select>
+									</div>
+									<div data-fls-spoilers="" class="orders-profile__items">
+										<details class="orders-profile__item item-order">
+											<summary class="item-order__summary summary-orders">
+												<div class="summary-orders__body">
+													<div class="summary-orders__info">
+														<span>№ 2334</span>
+														від 27 травня 2025
+													</div>
+													<div style="color: #32BC00;" class="summary-orders__label">Виконано</div>
+												</div>
+												<div class="summary-orders__images">
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+													</a>
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+													</a>
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/03.webp">
+													</a>
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+													</a>
+												</div>
+												<div class="summary-orders__icon _icon-ch-down"></div>
+											</summary>
+											<div class="item-order__body">
+												<div class="item-order__details details-orders">
+													<div class="details-orders__aside">
+														<div class="details-orders__buttons">
+															<button class="details-orders__button button button--light">Повторити замовлення</button>
+															<button class="details-orders__button button button--border">Написати відгук</button>
+														</div>
+														<div class="details-orders__info">
+															<h4 class="details-orders__info-title">Самовивіз з точки видачі</h4>
+															<div class="details-orders__info-label _icon-location">Базова 1г</div>
+														</div>
+														<div class="details-orders__receiver">
+															<div class="details-orders__receiver-label">Отримувач замовлення</div>
+															<div class="details-orders__receiver-text">
+																<span>Андрій Гаврилов</span>
+																<span>380971111122</span>
+																<span>andriyko@gmail.com</span>
+															</div>
+														</div>
+													</div>
+													<div class="details-orders__body">
+														<div class="details-orders__products">
+															<div class="details-orders__product product-orders">
+																<a href="#" class="product-orders__image">
+																	<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+																</a>
+																<div class="product-orders__body">
+																	<h3 class="product-orders__title">
+																		<a href="#">Sika BV 3M</a>
+																	</h3>
+																	<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																	<div class="product-orders__article">Артикул: 15863</div>
+																</div>
+																<div class="product-orders__item-price">101 грн. x1</div>
+																<div class="product-orders__price">101 грн.</div>
+															</div>
+															<div class="details-orders__product product-orders">
+																<a href="#" class="product-orders__image">
+																	<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+																</a>
+																<div class="product-orders__body">
+																	<h3 class="product-orders__title">
+																		<a href="#">Sika BV 3M</a>
+																	</h3>
+																	<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																	<div class="product-orders__article">Артикул: 15863</div>
+																</div>
+																<div class="product-orders__item-price">1201 грн. x1</div>
+																<div class="product-orders__price">1201 грн.</div>
+															</div>
+														</div>
+														<div class="details-orders__summary">
+															<div class="details-orders__summary-item">
+																<span>Доставка</span>
+																<span>350 грн.</span>
+															</div>
+															<div class="details-orders__summary-item">
+																<span>Разом</span>
+																<span class="total">1653 грн.</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</details>
+										<details class="orders-profile__item item-order">
+											<summary class="item-order__summary summary-orders">
+												<div class="summary-orders__body">
+													<div class="summary-orders__info">
+														<span>№ 2334</span>
+														від 27 травня 2025
+													</div>
+													<div style="color: #FFA900;" class="summary-orders__label">Обробляється</div>
+												</div>
+												<div class="summary-orders__images">
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+													</a>
+												</div>
+												<div class="summary-orders__icon _icon-ch-down"></div>
+											</summary>
+											<div class="item-order__body">
+												<div class="item-order__details details-orders">
+													<div class="details-orders__aside">
+														<div class="details-orders__buttons">
+															<button class="details-orders__button button button--light">Повторити замовлення</button>
+															<button class="details-orders__button button button--border">Написати відгук</button>
+														</div>
+														<div class="details-orders__info">
+															<h4 class="details-orders__info-title">Самовивіз з точки видачі</h4>
+															<div class="details-orders__info-label _icon-location">Базова 1г</div>
+														</div>
+														<div class="details-orders__receiver">
+															<div class="details-orders__receiver-label">Отримувач замовлення</div>
+															<div class="details-orders__receiver-text">
+																<span>Андрій Гаврилов</span>
+																<span>380971111122</span>
+																<span>andriyko@gmail.com</span>
+															</div>
+														</div>
+													</div>
+													<div class="details-orders__body">
+														<div class="details-orders__products">
+															<div class="details-orders__product product-orders">
+																<a href="#" class="product-orders__image">
+																	<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+																</a>
+																<div class="product-orders__body">
+																	<h3 class="product-orders__title">
+																		<a href="#">Sika BV 3M</a>
+																	</h3>
+																	<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																	<div class="product-orders__article">Артикул: 15863</div>
+																</div>
+																<div class="product-orders__item-price">101 грн. x1</div>
+																<div class="product-orders__price">101 грн.</div>
+															</div>
+															<div class="details-orders__product product-orders">
+																<a href="#" class="product-orders__image">
+																	<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+																</a>
+																<div class="product-orders__body">
+																	<h3 class="product-orders__title">
+																		<a href="#">Sika BV 3M</a>
+																	</h3>
+																	<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																	<div class="product-orders__article">Артикул: 15863</div>
+																</div>
+																<div class="product-orders__item-price">1201 грн. x1</div>
+																<div class="product-orders__price">1201 грн.</div>
+															</div>
+														</div>
+														<div class="details-orders__summary">
+															<div class="details-orders__summary-item">
+																<span>Доставка</span>
+																<span>350 грн.</span>
+															</div>
+															<div class="details-orders__summary-item">
+																<span>Разом</span>
+																<span class="total">1653 грн.</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</details>
+										<details class="orders-profile__item item-order">
+											<summary class="item-order__summary summary-orders">
+												<div class="summary-orders__body">
+													<div class="summary-orders__info">
+														<span>№ 2334</span>
+														від 27 травня 2025
+													</div>
+													<div style="color: rgba(30, 30, 30, 0.40);" class="summary-orders__label">Скасовано</div>
+												</div>
+												<div class="summary-orders__images">
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+													</a>
+												</div>
+												<div class="summary-orders__icon _icon-ch-down"></div>
+											</summary>
+											<div class="item-order__body">
+												<div class="item-order__details details-orders">
+													<div class="details-orders__aside">
+														<div class="details-orders__buttons">
+															<button class="details-orders__button button button--light">Повторити замовлення</button>
+															<button class="details-orders__button button button--border">Написати відгук</button>
+														</div>
+														<div class="details-orders__info">
+															<h4 class="details-orders__info-title">Самовивіз з точки видачі</h4>
+															<div class="details-orders__info-label _icon-location">Базова 1г</div>
+														</div>
+														<div class="details-orders__receiver">
+															<div class="details-orders__receiver-label">Отримувач замовлення</div>
+															<div class="details-orders__receiver-text">
+																<span>Андрій Гаврилов</span>
+																<span>380971111122</span>
+																<span>andriyko@gmail.com</span>
+															</div>
+														</div>
+													</div>
+													<div class="details-orders__body">
+														<div class="details-orders__products">
+															<div class="details-orders__product product-orders">
+																<a href="#" class="product-orders__image">
+																	<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+																</a>
+																<div class="product-orders__body">
+																	<h3 class="product-orders__title">
+																		<a href="#">Sika BV 3M</a>
+																	</h3>
+																	<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																	<div class="product-orders__article">Артикул: 15863</div>
+																</div>
+																<div class="product-orders__item-price">101 грн. x1</div>
+																<div class="product-orders__price">101 грн.</div>
+															</div>
+															<div class="details-orders__product product-orders">
+																<a href="#" class="product-orders__image">
+																	<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+																</a>
+																<div class="product-orders__body">
+																	<h3 class="product-orders__title">
+																		<a href="#">Sika BV 3M</a>
+																	</h3>
+																	<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																	<div class="product-orders__article">Артикул: 15863</div>
+																</div>
+																<div class="product-orders__item-price">1201 грн. x1</div>
+																<div class="product-orders__price">1201 грн.</div>
+															</div>
+														</div>
+														<div class="details-orders__summary">
+															<div class="details-orders__summary-item">
+																<span>Доставка</span>
+																<span>350 грн.</span>
+															</div>
+															<div class="details-orders__summary-item">
+																<span>Разом</span>
+																<span class="total">1653 грн.</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</details>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

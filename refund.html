@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Умови повернення</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,175 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<section class="page__info-page info-page">
+					<div class="info-page__container">
+						<div class="info-page__breadcrumbs breadcrumbs">
+							<ul>
+								<li>
+									<a href="#">Головна</a>
+								</li>
+								<li>
+									<a href="#">Доставка і оплата</a>
+								</li>
+							</ul>
+						</div>
+						<h1 class="info-page__title title">Повернення товару</h1>
+						<div class="info-page__body">
+							<div class="info-page__block">
+								<img src="./assets/img/info/03.svg" alt="Image" class="info-page__icon">
+								<h2 class="info-page__block-title">Умови повернення товару:</h2>
+								<div class="info-page__text text">
+									<ol>
+										<li>1. Товар можна повернути протягом 14 днів з дня покупки</li>
+										<li>2. Товар не був в експлуатації</li>
+										<li>3. Збережено товарний вигляд та не порушено упаковку</li>
+										<li>4. Надано документ про покупку</li>
+									</ol>
+									<h3>Договір публічної оферти:</h3>
+									<a href="#">Ознайомитись з усіма умовами Договір публічної оферти</a>
+								</div>
+							</div>
+							<div class="info-page__block">
+								<img src="./assets/img/info/02.svg" alt="Image" class="info-page__icon">
+								<h2 class="info-page__block-title">Як повернути товар?</h2>
+								<div class="info-page__text text">
+									<ol>
+										<li>1) Перейдіть до вашого листа замовлень.</li>
+										<li>2) Оберіть потрібний товар із списку.</li>
+										<li>3) Заповніть форму.</li>
+										<li>4) Домовтесь про час та місце повернення з нашим менеджером.</li>
+									</ol>
+								</div>
+								<a href="#" class="info-page__button button button--border">До моїх замовлень</a>
+							</div>
+						</div>
+						<div class="info-page__banners hero-home">
+							<div data-fls-slider="" class="hero-home__slider splide">
+								<div class="splide__track">
+									<ul class="splide__list">
+										<li class="splide__slide">
+											<a href="#" class="hero-home__image">
+												<img class="ibg pc" alt="Image" src="./assets/img/home/hero/01.webp">
+												<img class="ibg mobile" alt="Image" src="./assets/img/home/hero/01-mob.webp">
+											</a>
+										</li>
+										<li class="splide__slide">
+											<a href="#" class="hero-home__image">
+												<img class="ibg" alt="Image" src="./assets/img/home/hero/02.webp">
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<div class="page__faq faq-section">
+					<div class="faq-section__container">
+						<h2 class="faq-section__title title">Часті питання</h2>
+						<div data-fls-spoilers="" class="faq-section__spoilers faq-spoilers faq-spoilers--cols">
+							<details class="faq-spoilers__item">
+								<summary class="faq-spoilers__title">
+									<span>Які товари ви пропонуєте?</span>
+									<div class="faq-spoilers__icon"></div>
+								</summary>
+								<div class="faq-spoilers__body">
+									<div class="faq-spoilers__text text">
+										<p>
+											У нас широкий асортимент: фарби, плитка, ламінат, шпалери, інструменти та багато іншого для
+                ремонту.
+										</p>
+									</div>
+								</div>
+							</details>
+							<details class="faq-spoilers__item">
+								<summary class="faq-spoilers__title">
+									<span>Як оформити замовлення?</span>
+									<div class="faq-spoilers__icon"></div>
+								</summary>
+								<div class="faq-spoilers__body">
+									<div class="faq-spoilers__text text">
+										<p>
+											Додайте товари в кошик, заповніть дані для доставки та виберіть спосіб оплати. Це швидко та
+                зручно!
+										</p>
+									</div>
+								</div>
+							</details>
+							<details class="faq-spoilers__item">
+								<summary class="faq-spoilers__title">
+									<span>Які терміни доставки?</span>
+									<div class="faq-spoilers__icon"></div>
+								</summary>
+								<div class="faq-spoilers__body">
+									<div class="faq-spoilers__text text">
+										<p>
+											Додайте товари в кошик, заповніть дані для доставки та виберіть спосіб оплати. Це швидко та
+                зручно!
+										</p>
+									</div>
+								</div>
+							</details>
+							<details class="faq-spoilers__item">
+								<summary class="faq-spoilers__title">
+									<span>Чи є бонусна система?</span>
+									<div class="faq-spoilers__icon"></div>
+								</summary>
+								<div class="faq-spoilers__body">
+									<div class="faq-spoilers__text text">
+										<p>
+											Додайте товари в кошик, заповніть дані для доставки та виберіть спосіб оплати. Це швидко та
+                зручно!
+										</p>
+									</div>
+								</div>
+							</details>
+							<details class="faq-spoilers__item">
+								<summary class="faq-spoilers__title">
+									<span>Чи можна повернути товар?</span>
+									<div class="faq-spoilers__icon"></div>
+								</summary>
+								<div class="faq-spoilers__body">
+									<div class="faq-spoilers__text text">
+										<p>
+											Додайте товари в кошик, заповніть дані для доставки та виберіть спосіб оплати. Це швидко та
+                зручно!
+										</p>
+									</div>
+								</div>
+							</details>
+							<details class="faq-spoilers__item">
+								<summary class="faq-spoilers__title">
+									<span>Чи є гарантія на товари?</span>
+									<div class="faq-spoilers__icon"></div>
+								</summary>
+								<div class="faq-spoilers__body">
+									<div class="faq-spoilers__text text">
+										<p>
+											Додайте товари в кошик, заповніть дані для доставки та виберіть спосіб оплати. Це швидко та
+                зручно!
+										</p>
+									</div>
+								</div>
+							</details>
+							<details class="faq-spoilers__item">
+								<summary class="faq-spoilers__title">
+									<span>Як отримати консультацію?</span>
+									<div class="faq-spoilers__icon"></div>
+								</summary>
+								<div class="faq-spoilers__body">
+									<div class="faq-spoilers__text text">
+										<p>
+											Додайте товари в кошик, заповніть дані для доставки та виберіть спосіб оплати. Це швидко та
+                зручно!
+										</p>
+									</div>
+								</div>
+							</details>
+						</div>
 					</div>
 				</div>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Профіль</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,78 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<div class="page__profile profile">
+					<div class="profile__container">
+						<div class="profile__wrapper">
+							<div data-fls-spoilers="767.98, max" class="profile__aside">
+								<details>
+									<summary class="profile__user user-profile _icon-user">
+										<div class="user-profile__body">
+											<h3 class="user-profile__title">Андрій Гаврилов</h3>
+											<div class="user-profile__email">andriyko@gmail.com</div>
+										</div>
+										<div class="user-profile__icon _icon-ch-down"></div>
+									</summary>
+									<div class="profile__content">
+										<div class="profile__menu">
+											<a href="profile-data.html" class="profile__menu-item _icon-info --active">
+												<span>Особисті дані</span>
+											</a>
+											<a href="profile-edit.html" class="profile__menu-item _icon-info">
+												<span>Особисті дані(ред.)</span>
+											</a>
+											<a href="profile-orders.html" class="profile__menu-item _icon-orders">
+												<span>Мої замовлення</span>
+											</a>
+											<a href="profile-address.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса</span>
+											</a>
+											<a href="profile-address-add.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса(дод.)</span>
+											</a>
+											<a href="profile-cart.html" class="profile__menu-item _icon-cart">
+												<span>Кошик</span>
+											</a>
+											<a href="profile-history.html" class="profile__menu-item _icon-eye">
+												<span>Переглянуті товари</span>
+											</a>
+											<a href="profile-wishlist.html" class="profile__menu-item _icon-heart">
+												<span>Обрані товари</span>
+											</a>
+											<a href="profile-bonuses.html" class="profile__menu-item _icon-gift-card">
+												<span>Бонусні бали</span>
+											</a>
+										</div>
+										<button class="profile__logout _icon-exit">Вихід</button>
+									</div>
+								</details>
+							</div>
+							<div class="profile__body">
+								<h1 data-fls-dynamic=".profile__container, 767.98, first" class="profile__title title">Особисті дані</h1>
+								<div class="profile__data data-profile">
+									<div class="data-profile__body">
+										<div class="data-profile__fields">
+											<div class="data-profile__field field">
+												<div class="field__label">Ім’я та Прізвище</div>
+												<div class="field__text">Андрій Гаврилов</div>
+											</div>
+											<div class="data-profile__field field">
+												<div class="field__label">Телефон</div>
+												<div class="field__text">+38 097 111 11 22</div>
+											</div>
+											<div class="data-profile__field field">
+												<div class="field__label">Електрона пошта</div>
+												<div class="field__text">andriyko@gmail.com</div>
+											</div>
+										</div>
+										<button class="data-profile__button profile-btn button button--light">Редагувати</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

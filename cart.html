@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Кошик</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,664 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<section class="page__cart cart">
+					<div class="cart__container">
+						<div class="cart__breadcrumbs breadcrumbs">
+							<ul>
+								<li>
+									<a href="#">Головна</a>
+								</li>
+								<li>
+									<a href="#">Кошик</a>
+								</li>
+							</ul>
+						</div>
+						<div class="cart__header">
+							<h1 class="cart__title title">Ваш кошик товарів</h1>
+							<button class="cart__clear button button--border pc">Очистити</button>
+							<button class="cart__clear-mob icon-btn _icon-clear mobile"></button>
+						</div>
+						<div class="cart__wrapper">
+							<div class="cart__body">
+								<div class="cart__empty empty-cart">
+									<div class="empty-cart__body">
+										<h2 class="empty-cart__title">Нажаль кошик зараз порожній</h2>
+										<p class="empty-cart__text">
+											Можливо вас зацікавлять наші
+											<a href="#">Акції</a>
+										</p>
+									</div>
+									<a href="#" class="empty-cart__button button button--border">До каталогу</a>
+								</div>
+								<div class="cart__items">
+									<div class="cart__item item-cart">
+										<div class="item-cart__sale">-14%</div>
+										<a href="#" class="item-cart__image">
+											<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+										</a>
+										<div class="item-cart__body">
+											<h3 class="item-cart__title">
+												<a href="#">Sika BV 3M</a>
+											</h3>
+											<div class="item-cart__desc">Артикул: 15863</div>
+										</div>
+										<div class="item-cart__counter counter">
+											<button class="counter__btn counter__btn--decrement">-</button>
+											<input value="1" type="number" class="counter__input">
+											<button class="counter__btn counter__btn--increment">+</button>
+										</div>
+										<div class="item-cart__price">
+											<div class="item-cart__bonuses">
+												<span>Бонуси</span>
+												+25
+											</div>
+											101 грн.
+										</div>
+										<button class="item-cart__remove _icon-delete"></button>
+									</div>
+									<div class="cart__item item-cart">
+										<div class="item-cart__sale">-14%</div>
+										<a href="#" class="item-cart__image">
+											<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+										</a>
+										<div class="item-cart__body">
+											<h3 class="item-cart__title">
+												<a href="#">Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)</a>
+											</h3>
+											<div class="item-cart__desc">Артикул: 15863</div>
+										</div>
+										<div class="item-cart__counter counter">
+											<button class="counter__btn counter__btn--decrement">-</button>
+											<input value="1" type="number" class="counter__input">
+											<button class="counter__btn counter__btn--increment">+</button>
+										</div>
+										<div class="item-cart__price">
+											<div class="item-cart__bonuses">
+												<span>Бонуси</span>
+												+25
+											</div>
+											101 грн.
+										</div>
+										<button class="item-cart__remove _icon-delete"></button>
+									</div>
+									<div class="cart__item item-cart">
+										<div class="item-cart__sale">-14%</div>
+										<a href="#" class="item-cart__image">
+											<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/03.webp">
+										</a>
+										<div class="item-cart__body">
+											<h3 class="item-cart__title">
+												<a href="#">Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)</a>
+											</h3>
+											<div class="item-cart__desc">Артикул: 15863</div>
+										</div>
+										<div class="item-cart__counter counter">
+											<button class="counter__btn counter__btn--decrement">-</button>
+											<input value="1" type="number" class="counter__input">
+											<button class="counter__btn counter__btn--increment">+</button>
+										</div>
+										<div class="item-cart__price">
+											<div class="item-cart__bonuses">
+												<span>Бонуси</span>
+												+25
+											</div>
+											101 грн.
+										</div>
+										<button class="item-cart__remove _icon-delete"></button>
+									</div>
+								</div>
+								<a href="#" data-fls-dynamic=".aside-cart, 768, last" class="cart__button button button--border">Продовжити покупки</a>
+							</div>
+							<div class="cart__aside aside-cart">
+								<h2 class="aside-cart__title">Підсумок</h2>
+								<div class="aside-cart__summary summary-comp">
+									<div class="summary-comp__item">
+										<span>2 тов. на суму</span>
+										<span>303 грн.</span>
+									</div>
+									<div class="summary-comp__item">
+										<span>Знижка</span>
+										<span>3 грн.</span>
+									</div>
+									<div class="summary-comp__item">
+										<span>Бонуси</span>
+										<div class="summary-comp__bonuses">+75</div>
+									</div>
+									<div class="summary-comp__item">
+										<span>Разом:</span>
+										<span class="total">3 360 ₴</span>
+									</div>
+								</div>
+								<div class="aside-cart__promo-wrapper">
+									<label class="aside-cart__checkbox check-input check-input--checkbox">
+										<div class="check-input__icon"></div>
+										В мене є промокод
+										<input type="checkbox" name="promo">
+									</label>
+									<div class="aside-cart__promo">
+										<input class="aside-cart__promo-input input" type="text" placeholder="ПРОМОКОД">
+										<button class="aside-cart__promo-btn button button--light">Активувати</button>
+									</div>
+								</div>
+								<button class="aside-cart__button button">Оформити покупку</button>
+							</div>
+						</div>
+					</div>
+					<div class="cart__pinned pinned-actions mobile">
+						<div class="pinned-actions__body">
+							<div class="pinned-actions__label">3 товари</div>
+							<div class="pinned-actions__price">
+								600
+								<span>грн.</span>
+							</div>
+						</div>
+						<button class="pinned-actions__button button">Оформити замовлення</button>
+					</div>
+				</section>
+				<div class="page__products-section products-section">
+					<div class="products-section__container">
+						<h2 class="products-section__title title">Рекомендовані товари</h2>
+						<div data-fls-slider="" class="products-section__slider splide">
+							<div class="splide__track">
+								<ul class="splide__list">
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/01.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/02.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+									<li class="splide__slide">
+										<article class="item-product">
+											<div class="item-product__image">
+												<a href="#" class="item-product__pic">
+													<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<div class="item-product__header">
+													<div class="item-product__sale">-10%</div>
+													<div class="item-product__actions">
+														<div class="item-product__bonus">
+															Бонуси
+															<span>+25</span>
+														</div>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
+													</div>
+												</div>
+											</div>
+											<div class="item-product__body">
+												<h3 class="item-product__title">
+													<a class="ellipsis" href="#">Sika BV 3M</a>
+												</h3>
+												<p class="item-product__desc">Добавка до бетону тепла підлога</p>
+												<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+												<div class="item-product__footer">
+													<div class="item-product__prices">
+														<div class="item-product__price">
+															<span class="gray-label discount">
+																191
+																<span class="small">грн.</span>
+															</span>
+															<span class="price">
+																101
+																<span class="small">грн.</span>
+															</span>
+														</div>
+													</div>
+													<button class="item-product__cart-btn _icon-cart"></button>
+												</div>
+											</div>
+										</article>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

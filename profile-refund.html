@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Профіль</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,134 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<div class="page__profile profile">
+					<div class="profile__container">
+						<div class="profile__wrapper">
+							<div data-fls-spoilers="767.98, max" class="profile__aside">
+								<details>
+									<summary class="profile__user user-profile _icon-user">
+										<div class="user-profile__body">
+											<h3 class="user-profile__title">Андрій Гаврилов</h3>
+											<div class="user-profile__email">andriyko@gmail.com</div>
+										</div>
+										<div class="user-profile__icon _icon-ch-down"></div>
+									</summary>
+									<div class="profile__content">
+										<div class="profile__menu">
+											<a href="profile-data.html" class="profile__menu-item _icon-info">
+												<span>Особисті дані</span>
+											</a>
+											<a href="profile-edit.html" class="profile__menu-item _icon-info">
+												<span>Особисті дані(ред.)</span>
+											</a>
+											<a href="profile-orders.html" class="profile__menu-item _icon-orders --active">
+												<span>Мої замовлення</span>
+											</a>
+											<a href="profile-address.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса</span>
+											</a>
+											<a href="profile-address-add.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса(дод.)</span>
+											</a>
+											<a href="profile-cart.html" class="profile__menu-item _icon-cart">
+												<span>Кошик</span>
+											</a>
+											<a href="profile-history.html" class="profile__menu-item _icon-eye">
+												<span>Переглянуті товари</span>
+											</a>
+											<a href="profile-wishlist.html" class="profile__menu-item _icon-heart">
+												<span>Обрані товари</span>
+											</a>
+											<a href="profile-bonuses.html" class="profile__menu-item _icon-gift-card">
+												<span>Бонусні бали</span>
+											</a>
+										</div>
+										<button class="profile__logout _icon-exit">Вихід</button>
+									</div>
+								</details>
+							</div>
+							<div class="profile__body">
+								<h1 data-fls-dynamic=".profile__container, 767.98, first" class="profile__title title">Мої замовлення</h1>
+								<div class="profile__orders orders-profile">
+									<button class="orders-profile__button button button--border _icon-plus">Нова заявка на повернення</button>
+									<div class="orders-profile__navigation">
+										<a href="profile-orders.html" class="orders-profile__link">Всі замовлення</a>
+										<a href="profile-refund.html" class="orders-profile__link --active">Гарантія та повернення</a>
+									</div>
+									<div data-fls-spoilers="" class="orders-profile__items">
+										<details class="orders-profile__item item-order">
+											<summary class="item-order__summary summary-orders">
+												<div class="summary-orders__body">
+													<div class="summary-orders__info">
+														<span>№ 2334</span>
+														від 27 травня 2025
+													</div>
+													<div style="color: rgba(30, 30, 30, 0.60);" class="summary-orders__label">Повернення коштів</div>
+												</div>
+												<div class="summary-orders__images">
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+													</a>
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+													</a>
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/03.webp">
+													</a>
+													<a class="summary-orders__image" href="#">
+														<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+													</a>
+												</div>
+												<div class="summary-orders__icon _icon-ch-down"></div>
+											</summary>
+											<div class="item-order__body">
+												<div class="item-order__refund refund-profile">
+													<h3 class="refund-profile__title">Заявка на Повернення 59990 від 26.09.2024</h3>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">Номер заявки</div>
+														<div class="refund-profile__text">AM593990</div>
+													</div>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">Статус</div>
+														<div class="refund-profile__text">Проведено повернення коштів</div>
+													</div>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">Найменування товару</div>
+														<a href="#" class="refund-profile__product">
+															<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+															Sika BV 3M
+														</a>
+													</div>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">ПІБ покупця</div>
+														<div class="refund-profile__text">Гаврилов Андрій Валентинович</div>
+													</div>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">Причина повернення</div>
+														<div class="refund-profile__text">Низька якість продукту</div>
+													</div>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">Контактний телефон</div>
+														<div class="refund-profile__text">+38 098 177 78 79</div>
+													</div>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">Причина повернення</div>
+														<div class="refund-profile__text">Покрошився пол після того як додали цей матеріал</div>
+													</div>
+													<div class="refund-profile__item">
+														<div class="refund-profile__label">Номер картки</div>
+														<div class="refund-profile__text">**** **** **** 4756</div>
+													</div>
+												</div>
+											</div>
+										</details>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

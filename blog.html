@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Блог</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,228 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<section class="page__blog blog">
+					<div class="blog__container">
+						<div class="blog__breadcrumbs breadcrumbs">
+							<ul>
+								<li>
+									<a href="#">Головна</a>
+								</li>
+								<li>
+									<a href="#">Корисні статті</a>
+								</li>
+							</ul>
+						</div>
+						<h1 class="blog__title title">Корисні статті</h1>
+						<div class="blog__categories">
+							<label class="blog__category">
+								Всі категорії
+								<span>10</span>
+								<input type="checkbox">
+							</label>
+							<label class="blog__category">
+								Акції
+								<span>5</span>
+								<input type="checkbox">
+							</label>
+							<label class="blog__category">
+								Без категорії
+								<span>10</span>
+								<input type="checkbox">
+							</label>
+							<label class="blog__category">
+								Відео
+								<span>6</span>
+								<input type="checkbox">
+							</label>
+							<label class="blog__category">
+								Огляди
+								<span>12</span>
+								<input type="checkbox">
+							</label>
+						</div>
+						<div class="blog__items">
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/01.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Плануєте ремонт? 10 корисних порад як організувати цей процес</h3>
+									<p class="item-news__text">
+										Плануєте ремонт? Створіть оселю мрії! Обирайте якісні матеріали, сучасні ідеї та надійних майстрів. Нехай
+              ваш дім стане затишним і стильним! Почніть уже сьогодні та втілюйте свої задуми в реальність!
+									</p>
+								</div>
+							</a>
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/02.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Як гарно облаштувати подвір’я у вашому домі?</h3>
+									<p class="item-news__text">
+										Як гарно облаштувати подвір’я? Створіть затишний куточок! Додайте квіти, зручні меблі, освітлення. Зона
+              для відпочинку, доріжки з каменю та зелені насадження зроблять подвір’я стильним і комфортним для всієї
+              родини!
+									</p>
+								</div>
+							</a>
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/03.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Сучасне покриття для стін та підлоги, 5 бюджетних рішень для вас</h3>
+									<p class="item-news__text">
+										Вінілові шпалери, ламінат, керамічна плитка, фарба та лінолеум. Стильні, міцні, легкі в догляді – створіть
+              затишок без великих витрат!
+									</p>
+								</div>
+							</a>
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/04.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Як обрати інструмент: баланс між ціною та якістю</h3>
+									<p class="item-news__text">
+										Купуйте перевірені бренди, читайте відгуки, обирайте міцні матеріали. Інструмент має бути зручним і
+              довговічним, щоб служити роками без переплат!
+									</p>
+								</div>
+							</a>
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/01.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Плануєте ремонт? 10 корисних порад як організувати цей процес</h3>
+									<p class="item-news__text">
+										Плануєте ремонт? Створіть оселю мрії! Обирайте якісні матеріали, сучасні ідеї та надійних майстрів. Нехай
+              ваш дім стане затишним і стильним! Почніть уже сьогодні та втілюйте свої задуми в реальність!
+									</p>
+								</div>
+							</a>
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/02.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Як гарно облаштувати подвір’я у вашому домі?</h3>
+									<p class="item-news__text">
+										Як гарно облаштувати подвір’я? Створіть затишний куточок! Додайте квіти, зручні меблі, освітлення. Зона
+              для відпочинку, доріжки з каменю та зелені насадження зроблять подвір’я стильним і комфортним для всієї
+              родини!
+									</p>
+								</div>
+							</a>
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/03.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Сучасне покриття для стін та підлоги, 5 бюджетних рішень для вас</h3>
+									<p class="item-news__text">
+										Вінілові шпалери, ламінат, керамічна плитка, фарба та лінолеум. Стильні, міцні, легкі в догляді – створіть
+              затишок без великих витрат!
+									</p>
+								</div>
+							</a>
+							<a href="#" class="blog__item item-news">
+								<div class="item-news__image">
+									<img alt="Image" class="ibg" src="./assets/img/home/news/04.webp">
+								</div>
+								<div class="item-news__body">
+									<h3 class="item-news__title">Як обрати інструмент: баланс між ціною та якістю</h3>
+									<p class="item-news__text">
+										Купуйте перевірені бренди, читайте відгуки, обирайте міцні матеріали. Інструмент має бути зручним і
+              довговічним, щоб служити роками без переплат!
+									</p>
+								</div>
+							</a>
+						</div>
+						<div class="blog__pagination pagination">
+							<button class="pagination__button button button--border">Показати ще</button>
+							<ul class="pagination__list">
+								<li>
+									<a href="#" class="_icon-ch-left --disabled"></a>
+								</li>
+								<li>
+									<a class="--active" href="#">1</a>
+								</li>
+								<li>
+									<a href="#">2</a>
+								</li>
+								<li>
+									<a href="#">3</a>
+								</li>
+								<li>
+									<a href="#">4</a>
+								</li>
+								<li>
+									<a href="#">5</a>
+								</li>
+								<li>
+									<a href="#">80</a>
+								</li>
+								<li>
+									<a href="#" class="_icon-ch-right"></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<div class="page__seo seo-section">
+					<div class="seo-section__container">
+						<h2 class="seo-section__title title">Чому варто замовляти в Торусі?</h2>
+						<div data-fls-showmore="" class="seo-section__showmore">
+							<div data-fls-showmore-content="160" class="seo-section__content">
+								<div class="seo-section__text tex">
+									<p>Переваги нашого інтернет-магазину будiвельних товарів не лише в ціні!</p>
+									<br>
+									<p>
+										Ми пропонуємо купити товари дійсно високої якості, а для цього укладаємо договори з безпосередніми
+              виробниками.
+										<br>
+										В наявності продукція для будівництва та ремонту з найширшим асортиментом.
+										<br>
+										Щоб не заплутатися в тому, що вам найбільше підходить за ціною та якістю, завжди можна зателефонувати та
+              проконсультуватися з досвідченим менеджером.
+										<br>
+										Доставка будівельних матеріалів та товарів відбувається вчасно і точно за вказаною адресою.
+										<br>
+										Діє гнучка система знижок, треба лише враховувати, що оптова ціна в нашому інтернет-магазині починає
+              діяти при купівлі двох і більше товарів.
+										<br>
+										Купити Фарба, ґрунт, хіміяу Запоріжжі, скориставшись послугами інтернет-магазину, означає зберегти свій
+              час, гроші та нерви та отримати з доставкою саме ті товари та послуги, які вам потрібні.
+              Ми пропонуємо купити товари дійсно високої якості, а для цього укладаємо договори з безпосередніми
+              виробниками.
+										<br>
+										В наявності продукція для будівництва та ремонту з найширшим асортиментом.
+										<br>
+										Щоб не заплутатися в тому, що вам найбільше підходить за ціною та якістю, завжди можна зателефонувати та
+              проконсультуватися з досвідченим менеджером.
+										<br>
+										Доставка будівельних матеріалів та товарів відбувається вчасно і точно за вказаною адресою.
+										<br>
+										Діє гнучка система знижок, треба лише враховувати, що оптова ціна в нашому інтернет-магазині починає
+              діяти при купівлі двох і більше товарів.
+										<br>
+										Купити Фарба, ґрунт, хіміяу Запоріжжі, скориставшись послугами інтернет-магазину, означає зберегти свій
+              час, гроші та нерви та отримати з доставкою саме ті товари та послуги, які вам потрібні.
+									</p>
+								</div>
+							</div>
+							<button hidden data-fls-showmore-button="" type="button" class="seo-section__more-btn more-btn _icon-ch-right">
+								<span>Читати
+            повністю</span>
+								<span>Сховати</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

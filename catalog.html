@@ -15,8 +15,8 @@
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
 		<title>Каталог</title>
-		<script type="module" crossorigin="" src="./js/app.min.js?v=1759727168227"></script>
-		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1759727168227">
+		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
+		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
 	<body>
 		<div class="wrapper">
@@ -268,7 +268,7 @@
 						<button class="search__submit button _icon-search"></button>
 					</form>
 					<div class="header__actions">
-						<a href="#" class="header__actions-item _icon-phone pc"></a>
+						<button data-fls-popup-link="contacts-popup" class="header__actions-item _icon-phone pc"></button>
 						<a href="#" class="header__actions-item _icon-cart pc">
 							<span>10</span>
 						</a>
@@ -364,7 +364,7 @@
 				<a href="#" class="navbar__item _icon-nav-home">Головна</a>
 				<a href="#" class="navbar__item _icon-nav-catalog">Категорії</a>
 				<a href="#" class="navbar__item _icon-nav-cart">Кошик</a>
-				<a href="#" class="navbar__item _icon-nav-phone">Зв’язатися</a>
+				<button data-fls-popup-link="contacts-mini-popup" class="navbar__item _icon-nav-phone">Зв’язатися</button>
 				<button data-nav-more="" href="#" class="navbar__item _icon-nav-user">Більше</button>
 				<div class="navbar__submenu submenu-navbar">
 					<div class="submenu-navbar__header">
@@ -421,6 +421,752 @@
 				</div>
 			</div>
 			<a href="#" class="call-btn _icon-phone-fill"></a>
+			<div data-fls-popup="cart-clear-popup" aria-hidden="true" class="popup popup--cart-clear">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<div class="cart-clear-popup">
+							<h4 class="cart-clear-popup__title">Ви дійсно хочете видалити всі товари?</h4>
+							<div class="cart-clear-popup__actions">
+								<button class="cart-clear-popup__button button button--border">Так, видаліть все</button>
+								<button class="cart-clear-popup__button button button--border">Ні</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="success-popup" aria-hidden="true" class="popup popup--success">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<div class="success-popup">
+							<img alt="Image" class="success-popup__image" src="./assets/img/success.webp">
+							<h4 class="success-popup__title title">Ваше замовлення прийняте!</h4>
+							<div class="success-popup__content">
+								<p>
+									Номер Вашого замовлення:
+									<b>#567820</b>
+								</p>
+								<p>
+									Щоб уникнути незручностей, дочекайтесь дзвінка нашого менеджера про готовність вашого замовлення
+								</p>
+								<div class="success-popup__label color-label">
+									<b>Зверніть увагу!</b>
+									На вивантаження надається
+									<b>30 хвилин</b>
+								</div>
+							</div>
+							<a href="#" class="success-popup__button button button--border">На головну</a>
+							<a href="#" class="success-popup__orders _icon-orders">Мої замовлення</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="contacts-popup" aria-hidden="true" class="popup popup--contacts">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<div class="contacts-popup">
+							<div class="contacts-popup__header">
+								<select data-fls-select="" data-fls-select-modif="contacts">
+									<option value="1" selected>Запоріжжя</option>
+									<option value="2">Київ</option>
+									<option value="3">Львів</option>
+									<option value="4">Ужгород</option>
+								</select>
+								<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+							</div>
+							<div class="contacts-popup__body">
+								<div data-fls-tabs="" class="contacts-popup__worktime worktime-tabs">
+									<nav data-fls-tabs-titles="" class="worktime-tabs__navigation">
+										<button type="button" class="worktime-tabs__title">Пн</button>
+										<button type="button" class="worktime-tabs__title --tab-active">Вт</button>
+										<button type="button" class="worktime-tabs__title">Ср</button>
+										<button type="button" class="worktime-tabs__title">Чт</button>
+										<button type="button" class="worktime-tabs__title">Пт</button>
+										<button type="button" class="worktime-tabs__title">Сб</button>
+										<button type="button" class="worktime-tabs__title">Нд</button>
+									</nav>
+									<div data-fls-tabs-body="" class="worktime-tabs__content">
+										<div class="worktime-tabs__body">
+											<div class="worktime-tabs__label">8:00 - 18:00</div>
+										</div>
+										<div class="worktime-tabs__body">
+											<div class="worktime-tabs__label">8:00 - 17:00</div>
+										</div>
+										<div class="worktime-tabs__body">
+											<div class="worktime-tabs__label">8:00 - 16:00</div>
+										</div>
+										<div class="worktime-tabs__body">
+											<div class="worktime-tabs__label">8:00 - 15:00</div>
+										</div>
+										<div class="worktime-tabs__body">
+											<div class="worktime-tabs__label">8:00 - 14:00</div>
+										</div>
+										<div class="worktime-tabs__body">
+											<div class="worktime-tabs__label">8:00 - 13:00</div>
+										</div>
+										<div class="worktime-tabs__body">
+											<div class="worktime-tabs__label">8:00 - 12:00</div>
+										</div>
+									</div>
+								</div>
+								<div class="contacts-popup__locations locations-header">
+									<div class="locations-header__block">
+										<div class="locations-header__title">Адреса 1</div>
+										<div class="locations-header__label _icon-location-fill">Базова 1г</div>
+										<div class="locations-header__items">
+											<a href="tel:0503761000" class="locations-header__link">(050) 376 10 00</a>
+											<a href="tel:0970771000" class="locations-header__link">(097) 077 10 00</a>
+										</div>
+										<a href="#" class="locations-header__button button button--light _icon-path">Прокласти маршрут</a>
+									</div>
+									<div class="locations-header__block">
+										<div class="locations-header__title">Адреса 2</div>
+										<div class="locations-header__label _icon-location-fill">Південне шосе 1</div>
+										<div class="locations-header__items">
+											<a href="tel:0503761000" class="locations-header__link">(050) 376 10 00</a>
+											<a href="tel:0970771000" class="locations-header__link">(097) 077 10 00</a>
+										</div>
+										<a href="#" class="locations-header__button button button--light _icon-path">Прокласти маршрут</a>
+									</div>
+									<div class="locations-header__block">
+										<div class="locations-header__title">Соціальні мережі</div>
+										<ul class="locations-header__social social">
+											<li>
+												<a href="#" class="_icon-s-inst"></a>
+											</li>
+											<li>
+												<a href="#" class="_icon-s-fb"></a>
+											</li>
+											<li>
+												<a href="#" class="_icon-s-yt"></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="phone-login-popup" aria-hidden="true" class="popup popup--auth">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<div class="auth-popup">
+							<div class="auth-popup__header">
+								<h3 class="auth-popup__title">Вхід</h3>
+								<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+							</div>
+							<form action="#" class="auth-popup__body">
+								<div class="auth-popup__field field">
+									<div class="field__label">Номер телефону</div>
+									<input type="text" name="phone" class="field__input input">
+								</div>
+								<button class="auth-popup__button button">Продовжити</button>
+							</form>
+							<div class="auth-popup__label">
+								Продовжуючи, ви підтверджуєте, що згодні увійти до
+								<a href="#">облікового запису</a>
+								та надаєте згоду на
+								<a href="#">обробку персональних даних</a>
+							</div>
+							<div class="auth-popup__or">
+								<span>або</span>
+							</div>
+							<div class="auth-popup__social">
+								<button class="auth-popup__social-btn button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+										<path d="M21 4.5H3C2.80109 4.5 2.61032 4.57902 2.46967 4.71967C2.32902 4.86032 2.25 5.05109 2.25 5.25V18C2.25 18.3978 2.40804 18.7794 2.68934 19.0607C2.97064 19.342 3.35218 19.5 3.75 19.5H20.25C20.6478 19.5 21.0294 19.342 21.3107 19.0607C21.592 18.7794 21.75 18.3978 21.75 18V5.25C21.75 5.05109 21.671 4.86032 21.5303 4.71967C21.3897 4.57902 21.1989 4.5 21 4.5ZM12 12.4828L4.92844 6H19.0716L12 12.4828ZM9.25406 12L3.75 17.0447V6.95531L9.25406 12ZM10.3641 13.0172L11.4891 14.0531C11.6274 14.1801 11.8084 14.2506 11.9963 14.2506C12.1841 14.2506 12.3651 14.1801 12.5034 14.0531L13.6284 13.0172L19.0659 18H4.92844L10.3641 13.0172ZM14.7459 12L20.25 6.95438V17.0456L14.7459 12Z" fill="#1E1E1E" fill-opacity="0.5"></path>
+									</svg>
+									Увійти через електрону пошту
+								</button>
+								<button class="auth-popup__social-btn button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+										<path d="M21 11.7159C21 11.0423 20.9416 10.3945 20.833 9.77273H12.1837V13.4518H17.1262C16.9091 14.635 16.2579 15.6368 15.2811 16.3105V18.7027H18.2616C19.9981 17.0445 21 14.6091 21 11.7159Z" fill="#4285F4"></path>
+										<path d="M12.1837 21C14.6633 21 16.7421 20.1536 18.2616 18.7027L15.2811 16.3105C14.4629 16.8805 13.4193 17.2259 12.1837 17.2259C9.79592 17.2259 7.76716 15.5591 7.04082 13.3136H3.98516V15.7664C5.49629 18.8668 8.59369 21 12.1837 21Z" fill="#34A853"></path>
+										<path d="M7.04082 13.305C6.85714 12.735 6.74861 12.1305 6.74861 11.5C6.74861 10.8695 6.85714 10.265 7.04082 9.695V7.24227H3.98516C3.359 8.52045 3 9.96273 3 11.5C3 13.0373 3.359 14.4795 3.98516 15.7577L6.36456 13.8405L7.04082 13.305Z" fill="#FBBC05"></path>
+										<path d="M12.1837 5.78273C13.5362 5.78273 14.7384 6.26636 15.6985 7.19909L18.3284 4.47864C16.7338 2.94136 14.6633 2 12.1837 2C8.59369 2 5.49629 4.13318 3.98516 7.24227L7.04082 9.695C7.76716 7.44955 9.79592 5.78273 12.1837 5.78273Z" fill="#EA4335"></path>
+									</svg>
+									Продовжити через Google
+								</button>
+								<button class="auth-popup__social-btn button">
+									<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewbox="0 0 25 24" fill="none">
+										<path d="M21.5 12.0331C21.5 7.04428 17.4705 3 12.5 3C7.52948 3 3.5 7.04428 3.5 12.0331C3.5 16.2692 6.40592 19.8239 10.326 20.8002V14.7936H8.47016V12.0331H10.326V10.8436C10.326 7.76909 11.7123 6.34404 14.7198 6.34404C15.29 6.34404 16.2739 6.45641 16.6764 6.56842V9.07058C16.464 9.04818 16.095 9.03697 15.6367 9.03697C14.161 9.03697 13.5908 9.59811 13.5908 11.0568V12.0331H16.5306L16.0255 14.7936H13.5908V21C18.0465 20.4598 21.5 16.6515 21.5 12.0331Z" fill="#0966FF"></path>
+									</svg>
+									Продовжити через Facebook
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="email-login-popup" aria-hidden="true" class="popup popup--auth">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<div class="auth-popup">
+							<div class="auth-popup__header">
+								<h3 class="auth-popup__title">Вхід</h3>
+								<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+							</div>
+							<form action="#" class="auth-popup__body">
+								<div class="auth-popup__field field">
+									<div class="field__label">Ел. пошта</div>
+									<input type="email" name="email" class="field__input input">
+								</div>
+								<div class="auth-popup__field field">
+									<div class="field__label">Пароль</div>
+									<div class="field__pass pass">
+										<input type="password" name="password" class="pass__input input">
+										<button type="button" class="pass__btn _icon-eye"></button>
+									</div>
+								</div>
+								<button class="auth-popup__button button">Продовжити</button>
+							</form>
+							<div class="auth-popup__label">
+								Продовжуючи, ви підтверджуєте, що згодні увійти до
+								<a href="#">облікового запису</a>
+								та надаєте згоду на
+								<a href="#">обробку персональних даних</a>
+							</div>
+							<div class="auth-popup__actions">
+								<button class="auth-popup__action-item">Нагадати пароль</button>
+								<button class="auth-popup__action-item">Увійти за номером телефону</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="remind-pass-popup" aria-hidden="true" class="popup popup--auth">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<div class="auth-popup">
+							<div class="auth-popup__header">
+								<h3 class="auth-popup__title">Нагадати пароль</h3>
+								<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+							</div>
+							<form action="#" class="auth-popup__body">
+								<div class="auth-popup__field field">
+									<div class="field__label">Ел. пошта</div>
+									<input type="email" name="email" class="field__input input">
+								</div>
+								<button class="auth-popup__button button">Отримати тимчасовий пароль</button>
+							</form>
+							<div class="auth-popup__label">
+								Продовжуючи, ви підтверджуєте, що згодні увійти до
+								<a href="#">облікового запису</a>
+								та надаєте згоду на
+								<a href="#">обробку персональних даних</a>
+							</div>
+							<div class="auth-popup__actions">
+								<button class="auth-popup__action-item">Я згадав свій пароль</button>
+								<button class="auth-popup__action-item">Назад</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="answer-popup" aria-hidden="true" class="popup popup--form">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<form action="#" method="post" enctype="multipart/form-data" class="form-popup">
+							<h3 class="form-popup__title">Написати відповідь</h3>
+							<div class="form-popup__field field">
+								<div class="field__label">Коментар</div>
+								<textarea name="comment" class="field__textarea textarea"></textarea>
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Email
+									<span>*обов’язково для отримання бонуса</span>
+								</div>
+								<input type="email" placeholder="Ваш емail" name="email" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Ім’я та прізвище</div>
+								<input type="text" placeholder="Андрій Хартов" name="name" class="field__input input">
+							</div>
+							<label class="form-popup__checkbox check-input check-input--checkbox">
+								<div class="check-input__icon"></div>
+								Я погоджуюсь на обробку персональних даних
+								<input type="checkbox">
+							</label>
+							<button class="form-popup__button button button--border">Написати відповідь</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="feedback-popup" aria-hidden="true" class="popup popup--form">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<form action="#" method="post" enctype="multipart/form-data" class="form-popup">
+							<h3 class="form-popup__title">Написати відгук</h3>
+							<div class="form-popup__big-rating big-rating">
+								<div class="big-rating__label">Оцініть товар</div>
+								<div class="big-rating__body">
+									<label class="big-rating__item _icon-star">
+										<input type="radio" name="rating-value">
+										Погано
+									</label>
+									<label class="big-rating__item _icon-star">
+										<input type="radio" name="rating-value">
+										Не дуже
+									</label>
+									<label class="big-rating__item _icon-star">
+										<input type="radio" name="rating-value">
+										Нормально
+									</label>
+									<label class="big-rating__item _icon-star">
+										<input type="radio" name="rating-value">
+										Добре
+									</label>
+									<label class="big-rating__item _icon-star">
+										<input type="radio" name="rating-value">
+										Чудово
+									</label>
+								</div>
+							</div>
+							<div class="form-popup__color-label color-label">
+								<b>Завершіть ваш відгук</b>
+								та отримайте
+								<b>150грн.</b>
+								бонусами на наступне замовлення
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Email
+									<span>*обов’язково для отримання бонуса</span>
+								</div>
+								<input type="email" placeholder="Ваш емail" name="email" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Ім’я та прізвище</div>
+								<input type="text" placeholder="Андрій Хартов" name="name" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Телефон</div>
+								<input type="text" placeholder="0 9X XXX XX XX" name="phone" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Коментар</div>
+								<textarea name="comment" class="field__textarea textarea"></textarea>
+							</div>
+							<label class="form-popup__checkbox check-input check-input--checkbox">
+								<div class="check-input__icon"></div>
+								Я погоджуюсь на обробку персональних даних
+								<input type="checkbox">
+							</label>
+							<button class="form-popup__button button button--border">Написати відгук</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="comment-popup" aria-hidden="true" class="popup popup--form">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<form action="#" method="post" enctype="multipart/form-data" class="form-popup">
+							<h3 class="form-popup__title">Написати коментар</h3>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Email
+									<span>*</span>
+								</div>
+								<input type="email" placeholder="Ваш емail" name="email" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Ім’я та прізвище
+									<span>*</span>
+								</div>
+								<input type="text" placeholder="Андрій Хартов" name="name" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Коментар</div>
+								<textarea name="comment" class="field__textarea textarea"></textarea>
+							</div>
+							<label class="form-popup__checkbox check-input check-input--checkbox">
+								<div class="check-input__icon"></div>
+								Save my name, email, and website in this browser for the next time I comment.
+								<input type="checkbox">
+							</label>
+							<button class="form-popup__button button button--border">Надіслати</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="cheap-popup" aria-hidden="true" class="popup popup--form">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<form action="#" method="post" enctype="multipart/form-data" class="form-popup">
+							<h3 class="form-popup__title">Знайшли дешевше?</h3>
+							<div class="form-popup__color-label color-label">
+								Скиньте повилання на товар та отримайте
+								<b>Гарантовану знижку!</b>
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Ім’я</div>
+								<input type="text" placeholder="Андрій" name="name" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Телефон
+									<span>*</span>
+								</div>
+								<input type="text" placeholder="0 9X XXX XX XX" name="phone" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Посилання на товар
+									<span>*</span>
+								</div>
+								<input type="text" placeholder="Http:/" name="link" class="field__input input">
+							</div>
+							<div class="form-popup__cheap-footer">
+								<button data-fls-popup-close="" class="form-popup__button button button--border">Закрити</button>
+								<button class="form-popup__button button button--border">Відправити</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="write-us-popup" aria-hidden="true" class="popup popup--form">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<form action="#" method="post" enctype="multipart/form-data" class="form-popup">
+							<h3 class="form-popup__title">Написати нам</h3>
+							<div class="form-popup__color-label color-label">
+								<b>Ми дамо відповідь у робочі години: 8:00 - 18:00</b>
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Email
+									<span>*</span>
+								</div>
+								<input type="email" placeholder="Ваш емail" name="email" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Ім’я</div>
+								<input type="text" placeholder="Андрій" name="name" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">
+									Телефон
+									<span>*</span>
+								</div>
+								<input type="text" placeholder="0 9X XXX XX XX" name="phone" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Текст повідомлення</div>
+								<textarea name="message" class="field__textarea textarea"></textarea>
+							</div>
+							<label class="form-popup__checkbox check-input check-input--checkbox">
+								<div class="check-input__icon"></div>
+								Я погоджуюсь на обробку персональних даних
+								<input type="checkbox">
+							</label>
+							<button class="form-popup__button button button--border">Відправити</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="success-feedback-popup" aria-hidden="true" class="popup popup--success-feedback">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<div class="success-popup">
+							<img alt="Image" class="success-popup__image" src="./assets/img/success.webp">
+							<h4 class="success-popup__title title">Дякуємо за відгук!</h4>
+							<div class="success-popup__content">
+								<p>З повагою, команда магазину “Торус”</p>
+							</div>
+							<a href="#" class="success-popup__link">Назад до магазину</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="refund-popup" aria-hidden="true" class="popup popup--form">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<form action="#" method="post" enctype="multipart/form-data" class="form-popup">
+							<h3 class="form-popup__title">Нова заявка на повернення</h3>
+							<div class="form-popup__color-label color-label">
+								<b>Увага!</b>
+								Товар можна повернути протягом 14 днів з моменту отримання.
+								<br>
+								Читати
+								<a href="#">правила та умови повернення.</a>
+								<br>
+								<b>Заповніть поля нижче</b>
+								та наш менеджер зв’яжеться з вами для уточнення умов та часу повернення.
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Замовлення</div>
+								<div data-fls-spoilers="" class="field__orders">
+									<details class="orders-profile__item item-order item-order--mini">
+										<summary class="item-order__summary summary-orders">
+											<div class="summary-orders__body">
+												<div class="summary-orders__info">
+													<span>№ 2334</span>
+													від 27 травня 2025
+												</div>
+											</div>
+											<div class="summary-orders__images">
+												<a class="summary-orders__image" href="#">
+													<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+												</a>
+												<a class="summary-orders__image" href="#">
+													<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+												</a>
+												<a class="summary-orders__image" href="#">
+													<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/03.webp">
+												</a>
+												<a class="summary-orders__image" href="#">
+													<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+												</a>
+											</div>
+											<div class="summary-orders__icon _icon-ch-down"></div>
+										</summary>
+										<div class="item-order__body">
+											<div class="item-order__details details-orders">
+												<div class="details-orders__aside">
+													<div class="details-orders__buttons">
+														<button class="details-orders__button button button--light">Повторити замовлення</button>
+														<button class="details-orders__button button button--border">Написати відгук</button>
+													</div>
+													<div class="details-orders__info">
+														<h4 class="details-orders__info-title">Самовивіз з точки видачі</h4>
+														<div class="details-orders__info-label _icon-location">Базова 1г</div>
+													</div>
+													<div class="details-orders__receiver">
+														<div class="details-orders__receiver-label">Отримувач замовлення</div>
+														<div class="details-orders__receiver-text">
+															<span>Андрій Гаврилов</span>
+															<span>380971111122</span>
+															<span>andriyko@gmail.com</span>
+														</div>
+													</div>
+												</div>
+												<div class="details-orders__body">
+													<div class="details-orders__products">
+														<div class="details-orders__product product-orders">
+															<a href="#" class="product-orders__image">
+																<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+															</a>
+															<div class="product-orders__body">
+																<h3 class="product-orders__title">
+																	<a href="#">Sika BV 3M</a>
+																</h3>
+																<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																<div class="product-orders__article">Артикул: 15863</div>
+															</div>
+															<div class="product-orders__item-price">101 грн. x1</div>
+															<div class="product-orders__price">101 грн.</div>
+														</div>
+														<div class="details-orders__product product-orders">
+															<a href="#" class="product-orders__image">
+																<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+															</a>
+															<div class="product-orders__body">
+																<h3 class="product-orders__title">
+																	<a href="#">Sika BV 3M</a>
+																</h3>
+																<div class="product-orders__desc">Добавка до бетону тепла підлога</div>
+																<div class="product-orders__article">Артикул: 15863</div>
+															</div>
+															<div class="product-orders__item-price">1201 грн. x1</div>
+															<div class="product-orders__price">1201 грн.</div>
+														</div>
+													</div>
+													<div class="details-orders__summary">
+														<div class="details-orders__summary-item">
+															<span>Доставка</span>
+															<span>350 грн.</span>
+														</div>
+														<div class="details-orders__summary-item">
+															<span>Разом</span>
+															<span class="total">1653 грн.</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</details>
+								</div>
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Ім’я та прізвище</div>
+								<input type="text" placeholder="Андрій Хартов" name="name" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Телефон</div>
+								<input type="text" placeholder="0 9X XXX XX XX" name="phone" class="field__input input">
+							</div>
+							<div class="form-popup__field field">
+								<div class="field__label">Причина повернення</div>
+								<div class="field__rel-wrapper">
+									<textarea name="reason" class="field__textarea textarea"></textarea>
+									<label class="field__file _icon-file">
+										<input type="file" id="avatar" name="avatar" accept="">
+										Додати файли
+									</label>
+								</div>
+							</div>
+							<label class="form-popup__checkbox check-input check-input--checkbox">
+								<div class="check-input__icon"></div>
+								<div>
+									Я погоджуюся з
+									<a href="#">умовами повернення товару</a>
+								</div>
+								<input type="checkbox">
+							</label>
+							<button class="form-popup__button button button--border">Відправити</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="cart-popup" aria-hidden="true" class="popup popup--cart">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<div class="cart-popup">
+							<div class="cart-popup__header">
+								<h3 class="cart-popup__title">Ваше замовлення</h3>
+								<button class="cart-popup__clear icon-btn _icon-clear"></button>
+								<button data-fls-popup-close="" class="cart-popup__close close-btn _icon-cross"></button>
+							</div>
+							<div class="cart-popup__item item-cart">
+								<div class="item-cart__sale">-14%</div>
+								<a href="#" class="item-cart__image">
+									<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+								</a>
+								<div class="item-cart__body">
+									<h3 class="item-cart__title">
+										<a href="#">Sika BV 3M</a>
+									</h3>
+									<div class="item-cart__desc">Артикул: 15863</div>
+								</div>
+								<div class="item-cart__counter counter">
+									<button class="counter__btn counter__btn--decrement">-</button>
+									<input value="1" type="number" class="counter__input">
+									<button class="counter__btn counter__btn--increment">+</button>
+								</div>
+								<div class="item-cart__price">101 грн.</div>
+								<button class="item-cart__remove _icon-delete"></button>
+							</div>
+							<div class="cart-popup__item item-cart">
+								<div class="item-cart__sale">-14%</div>
+								<a href="#" class="item-cart__image">
+									<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+								</a>
+								<div class="item-cart__body">
+									<h3 class="item-cart__title">
+										<a href="#">Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)</a>
+									</h3>
+									<div class="item-cart__desc">Артикул: 15863</div>
+								</div>
+								<div class="item-cart__counter counter">
+									<button class="counter__btn counter__btn--decrement">-</button>
+									<input value="1" type="number" class="counter__input">
+									<button class="counter__btn counter__btn--increment">+</button>
+								</div>
+								<div class="item-cart__price">101 грн.</div>
+								<button class="item-cart__remove _icon-delete"></button>
+							</div>
+							<div class="cart-popup__item item-cart">
+								<div class="item-cart__sale">-14%</div>
+								<a href="#" class="item-cart__image">
+									<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/03.webp">
+								</a>
+								<div class="item-cart__body">
+									<h3 class="item-cart__title">
+										<a href="#">Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)</a>
+									</h3>
+									<div class="item-cart__desc">Артикул: 15863</div>
+								</div>
+								<div class="item-cart__counter counter">
+									<button class="counter__btn counter__btn--decrement">-</button>
+									<input value="1" type="number" class="counter__input">
+									<button class="counter__btn counter__btn--increment">+</button>
+								</div>
+								<div class="item-cart__price">101 грн.</div>
+								<button class="item-cart__remove _icon-delete"></button>
+							</div>
+							<button class="cart-popup__button button">Оформити покупку</button>
+							<a href="#" class="cart-popup__button button button--border">Продовжити покупки</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="contact-us-popup" aria-hidden="true" class="popup popup--contact-us">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<div class="contact-us-popup">
+							<div class="contact-us-popup__header">
+								<img src="./assets/img/icons/chat.svg" alt="Image" class="contact-us-popup__icon">
+								<button data-fls-popup-close="" class="contact-us-popup__close close-btn _icon-cross"></button>
+							</div>
+							<div class="contact-us-popup__body">
+								<h4 class="contact-us-popup__title">Зв’язатися з нами</h4>
+								<p class="contact-us-popup__text">
+									Наш менеджер перетелефонує Вам у робочий час та допоможе сформувати замовлення, проконсультує, надасть всю
+            необхідну інформацію.
+								</p>
+								<div class="contact-us-popup__field field">
+									<input type="text" name="name" placeholder="Ваше ім’я" class="field__input input">
+								</div>
+								<div class="contact-us-popup__field field">
+									<input type="text" name="phone" placeholder="+38 0" class="field__input input">
+								</div>
+							</div>
+							<button class="contact-us-popup__button button button--border">Відправити</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-fls-popup="contacts-mini-popup" aria-hidden="true" class="popup popup--contacts-mini">
+				<div data-fls-popup-wrapper="" class="popup__wrapper">
+					<div data-fls-popup-body="" class="popup__body">
+						<button data-fls-popup-close="" type="button" class="popup__close close-btn _icon-cross"></button>
+						<div class="contacts-mini">
+							<h3 class="contacts-mini__title">Контакти</h3>
+							<div class="contacts-mini__item item-cont-mini">
+								<div class="item-cont-mini__main _icon-phone-fill">
+									<div class="item-cont-mini__body">
+										<h4 class="item-cont-mini__title">Онлайн магазин</h4>
+										<div class="item-cont-mini__links">
+											<a href="tel:380665529339" class="item-cont-mini__link">+380 66 552 93 39</a>
+										</div>
+									</div>
+								</div>
+								<div class="item-cont-mini__worktime">ПН-СБ: 8:00 - 18:00</div>
+							</div>
+							<button class="contacts-mini__call-btn button button--purple">
+								<svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewbox="0 0 15 14" fill="none">
+									<path d="M7.5 4.08333V7L8.95833 6.125M12.75 7C12.75 9.89952 10.3995 12.25 7.5 12.25C4.60051 12.25 2.25 9.89952 2.25 7C2.25 4.10051 4.60051 1.75 7.5 1.75C10.3995 1.75 12.75 4.10051 12.75 7Z" stroke="var(--color, #FFF)" stroke-linecap="round" stroke-linejoin="round"></path>
+								</svg>
+								Наберіть мене
+							</button>
+							<div class="contacts-mini__item item-cont-mini">
+								<div class="item-cont-mini__main _icon-phone-fill">
+									<div class="item-cont-mini__body">
+										<h4 class="item-cont-mini__title">вул. Базова 1-Г</h4>
+										<div class="item-cont-mini__links">
+											<a href="tel:380504341000" class="item-cont-mini__link">+38 (050) 434 10 00</a>
+											<a href="tel:380970771000" class="item-cont-mini__link">+38 (097) 077 10 00</a>
+										</div>
+									</div>
+								</div>
+								<div class="item-cont-mini__worktime">ПН-СБ: 8:00 - 18:00</div>
+							</div>
+							<button data-fls-popup-close="" class="contacts-mini__close button button--border">Приховати</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<main class="page">
 				<section class="page__catalog catalog">
 					<div class="catalog__container">
@@ -540,22 +1286,22 @@
 									<label class="top-filters__checkbox check-input check-input--checkbox">
 										<div class="check-input__icon"></div>
 										Для стін
-										<input type="checkbox" name="lang">
+										<input type="checkbox">
 									</label>
 									<label class="top-filters__checkbox check-input check-input--checkbox">
 										<div class="check-input__icon"></div>
 										Для підлоги
-										<input type="checkbox" name="lang">
+										<input type="checkbox">
 									</label>
 									<label class="top-filters__checkbox check-input check-input--checkbox">
 										<div class="check-input__icon"></div>
 										Для даху
-										<input type="checkbox" name="lang">
+										<input type="checkbox">
 									</label>
 									<label class="top-filters__checkbox check-input check-input--checkbox">
 										<div class="check-input__icon"></div>
 										Для бруківки
-										<input type="checkbox" name="lang">
+										<input type="checkbox">
 									</label>
 								</div>
 							</div>
@@ -616,7 +1362,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -629,7 +1375,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -655,7 +1401,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -668,7 +1414,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -694,7 +1440,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -707,7 +1453,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -733,7 +1479,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -746,7 +1492,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -772,7 +1518,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -785,7 +1531,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -811,7 +1557,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -824,7 +1570,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -850,7 +1596,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -863,7 +1609,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -889,7 +1635,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -902,7 +1648,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -928,7 +1674,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -941,7 +1687,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -967,7 +1713,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -980,7 +1726,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1006,7 +1752,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1019,7 +1765,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1045,7 +1791,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1058,7 +1804,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1084,7 +1830,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1097,7 +1843,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1123,7 +1869,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1136,7 +1882,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1162,7 +1908,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1175,7 +1921,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1201,7 +1947,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1214,7 +1960,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1240,7 +1986,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1253,7 +1999,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1279,7 +2025,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1292,7 +2038,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1318,7 +2064,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1331,7 +2077,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1357,7 +2103,7 @@
 														Бонуси
 														<span>+25</span>
 													</div>
-													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+													<button class="item-product__fav fav-btn _icon-heart --active"></button>
 												</div>
 											</div>
 										</div>
@@ -1370,7 +2116,7 @@
 											<div class="item-product__footer">
 												<div class="item-product__prices">
 													<div class="item-product__price">
-														<span class="discount">
+														<span class="gray-label discount">
 															191
 															<span class="small">грн.</span>
 														</span>
@@ -1446,37 +2192,37 @@
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Sniezka
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Dufa
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Darbex
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Feidal
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Feidal
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Feidal
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Feidal
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 													</div>
 													<button hidden data-fls-showmore-button="" type="button" class="block-filters__more _icon-ch-down">
@@ -1494,37 +2240,37 @@
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Знижка
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Оплата частинами
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Національний кешбек
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Липнева економія
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Липнева економія
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Липнева економія
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Липнева економія
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 													</div>
 													<button hidden data-fls-showmore-button="" type="button" class="block-filters__more _icon-ch-down">
@@ -1542,37 +2288,37 @@
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															1015
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															1021
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															2005
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															3009
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															3009
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															3009
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															3009
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 													</div>
 													<button hidden data-fls-showmore-button="" type="button" class="block-filters__more _icon-ch-down">
@@ -1594,37 +2340,37 @@
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Для стін
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Для підлоги
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Для даху
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Для бруківки
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Для бруківки
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Для бруківки
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Для бруківки
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 													</div>
 													<button hidden data-fls-showmore-button="" type="button" class="block-filters__more _icon-ch-down">
@@ -1642,37 +2388,37 @@
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Еко
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Антикорозійна
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Антисептична
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Атмосферостойка
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Атмосферостойка
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Атмосферостойка
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															Атмосферостойка
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 													</div>
 													<button hidden data-fls-showmore-button="" type="button" class="block-filters__more _icon-ch-down">
@@ -1694,37 +2440,37 @@
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															0,02
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															0,03
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															0,06
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															0,1
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															0,1
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															0,1
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 														<label class="block-filters__checkbox check-input check-input--checkbox">
 															<div class="check-input__icon"></div>
 															0,1
-															<input type="checkbox" name="lang">
+															<input type="checkbox">
 														</label>
 													</div>
 													<button hidden data-fls-showmore-button="" type="button" class="block-filters__more _icon-ch-down">
@@ -1759,7 +2505,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -1772,7 +2518,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -1800,7 +2546,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -1813,7 +2559,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -1841,7 +2587,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -1854,7 +2600,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -1882,7 +2628,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -1895,7 +2641,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -1923,7 +2669,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -1936,7 +2682,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -1964,7 +2710,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -1977,7 +2723,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -2005,7 +2751,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -2018,7 +2764,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -2046,7 +2792,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -2059,7 +2805,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -2087,7 +2833,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -2100,7 +2846,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -2128,7 +2874,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -2141,7 +2887,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -2169,7 +2915,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -2182,7 +2928,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -2210,7 +2956,7 @@
 															Бонуси
 															<span>+25</span>
 														</div>
-														<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+														<button class="item-product__fav fav-btn _icon-heart --active"></button>
 													</div>
 												</div>
 											</div>
@@ -2223,7 +2969,7 @@
 												<div class="item-product__footer">
 													<div class="item-product__prices">
 														<div class="item-product__price">
-															<span class="discount">
+															<span class="gray-label discount">
 																191
 																<span class="small">грн.</span>
 															</span>
@@ -2399,73 +3145,38 @@
 								<ul class="splide__list">
 									<li class="splide__slide">
 										<div class="feedback-section__item item-feedback">
-											<a href="#" class="item-feedback__product product-feedback">
-												<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
-												<div class="product-feedback__body">
-													<h4 class="product-feedback__title">
-														<span class="ellipsis">Sika BV 3M</span>
-													</h4>
-													<p class="product-feedback__desc">
-														<span class="ellipsis">Добавка до бетону тепла підлога</span>
-													</p>
-												</div>
-											</a>
-											<div class="item-feedback__header">
-												<div class="item-feedback__name">Віталій Т.</div>
-												<div class="item-feedback__date">22 червня 2025</div>
-											</div>
-											<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
-											<p class="item-feedback__text">
-												Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
-                  залишив приємні враження, точно замовлятиму ще!
-											</p>
-											<div class="item-feedback__footer">
-												<div class="separator"></div>
-												<div class="item-feedback__actions">
-													<div class="item-feedback__action-item">
-														<button class="like _icon-like"></button>
-														2
+											<div class="item-feedback__wrapper">
+												<a href="#" class="item-feedback__product product-feedback">
+													<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
+													<div class="product-feedback__body">
+														<h4 class="product-feedback__title">
+															<span class="ellipsis">Sika BV 3M</span>
+														</h4>
+														<p class="product-feedback__desc">
+															<span class="ellipsis">Добавка до бетону тепла підлога</span>
+														</p>
 													</div>
-													<div class="item-feedback__action-item">
-														<button class="dislike _icon-dislike"></button>
-														1
-													</div>
+												</a>
+												<div class="item-feedback__header">
+													<div class="item-feedback__name">Віталій Т.</div>
+													<div class="item-feedback__date">22 червня 2025</div>
 												</div>
-											</div>
-										</div>
-									</li>
-									<li class="splide__slide">
-										<div class="feedback-section__item item-feedback">
-											<a href="#" class="item-feedback__product product-feedback">
-												<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
-												<div class="product-feedback__body">
-													<h4 class="product-feedback__title">
-														<span class="ellipsis">Sika BV 3M</span>
-													</h4>
-													<p class="product-feedback__desc">
-														<span class="ellipsis">Добавка до бетону тепла підлога</span>
-													</p>
-												</div>
-											</a>
-											<div class="item-feedback__header">
-												<div class="item-feedback__name">Віталій Т.</div>
-												<div class="item-feedback__date">22 червня 2025</div>
-											</div>
-											<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
-											<p class="item-feedback__text">
-												Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
-                  залишив приємні враження, точно замовлятиму ще!
-											</p>
-											<div class="item-feedback__footer">
-												<div class="separator"></div>
-												<div class="item-feedback__actions">
-													<div class="item-feedback__action-item">
-														<button class="like --active _icon-like"></button>
-														2
-													</div>
-													<div class="item-feedback__action-item">
-														<button class="dislike _icon-dislike"></button>
-														1
+												<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
+												<p class="item-feedback__text">
+													Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
+                    залишив приємні враження, точно замовлятиму ще!
+												</p>
+												<div class="item-feedback__footer">
+													<div class="separator"></div>
+													<div class="item-feedback__actions">
+														<div class="item-feedback__action-item">
+															<button class="like _icon-like"></button>
+															2
+														</div>
+														<div class="item-feedback__action-item">
+															<button class="dislike _icon-dislike"></button>
+															1
+														</div>
 													</div>
 												</div>
 											</div>
@@ -2473,73 +3184,38 @@
 									</li>
 									<li class="splide__slide">
 										<div class="feedback-section__item item-feedback">
-											<a href="#" class="item-feedback__product product-feedback">
-												<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
-												<div class="product-feedback__body">
-													<h4 class="product-feedback__title">
-														<span class="ellipsis">Sika BV 3M</span>
-													</h4>
-													<p class="product-feedback__desc">
-														<span class="ellipsis">Добавка до бетону тепла підлога</span>
-													</p>
-												</div>
-											</a>
-											<div class="item-feedback__header">
-												<div class="item-feedback__name">Віталій Т.</div>
-												<div class="item-feedback__date">22 червня 2025</div>
-											</div>
-											<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
-											<p class="item-feedback__text">
-												Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
-                  залишив приємні враження, точно замовлятиму ще!
-											</p>
-											<div class="item-feedback__footer">
-												<div class="separator"></div>
-												<div class="item-feedback__actions">
-													<div class="item-feedback__action-item">
-														<button class="like _icon-like"></button>
-														2
+											<div class="item-feedback__wrapper">
+												<a href="#" class="item-feedback__product product-feedback">
+													<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
+													<div class="product-feedback__body">
+														<h4 class="product-feedback__title">
+															<span class="ellipsis">Sika BV 3M</span>
+														</h4>
+														<p class="product-feedback__desc">
+															<span class="ellipsis">Добавка до бетону тепла підлога</span>
+														</p>
 													</div>
-													<div class="item-feedback__action-item">
-														<button class="dislike --active _icon-dislike"></button>
-														1
-													</div>
+												</a>
+												<div class="item-feedback__header">
+													<div class="item-feedback__name">Віталій Т.</div>
+													<div class="item-feedback__date">22 червня 2025</div>
 												</div>
-											</div>
-										</div>
-									</li>
-									<li class="splide__slide">
-										<div class="feedback-section__item item-feedback">
-											<a href="#" class="item-feedback__product product-feedback">
-												<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
-												<div class="product-feedback__body">
-													<h4 class="product-feedback__title">
-														<span class="ellipsis">Sika BV 3M</span>
-													</h4>
-													<p class="product-feedback__desc">
-														<span class="ellipsis">Добавка до бетону тепла підлога</span>
-													</p>
-												</div>
-											</a>
-											<div class="item-feedback__header">
-												<div class="item-feedback__name">Віталій Т.</div>
-												<div class="item-feedback__date">22 червня 2025</div>
-											</div>
-											<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
-											<p class="item-feedback__text">
-												Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
-                  залишив приємні враження, точно замовлятиму ще!
-											</p>
-											<div class="item-feedback__footer">
-												<div class="separator"></div>
-												<div class="item-feedback__actions">
-													<div class="item-feedback__action-item">
-														<button class="like _icon-like"></button>
-														2
-													</div>
-													<div class="item-feedback__action-item">
-														<button class="dislike --active _icon-dislike"></button>
-														1
+												<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
+												<p class="item-feedback__text">
+													Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
+                    залишив приємні враження, точно замовлятиму ще!
+												</p>
+												<div class="item-feedback__footer">
+													<div class="separator"></div>
+													<div class="item-feedback__actions">
+														<div class="item-feedback__action-item">
+															<button class="like _icon-like"></button>
+															2
+														</div>
+														<div class="item-feedback__action-item">
+															<button class="dislike _icon-dislike"></button>
+															1
+														</div>
 													</div>
 												</div>
 											</div>
@@ -2547,36 +3223,155 @@
 									</li>
 									<li class="splide__slide">
 										<div class="feedback-section__item item-feedback">
-											<a href="#" class="item-feedback__product product-feedback">
-												<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
-												<div class="product-feedback__body">
-													<h4 class="product-feedback__title">
-														<span class="ellipsis">Sika BV 3M</span>
-													</h4>
-													<p class="product-feedback__desc">
-														<span class="ellipsis">Добавка до бетону тепла підлога</span>
-													</p>
-												</div>
-											</a>
-											<div class="item-feedback__header">
-												<div class="item-feedback__name">Віталій Т.</div>
-												<div class="item-feedback__date">22 червня 2025</div>
-											</div>
-											<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
-											<p class="item-feedback__text">
-												Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
-                  залишив приємні враження, точно замовлятиму ще!
-											</p>
-											<div class="item-feedback__footer">
-												<div class="separator"></div>
-												<div class="item-feedback__actions">
-													<div class="item-feedback__action-item">
-														<button class="like _icon-like"></button>
-														2
+											<div class="item-feedback__wrapper">
+												<a href="#" class="item-feedback__product product-feedback">
+													<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
+													<div class="product-feedback__body">
+														<h4 class="product-feedback__title">
+															<span class="ellipsis">Sika BV 3M</span>
+														</h4>
+														<p class="product-feedback__desc">
+															<span class="ellipsis">Добавка до бетону тепла підлога</span>
+														</p>
 													</div>
-													<div class="item-feedback__action-item">
-														<button class="dislike --active _icon-dislike"></button>
-														1
+												</a>
+												<div class="item-feedback__header">
+													<div class="item-feedback__name">Віталій Т.</div>
+													<div class="item-feedback__date">22 червня 2025</div>
+												</div>
+												<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
+												<p class="item-feedback__text">
+													Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
+                    залишив приємні враження, точно замовлятиму ще!
+												</p>
+												<div class="item-feedback__footer">
+													<div class="separator"></div>
+													<div class="item-feedback__actions">
+														<div class="item-feedback__action-item">
+															<button class="like _icon-like"></button>
+															2
+														</div>
+														<div class="item-feedback__action-item">
+															<button class="dislike _icon-dislike"></button>
+															1
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="splide__slide">
+										<div class="feedback-section__item item-feedback">
+											<div class="item-feedback__wrapper">
+												<a href="#" class="item-feedback__product product-feedback">
+													<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
+													<div class="product-feedback__body">
+														<h4 class="product-feedback__title">
+															<span class="ellipsis">Sika BV 3M</span>
+														</h4>
+														<p class="product-feedback__desc">
+															<span class="ellipsis">Добавка до бетону тепла підлога</span>
+														</p>
+													</div>
+												</a>
+												<div class="item-feedback__header">
+													<div class="item-feedback__name">Віталій Т.</div>
+													<div class="item-feedback__date">22 червня 2025</div>
+												</div>
+												<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
+												<p class="item-feedback__text">
+													Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
+                    залишив приємні враження, точно замовлятиму ще!
+												</p>
+												<div class="item-feedback__footer">
+													<div class="separator"></div>
+													<div class="item-feedback__actions">
+														<div class="item-feedback__action-item">
+															<button class="like _icon-like"></button>
+															2
+														</div>
+														<div class="item-feedback__action-item">
+															<button class="dislike _icon-dislike"></button>
+															1
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="splide__slide">
+										<div class="feedback-section__item item-feedback">
+											<div class="item-feedback__wrapper">
+												<a href="#" class="item-feedback__product product-feedback">
+													<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
+													<div class="product-feedback__body">
+														<h4 class="product-feedback__title">
+															<span class="ellipsis">Sika BV 3M</span>
+														</h4>
+														<p class="product-feedback__desc">
+															<span class="ellipsis">Добавка до бетону тепла підлога</span>
+														</p>
+													</div>
+												</a>
+												<div class="item-feedback__header">
+													<div class="item-feedback__name">Віталій Т.</div>
+													<div class="item-feedback__date">22 червня 2025</div>
+												</div>
+												<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
+												<p class="item-feedback__text">
+													Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
+                    залишив приємні враження, точно замовлятиму ще!
+												</p>
+												<div class="item-feedback__footer">
+													<div class="separator"></div>
+													<div class="item-feedback__actions">
+														<div class="item-feedback__action-item">
+															<button class="like _icon-like"></button>
+															2
+														</div>
+														<div class="item-feedback__action-item">
+															<button class="dislike _icon-dislike"></button>
+															1
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li class="splide__slide">
+										<div class="feedback-section__item item-feedback">
+											<div class="item-feedback__wrapper">
+												<a href="#" class="item-feedback__product product-feedback">
+													<img alt="Image" class="product-feedback__image" src="./assets/img/products/01.webp">
+													<div class="product-feedback__body">
+														<h4 class="product-feedback__title">
+															<span class="ellipsis">Sika BV 3M</span>
+														</h4>
+														<p class="product-feedback__desc">
+															<span class="ellipsis">Добавка до бетону тепла підлога</span>
+														</p>
+													</div>
+												</a>
+												<div class="item-feedback__header">
+													<div class="item-feedback__name">Віталій Т.</div>
+													<div class="item-feedback__date">22 червня 2025</div>
+												</div>
+												<div data-fls-rating="" data-fls-rating-value="5" class="item-feedback__rating rating"></div>
+												<p class="item-feedback__text">
+													Дуже гарна якість товару! Доставка швидка, все прийшло вчасно і в ідеальному стані. Магазин "Торус"
+                    залишив приємні враження, точно замовлятиму ще!
+												</p>
+												<div class="item-feedback__footer">
+													<div class="separator"></div>
+													<div class="item-feedback__actions">
+														<div class="item-feedback__action-item">
+															<button class="like _icon-like"></button>
+															2
+														</div>
+														<div class="item-feedback__action-item">
+															<button class="dislike _icon-dislike"></button>
+															1
+														</div>
 													</div>
 												</div>
 											</div>

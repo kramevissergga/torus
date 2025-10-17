@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Попапи</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,30 +1168,28 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<div class="page__popups popups">
+					<div class="popups__container">
+						<button data-fls-popup-link="cart-clear-popup" class="button">Очистити кошик</button>
+						<button data-fls-popup-link="success-popup" class="button">Замовлення оформлене</button>
+						<button data-fls-popup-link="phone-login-popup" class="button">Увійти за телефоном</button>
+						<button data-fls-popup-link="email-login-popup" class="button">Увійти за поштою</button>
+						<button data-fls-popup-link="remind-pass-popup" class="button">Нагадати пароль</button>
+						<button data-fls-popup-link="feedback-popup" class="button">Написати відгук</button>
+						<button data-fls-popup-link="answer-popup" class="button">Написати відповідь</button>
+						<button data-fls-popup-link="cheap-popup" class="button">Знайшли дешевше</button>
+						<button data-fls-popup-link="success-feedback-popup" class="button">Успішний відгук</button>
+						<button data-fls-popup-link="refund-popup" class="button">Заявка на повернення</button>
+						<button data-fls-popup-link="refund-popup" class="button">Заявка на повернення</button>
+						<button data-fls-popup-link="write-us-popup" class="button">Написати нам</button>
+						<button data-fls-popup-link="cart-popup" class="button">Кошик</button>
+						<button data-fls-popup-link="contact-us-popup" class="button">Зв'язатися</button>
+						<button data-fls-popup-link="comment-popup" class="button">Написати коментар</button>
 					</div>
 				</div>
 			</main>
 			<style>
-				.pages__container {
+				.popups__container {
     display: flex;
     flex-direction: column;
     align-items: start;

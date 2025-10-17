@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Профіль</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,319 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<div class="page__profile profile">
+					<div class="profile__container">
+						<div class="profile__wrapper">
+							<div data-fls-spoilers="767.98, max" class="profile__aside">
+								<details>
+									<summary class="profile__user user-profile _icon-user">
+										<div class="user-profile__body">
+											<h3 class="user-profile__title">Андрій Гаврилов</h3>
+											<div class="user-profile__email">andriyko@gmail.com</div>
+										</div>
+										<div class="user-profile__icon _icon-ch-down"></div>
+									</summary>
+									<div class="profile__content">
+										<div class="profile__menu">
+											<a href="profile-data.html" class="profile__menu-item _icon-info">
+												<span>Особисті дані</span>
+											</a>
+											<a href="profile-edit.html" class="profile__menu-item _icon-info">
+												<span>Особисті дані(ред.)</span>
+											</a>
+											<a href="profile-orders.html" class="profile__menu-item _icon-orders">
+												<span>Мої замовлення</span>
+											</a>
+											<a href="profile-address.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса</span>
+											</a>
+											<a href="profile-address-add.html" class="profile__menu-item _icon-profile-location">
+												<span>Адреса(дод.)</span>
+											</a>
+											<a href="profile-cart.html" class="profile__menu-item _icon-cart">
+												<span>Кошик</span>
+											</a>
+											<a href="profile-history.html" class="profile__menu-item _icon-eye --active">
+												<span>Переглянуті товари</span>
+											</a>
+											<a href="profile-wishlist.html" class="profile__menu-item _icon-heart">
+												<span>Обрані товари</span>
+											</a>
+											<a href="profile-bonuses.html" class="profile__menu-item _icon-gift-card">
+												<span>Бонусні бали</span>
+											</a>
+										</div>
+										<button class="profile__logout _icon-exit">Вихід</button>
+									</div>
+								</details>
+							</div>
+							<div class="profile__body">
+								<h1 data-fls-dynamic=".profile__container, 767.98, first" class="profile__title title">Переглянуті товари</h1>
+								<div class="profile__products">
+									<article class="item-product item-product--wide">
+										<div class="item-product__image">
+											<a href="#" class="item-product__pic">
+												<img class="ibg" alt="Image" src="./assets/img/products/01.webp">
+											</a>
+											<div class="item-product__header">
+												<div class="item-product__tag">ХІТ</div>
+												<div class="item-product__actions">
+													<div class="item-product__bonus">
+														Бонуси
+														<span>+25</span>
+													</div>
+													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+												</div>
+											</div>
+										</div>
+										<div class="item-product__body">
+											<h3 class="item-product__title">
+												<a class="ellipsis" href="#">
+													Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)
+												</a>
+											</h3>
+											<p class="item-product__desc">
+												<span class="ellipsis">Добавка до бетону тепла підлога</span>
+											</p>
+											<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+											<div class="item-product__footer">
+												<div class="item-product__prices">
+													<div class="item-product__price">
+														<span class="gray-label discount">
+															191
+															<span class="small">грн.</span>
+														</span>
+														<span class="price">
+															101
+															<span class="small">грн.</span>
+														</span>
+													</div>
+												</div>
+												<button class="item-product__cart-btn _icon-cart"></button>
+											</div>
+										</div>
+									</article>
+									<article class="item-product item-product--wide">
+										<div class="item-product__image">
+											<a href="#" class="item-product__pic">
+												<img class="ibg" alt="Image" src="./assets/img/products/02.webp">
+											</a>
+											<div class="item-product__header">
+												<div class="item-product__tag">ХІТ</div>
+												<div class="item-product__actions">
+													<div class="item-product__bonus">
+														Бонуси
+														<span>+25</span>
+													</div>
+													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+												</div>
+											</div>
+										</div>
+										<div class="item-product__body">
+											<h3 class="item-product__title">
+												<a class="ellipsis" href="#">
+													Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)
+												</a>
+											</h3>
+											<p class="item-product__desc">
+												<span class="ellipsis">Добавка до бетону тепла підлога</span>
+											</p>
+											<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+											<div class="item-product__footer">
+												<div class="item-product__prices">
+													<div class="item-product__price">
+														<span class="gray-label discount">
+															191
+															<span class="small">грн.</span>
+														</span>
+														<span class="price">
+															101
+															<span class="small">грн.</span>
+														</span>
+													</div>
+												</div>
+												<button class="item-product__cart-btn _icon-cart"></button>
+											</div>
+										</div>
+									</article>
+									<article class="item-product item-product--wide">
+										<div class="item-product__image">
+											<a href="#" class="item-product__pic">
+												<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+											</a>
+											<div class="item-product__header">
+												<div class="item-product__tag">ХІТ</div>
+												<div class="item-product__actions">
+													<div class="item-product__bonus">
+														Бонуси
+														<span>+25</span>
+													</div>
+													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+												</div>
+											</div>
+										</div>
+										<div class="item-product__body">
+											<h3 class="item-product__title">
+												<a class="ellipsis" href="#">
+													Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)
+												</a>
+											</h3>
+											<p class="item-product__desc">
+												<span class="ellipsis">Добавка до бетону тепла підлога</span>
+											</p>
+											<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+											<div class="item-product__footer">
+												<div class="item-product__prices">
+													<div class="item-product__price">
+														<span class="gray-label discount">
+															191
+															<span class="small">грн.</span>
+														</span>
+														<span class="price">
+															101
+															<span class="small">грн.</span>
+														</span>
+													</div>
+												</div>
+												<button class="item-product__cart-btn _icon-cart"></button>
+											</div>
+										</div>
+									</article>
+									<article class="item-product item-product--wide">
+										<div class="item-product__image">
+											<a href="#" class="item-product__pic">
+												<img class="ibg" alt="Image" src="./assets/img/products/01.webp">
+											</a>
+											<div class="item-product__header">
+												<div class="item-product__tag">ХІТ</div>
+												<div class="item-product__actions">
+													<div class="item-product__bonus">
+														Бонуси
+														<span>+25</span>
+													</div>
+													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+												</div>
+											</div>
+										</div>
+										<div class="item-product__body">
+											<h3 class="item-product__title">
+												<a class="ellipsis" href="#">
+													Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)
+												</a>
+											</h3>
+											<p class="item-product__desc">
+												<span class="ellipsis">Добавка до бетону тепла підлога</span>
+											</p>
+											<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+											<div class="item-product__footer">
+												<div class="item-product__prices">
+													<div class="item-product__price">
+														<span class="gray-label discount">
+															191
+															<span class="small">грн.</span>
+														</span>
+														<span class="price">
+															101
+															<span class="small">грн.</span>
+														</span>
+													</div>
+												</div>
+												<button class="item-product__cart-btn _icon-cart"></button>
+											</div>
+										</div>
+									</article>
+									<article class="item-product item-product--wide">
+										<div class="item-product__image">
+											<a href="#" class="item-product__pic">
+												<img class="ibg" alt="Image" src="./assets/img/products/02.webp">
+											</a>
+											<div class="item-product__header">
+												<div class="item-product__tag">ХІТ</div>
+												<div class="item-product__actions">
+													<div class="item-product__bonus">
+														Бонуси
+														<span>+25</span>
+													</div>
+													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+												</div>
+											</div>
+										</div>
+										<div class="item-product__body">
+											<h3 class="item-product__title">
+												<a class="ellipsis" href="#">
+													Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)
+												</a>
+											</h3>
+											<p class="item-product__desc">
+												<span class="ellipsis">Добавка до бетону тепла підлога</span>
+											</p>
+											<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+											<div class="item-product__footer">
+												<div class="item-product__prices">
+													<div class="item-product__price">
+														<span class="gray-label discount">
+															191
+															<span class="small">грн.</span>
+														</span>
+														<span class="price">
+															101
+															<span class="small">грн.</span>
+														</span>
+													</div>
+												</div>
+												<button class="item-product__cart-btn _icon-cart"></button>
+											</div>
+										</div>
+									</article>
+									<article class="item-product item-product--wide">
+										<div class="item-product__image">
+											<a href="#" class="item-product__pic">
+												<img class="ibg" alt="Image" src="./assets/img/products/03.webp">
+											</a>
+											<div class="item-product__header">
+												<div class="item-product__tag">ХІТ</div>
+												<div class="item-product__actions">
+													<div class="item-product__bonus">
+														Бонуси
+														<span>+25</span>
+													</div>
+													<button class="item-product__fav fav-btn _icon-heart"><!-- --active --></button>
+												</div>
+											</div>
+										</div>
+										<div class="item-product__body">
+											<h3 class="item-product__title">
+												<a class="ellipsis" href="#">
+													Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)
+												</a>
+											</h3>
+											<p class="item-product__desc">
+												<span class="ellipsis">Добавка до бетону тепла підлога</span>
+											</p>
+											<div data-fls-rating="" data-fls-rating-value="4" class="rating"></div>
+											<div class="item-product__footer">
+												<div class="item-product__prices">
+													<div class="item-product__price">
+														<span class="gray-label discount">
+															191
+															<span class="small">грн.</span>
+														</span>
+														<span class="price">
+															101
+															<span class="small">грн.</span>
+														</span>
+													</div>
+												</div>
+												<button class="item-product__cart-btn _icon-cart"></button>
+											</div>
+										</div>
+									</article>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

@@ -14,7 +14,7 @@
 		<link rel="preload" href="./assets/fonts/Lato-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="preload" href="./assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="assets/img/favicon.ico">
-		<title>Сторінки</title>
+		<title>Оформлення замовлення (не авторизовано)</title>
 		<script type="module" crossorigin="" src="./js/app.min.js?v=1760702986344"></script>
 		<link rel="stylesheet" crossorigin="" href="./css/app.min.css?v=1760702986344">
 	</head>
@@ -1168,36 +1168,249 @@
 				</div>
 			</div>
 			<main class="page">
-				<div class="page__pages pages">
-					<div class="pages__container">
-						<a target="_blank" href="index.html" class="button">Головна</a>
-						<a target="_blank" href="categories.html" class="button">Категорії</a>
-						<a target="_blank" href="catalog.html" class="button">Каталог</a>
-						<a target="_blank" href="cart.html" class="button">Кошик</a>
-						<a target="_blank" href="checkout.html" class="button">Оформлення замовлення</a>
-						<a target="_blank" href="checkout-unauth.html" class="button">Оформлення замовлення (не авторизовано)</a>
-						<a target="_blank" href="profile-data.html" class="button">Профіль</a>
-						<a target="_blank" href="product.html" class="button">Товар</a>
-						<a target="_blank" href="product-alt.html" class="button">Товар (альтернативний)</a>
-						<a target="_blank" href="blog.html" class="button">Блог</a>
-						<a target="_blank" href="blog.html" class="button">Стаття</a>
-						<a target="_blank" href="contacts.html" class="button">Контакти</a>
-						<a target="_blank" href="shipping.html" class="button">Доставка і оплата</a>
-						<a target="_blank" href="refund.html" class="button">Умови повернення</a>
-						<a target="_blank" href="faq.html" class="button">Питання і відповіді</a>
-						<a target="_blank" href="popups.html" class="button">Попапи</a>
-						<a target="_blank" href="error.html" class="button">404</a>
+				<section class="page__checkout checkout">
+					<div class="checkout__container">
+						<div class="checkout__header">
+							<h1 class="checkout__title title">Оформлення замовлення</h1>
+							<button class="checkout__edit button button--border pc">Редагувати замовлення</button>
+							<button class="checkout__edit-mob icon-btn _icon-pencil mobile"></button>
+						</div>
+						<form action="#" enctype="multipart/form-data" method="POST" class="checkout__wrapper">
+							<div data-fls-select-one="" class="checkout__body">
+								<div class="checkout__label color-label">
+									<b>Увага!</b>
+									Ви обрали товар під замовлення 1-5 днів, після оформлення замовлення, очікуйте на дзвінок
+            менеджера для уточнення деталей
+								</div>
+								<div class="checkout__login login-checkout">
+									<h3 class="login-checkout__title">Вхід / Реєстрація</h3>
+									<div class="login-checkout__label">
+										Реєструйся щоб не втратити бонуси
+										<b>1 бонус = 1 гривня</b>
+									</div>
+									<div class="login-checkout__items">
+										<label class="login-checkout__radiobox check-input">
+											<div class="check-input__icon"></div>
+											Вхід
+											<input type="radio" name="auth-type">
+										</label>
+										<label class="login-checkout__radiobox check-input">
+											<div class="check-input__icon"></div>
+											Реєстрація
+											<input checked type="radio" name="auth-type">
+										</label>
+										<label class="login-checkout__radiobox check-input">
+											<div class="check-input__icon"></div>
+											Не реєструватися
+											<input type="radio" name="auth-type">
+										</label>
+									</div>
+								</div>
+								<div class="checkout__block">
+									<h2 class="checkout__block-title title">Контактні дані</h2>
+									<div class="checkout__field field">
+										<div class="field__label">
+											Ім’я
+											<span>*</span>
+										</div>
+										<input type="text" name="firstName" value="Андрій" class="field__input input">
+									</div>
+									<div class="checkout__field field">
+										<div class="field__label">
+											Прізвище
+											<span>*</span>
+										</div>
+										<input type="text" name="lastName" value="Хартов" class="field__input input">
+									</div>
+									<div class="checkout__field field">
+										<div class="field__label">
+											Телефон
+											<span>*</span>
+										</div>
+										<input type="text" name="phone" value="+38 0" class="field__input input">
+									</div>
+									<div class="checkout__field field">
+										<div class="field__label">
+											Email
+											<span>*</span>
+										</div>
+										<input type="email" name="email" placeholder="Ваш Email" class="field__input input">
+									</div>
+									<div class="checkout__field field">
+										<div class="field__label">Обери свій напрям</div>
+										<select data-fls-select="">
+											<option value="1" selected>Будую собі</option>
+											<option value="2">Професійний будівельник</option>
+										</select>
+									</div>
+								</div>
+								<div class="checkout__block">
+									<h2 class="checkout__block-title title">Доставка та оплата</h2>
+									<div class="checkout__field field">
+										<div class="field__label">
+											Місто
+											<span>*</span>
+										</div>
+										<select data-fls-select="">
+											<option value="1" selected>Запоріжжя</option>
+											<option value="2">Київ</option>
+											<option value="3">Івано-Франківськ</option>
+											<option value="4">Дніпро</option>
+										</select>
+									</div>
+									<div class="checkout__size-wrapper">
+										<h3 class="checkout__block-title title">
+											Спосіб доставки
+											<span>*</span>
+										</h3>
+										<label class="checkout__radiobox check-input">
+											<div class="check-input__icon"></div>
+											Доставка
+											<input type="radio" name="shipping">
+										</label>
+										<label class="checkout__radiobox check-input">
+											<div class="check-input__icon"></div>
+											Самовивіз
+											<input checked type="radio" name="shipping">
+										</label>
+										<div class="checkout__addresses">
+											<label class="checkout__radiobox check-input">
+												<div class="check-input__icon"></div>
+												вул. Базова 1г
+												<input checked type="radio" name="self-pickup">
+											</label>
+											<label class="checkout__radiobox check-input">
+												<div class="check-input__icon"></div>
+												вул. Базова 1г
+												<input type="radio" name="self-pickup">
+											</label>
+											<label class="checkout__radiobox check-input">
+												<div class="check-input__icon"></div>
+												вул. Базова 1г
+												<input type="radio" name="self-pickup">
+											</label>
+										</div>
+										<h3 class="checkout__block-title title">
+											Спосіб оплати
+											<span>*</span>
+										</h3>
+										<label class="checkout__radiobox check-input">
+											<div class="check-input__icon"></div>
+											У відділенні
+											<input checked type="radio" name="payment">
+										</label>
+									</div>
+								</div>
+								<div class="checkout__field field">
+									<div class="field__label">Коментар</div>
+									<textarea name="comment" class="field__textarea textarea"></textarea>
+								</div>
+								<label class="checkout__checkbox check-input check-input--checkbox">
+									<div class="check-input__icon"></div>
+									<p>
+										Я прочитав (а) і погоджуюся з правилами сайту
+										<a href="#">правила та умови</a>
+										<span style="color: #FF0004;">*</span>
+									</p>
+									<input type="checkbox" name="terms">
+								</label>
+								<button class="checkout__button button button--border pc">Назад</button>
+							</div>
+							<div class="checkout__aside aside-checkout">
+								<h2 class="aside-checkout__title">Ваше замовлення</h2>
+								<div class="aside-checkout__items">
+									<div class="aside-checkout__item product-checkout">
+										<a href="#" class="product-checkout__image">
+											<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/01.webp">
+										</a>
+										<div class="product-checkout__body">
+											<h4 class="product-checkout__title">
+												<a href="#">Sika BV 3M</a>
+											</h4>
+											<div class="product-checkout__info">Артикул: 15863</div>
+											<div class="product-checkout__info">
+												Кількість:
+												<span>1</span>
+											</div>
+											<div class="product-checkout__info">
+												Вага:
+												<span>100кг</span>
+											</div>
+										</div>
+										<div class="product-checkout__price">101 грн.</div>
+									</div>
+									<div class="aside-checkout__item product-checkout">
+										<a href="#" class="product-checkout__image">
+											<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/02.webp">
+										</a>
+										<div class="product-checkout__body">
+											<h4 class="product-checkout__title">
+												<a href="#">Цемент BauGut ШПЦ ІІІ/А-400 25 кг (CEM III/А 32,5 N)</a>
+											</h4>
+											<div class="product-checkout__info">Артикул: 15863</div>
+											<div class="product-checkout__info">
+												Кількість:
+												<span>1</span>
+											</div>
+											<div class="product-checkout__info">
+												Вага:
+												<span>100кг</span>
+											</div>
+										</div>
+										<div class="product-checkout__price">101 грн.</div>
+									</div>
+									<div class="aside-checkout__item product-checkout">
+										<a href="#" class="product-checkout__image">
+											<img class="ibg ibg--contain" alt="Image" src="./assets/img/products/03.webp">
+										</a>
+										<div class="product-checkout__body">
+											<h4 class="product-checkout__title">
+												<a href="#">Вогнебіозахист Дніпро СПЕЦЕМАЛЬ 1:10 1 л для внутрішніх та зовнішніх робіт</a>
+											</h4>
+											<div class="product-checkout__info">Артикул: 15863</div>
+											<div class="product-checkout__info">
+												Кількість:
+												<span>1</span>
+											</div>
+											<div class="product-checkout__info">
+												Вага:
+												<span>100кг</span>
+											</div>
+										</div>
+										<div class="product-checkout__price">101 грн.</div>
+									</div>
+								</div>
+								<div class="aside-checkout__summary summary-checkout">
+									<div class="summary-checkout__item">
+										<span>Сума за товар</span>
+										<span>303 грн.</span>
+									</div>
+									<div class="summary-checkout__item">
+										<span>Знижка</span>
+										<span>-3 грн.</span>
+									</div>
+									<div class="summary-checkout__item">
+										<span>Бонуси</span>
+										<span class="summary-checkout__bonus">+75 бонусів</span>
+									</div>
+									<div class="summary-checkout__item">
+										<span>Доставка</span>
+										<span>300 грн.</span>
+									</div>
+									<div class="summary-checkout__total">
+										<span>Разом</span>
+										<span>600 грн.</span>
+									</div>
+								</div>
+								<button class="aside-checkout__button button">Підтвердити замовлення</button>
+							</div>
+						</form>
 					</div>
-				</div>
+					<div class="checkout__pinned pinned-actions mobile">
+						<button class="pinned-actions__button button button--gray">Оформити замовлення</button>
+					</div>
+				</section>
 			</main>
-			<style>
-				.pages__container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-  }
-			</style>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__top">
 					<div class="footer__container">

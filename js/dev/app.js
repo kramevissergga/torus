@@ -35,6 +35,15 @@
     fetch(link.href, fetchOpts);
   }
 })();
+function getHash() {
+  if (location.hash) {
+    return location.hash.replace("#", "");
+  }
+}
+function setHash(hash) {
+  hash = hash ? `#${hash}` : window.location.href.split("#")[0];
+  history.pushState("", "", hash);
+}
 let slideUp = (target, duration = 500, showmore = 0) => {
   if (!target.classList.contains("--slide")) {
     target.classList.add("--slide");
@@ -170,6 +179,174 @@ function dataMediaQueries(array, dataSetValue) {
     return { itemsArray, matchMedia: matchMedia2 };
   });
 }
+const gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 0) => {
+  const targetBlockElement = document.querySelector(targetBlock);
+  if (targetBlockElement) {
+    let headerItem = "";
+    let headerItemHeight = 0;
+    if (noHeader) {
+      headerItem = "header.header";
+      const headerElement = document.querySelector(headerItem);
+      if (!headerElement.classList.contains("--header-scroll")) {
+        headerElement.style.cssText = `transition-duration: 0s;`;
+        headerElement.classList.add("--header-scroll");
+        headerItemHeight = headerElement.offsetHeight;
+        headerElement.classList.remove("--header-scroll");
+        setTimeout(() => {
+          headerElement.style.cssText = ``;
+        }, 0);
+      } else {
+        headerItemHeight = headerElement.offsetHeight;
+      }
+    }
+    if (document.documentElement.hasAttribute("data-fls-menu-open")) {
+      bodyUnlock();
+      document.documentElement.removeAttribute("data-fls-menu-open");
+    }
+    let targetBlockElementPosition = targetBlockElement.getBoundingClientRect().top + scrollY;
+    targetBlockElementPosition = headerItemHeight ? targetBlockElementPosition - headerItemHeight : targetBlockElementPosition;
+    targetBlockElementPosition = offsetTop ? targetBlockElementPosition - offsetTop : targetBlockElementPosition;
+    window.scrollTo({
+      top: targetBlockElementPosition,
+      behavior: "smooth"
+    });
+  }
+};
+function tabs() {
+  const tabs2 = document.querySelectorAll("[data-fls-tabs]");
+  let tabsActiveHash = [];
+  if (tabs2.length > 0) {
+    const hash = getHash();
+    if (hash && hash.startsWith("tab-")) {
+      tabsActiveHash = hash.replace("tab-", "").split("-");
+    }
+    tabs2.forEach((tabsBlock, index) => {
+      tabsBlock.classList.add("--tab-init");
+      tabsBlock.setAttribute("data-fls-tabs-index", index);
+      tabsBlock.addEventListener("click", setTabsAction);
+      initTabs(tabsBlock);
+    });
+    let mdQueriesArray = dataMediaQueries(tabs2, "flsTabs");
+    if (mdQueriesArray && mdQueriesArray.length) {
+      mdQueriesArray.forEach((mdQueriesItem) => {
+        mdQueriesItem.matchMedia.addEventListener("change", function() {
+          setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+        });
+        setTitlePosition(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+      });
+    }
+  }
+  function setTitlePosition(tabsMediaArray, matchMedia2) {
+    tabsMediaArray.forEach((tabsMediaItem) => {
+      tabsMediaItem = tabsMediaItem.item;
+      let tabsTitles = tabsMediaItem.querySelector("[data-fls-tabs-titles]");
+      let tabsTitleItems = tabsMediaItem.querySelectorAll(
+        "[data-fls-tabs-title]"
+      );
+      let tabsContent = tabsMediaItem.querySelector("[data-fls-tabs-body]");
+      let tabsContentItems = tabsMediaItem.querySelectorAll(
+        "[data-fls-tabs-item]"
+      );
+      tabsTitleItems = Array.from(tabsTitleItems).filter(
+        (item) => item.closest("[data-fls-tabs]") === tabsMediaItem
+      );
+      tabsContentItems = Array.from(tabsContentItems).filter(
+        (item) => item.closest("[data-fls-tabs]") === tabsMediaItem
+      );
+      tabsContentItems.forEach((tabsContentItem, index) => {
+        if (matchMedia2.matches) {
+          tabsContent.append(tabsTitleItems[index]);
+          tabsContent.append(tabsContentItem);
+          tabsMediaItem.classList.add("--tab-spoiler");
+        } else {
+          tabsTitles.append(tabsTitleItems[index]);
+          tabsMediaItem.classList.remove("--tab-spoiler");
+        }
+      });
+    });
+  }
+  function initTabs(tabsBlock) {
+    let tabsTitles = tabsBlock.querySelectorAll("[data-fls-tabs-titles]>*");
+    let tabsContent = tabsBlock.querySelectorAll("[data-fls-tabs-body]>*");
+    const tabsBlockIndex = tabsBlock.dataset.flsTabsIndex;
+    const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
+    if (tabsActiveHashBlock) {
+      const tabsActiveTitle = tabsBlock.querySelector(
+        "[data-fls-tabs-titles]>.--tab-active"
+      );
+      tabsActiveTitle ? tabsActiveTitle.classList.remove("--tab-active") : null;
+    }
+    if (tabsContent.length) {
+      tabsContent.forEach((tabsContentItem, index) => {
+        tabsTitles[index].setAttribute("data-fls-tabs-title", "");
+        tabsContentItem.setAttribute("data-fls-tabs-item", "");
+        if (tabsActiveHashBlock && index == tabsActiveHash[1]) {
+          tabsTitles[index].classList.add("--tab-active");
+        }
+        tabsContentItem.hidden = !tabsTitles[index].classList.contains("--tab-active");
+      });
+    }
+  }
+  function setTabsStatus2(tabsBlock) {
+    let tabsTitles = tabsBlock.querySelectorAll("[data-fls-tabs-title]");
+    let tabsContent = tabsBlock.querySelectorAll("[data-fls-tabs-item]");
+    const tabsBlockIndex = tabsBlock.dataset.flsTabsIndex;
+    function isTabsAnamate(tabsBlock2) {
+      if (tabsBlock2.hasAttribute("data-fls-tabs-animate")) {
+        return tabsBlock2.dataset.flsTabsAnimate > 0 ? Number(tabsBlock2.dataset.flsTabsAnimate) : 500;
+      }
+    }
+    const tabsBlockAnimate = isTabsAnamate(tabsBlock);
+    if (tabsContent.length > 0) {
+      const isHash = tabsBlock.hasAttribute("data-fls-tabs-hash");
+      tabsContent = Array.from(tabsContent).filter(
+        (item) => item.closest("[data-fls-tabs]") === tabsBlock
+      );
+      tabsTitles = Array.from(tabsTitles).filter(
+        (item) => item.closest("[data-fls-tabs]") === tabsBlock
+      );
+      tabsContent.forEach((tabsContentItem, index) => {
+        if (tabsTitles[index].classList.contains("--tab-active")) {
+          if (tabsBlockAnimate) {
+            slideDown(tabsContentItem, tabsBlockAnimate);
+          } else {
+            tabsContentItem.hidden = false;
+          }
+          if (isHash && !tabsContentItem.closest(".popup")) {
+            setHash(`tab-${tabsBlockIndex}-${index}`);
+          }
+        } else {
+          if (tabsBlockAnimate) {
+            slideUp(tabsContentItem, tabsBlockAnimate);
+          } else {
+            tabsContentItem.hidden = true;
+          }
+        }
+      });
+    }
+    tabsBlock.dispatchEvent(new Event("tabSwitch"));
+  }
+  function setTabsAction(e) {
+    const el = e.target;
+    if (el.closest("[data-fls-tabs-title]")) {
+      const tabTitle = el.closest("[data-fls-tabs-title]");
+      const tabsBlock = tabTitle.closest("[data-fls-tabs]");
+      if (!tabTitle.classList.contains("--tab-active") && !tabsBlock.querySelector(".--slide")) {
+        let tabActiveTitle = tabsBlock.querySelectorAll(
+          "[data-fls-tabs-title].--tab-active"
+        );
+        tabActiveTitle.length ? tabActiveTitle = Array.from(tabActiveTitle).filter(
+          (item) => item.closest("[data-fls-tabs]") === tabsBlock
+        ) : null;
+        tabActiveTitle.length ? tabActiveTitle[0].classList.remove("--tab-active") : null;
+        tabTitle.classList.add("--tab-active");
+        setTabsStatus2(tabsBlock);
+      }
+      e.preventDefault();
+    }
+  }
+}
+window.addEventListener("load", tabs);
 let formValidate = {
   getErrors(form) {
     let error = 0;
@@ -265,449 +442,6 @@ let formValidate = {
     return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(formRequiredItem.value);
   }
 };
-class SelectConstructor {
-  constructor(props, data = null) {
-    let defaultConfig = {
-      init: true,
-      speed: 150
-    };
-    this.config = Object.assign(defaultConfig, props);
-    this.selectClasses = {
-      classSelect: "select",
-      // Головний блок
-      classSelectBody: "select__body",
-      // Тіло селекту
-      classSelectTitle: "select__title",
-      // Заголовок
-      classSelectValue: "select__value",
-      // Значення у заголовку
-      classSelectLabel: "select__label",
-      // Лабел
-      classSelectInput: "select__input",
-      // Поле введення
-      classSelectText: "select__text",
-      // Оболонка текстових даних
-      classSelectLink: "select__link",
-      // Посилання в елементі
-      classSelectOptions: "select__options",
-      // Випадаючий список
-      classSelectOptionsScroll: "select__scroll",
-      // Оболонка при скролі
-      classSelectOption: "select__option",
-      // Пункт
-      classSelectContent: "select__content",
-      // Оболонка контенту в заголовку
-      classSelectRow: "select__row",
-      // Ряд
-      classSelectData: "select__asset",
-      // Додаткові дані
-      classSelectDisabled: "--select-disabled",
-      // Заборонено
-      classSelectTag: "--select-tag",
-      // Клас тега
-      classSelectOpen: "--select-open",
-      // Список відкритий
-      classSelectActive: "--select-active",
-      // Список вибрано
-      classSelectFocus: "--select-focus",
-      // Список у фокусі
-      classSelectMultiple: "--select-multiple",
-      // Мультивибір
-      classSelectCheckBox: "--select-checkbox",
-      // Стиль чекбоксу
-      classSelectOptionSelected: "--select-selected",
-      // Вибраний пункт
-      classSelectPseudoLabel: "--select-pseudo-label"
-      // Псевдолейбл
-    };
-    this._this = this;
-    if (this.config.init) {
-      const selectItems = data ? document.querySelectorAll(data) : document.querySelectorAll("select[data-fls-select]");
-      if (selectItems.length) {
-        this.selectsInit(selectItems);
-      }
-    }
-  }
-  // Конструктор CSS класу
-  getSelectClass(className) {
-    return `.${className}`;
-  }
-  // Геттер елементів псевдоселекту
-  getSelectElement(selectItem, className) {
-    return {
-      originalSelect: selectItem.querySelector("select"),
-      selectElement: selectItem.querySelector(this.getSelectClass(className))
-    };
-  }
-  // Функція ініціалізації всіх селектів
-  selectsInit(selectItems) {
-    selectItems.forEach((originalSelect, index) => {
-      this.selectInit(originalSelect, index + 1);
-    });
-    document.addEventListener("click", (function(e) {
-      this.selectsActions(e);
-    }).bind(this));
-    document.addEventListener("keydown", (function(e) {
-      this.selectsActions(e);
-    }).bind(this));
-    document.addEventListener("focusin", (function(e) {
-      this.selectsActions(e);
-    }).bind(this));
-    document.addEventListener("focusout", (function(e) {
-      this.selectsActions(e);
-    }).bind(this));
-  }
-  // Функція ініціалізації конкретного селекту
-  selectInit(originalSelect, index) {
-    index ? originalSelect.dataset.flsSelectId = index : null;
-    if (originalSelect.options.length) {
-      const _this = this;
-      let selectItem = document.createElement("div");
-      selectItem.classList.add(this.selectClasses.classSelect);
-      originalSelect.parentNode.insertBefore(selectItem, originalSelect);
-      selectItem.appendChild(originalSelect);
-      originalSelect.hidden = true;
-      if (this.getSelectPlaceholder(originalSelect)) {
-        originalSelect.dataset.placeholder = this.getSelectPlaceholder(originalSelect).value;
-        if (this.getSelectPlaceholder(originalSelect).label.show) {
-          const selectItemTitle = this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement;
-          selectItemTitle.insertAdjacentHTML("afterbegin", `<span class="${this.selectClasses.classSelectLabel}">${this.getSelectPlaceholder(originalSelect).label.text ? this.getSelectPlaceholder(originalSelect).label.text : this.getSelectPlaceholder(originalSelect).value}</span>`);
-        }
-      }
-      selectItem.insertAdjacentHTML("beforeend", `<div class="${this.selectClasses.classSelectBody}"><div hidden class="${this.selectClasses.classSelectOptions}"></div></div>`);
-      this.selectBuild(originalSelect);
-      originalSelect.dataset.flsSelectSpeed = originalSelect.dataset.flsSelectSpeed ? originalSelect.dataset.flsSelectSpeed : this.config.speed;
-      this.config.speed = +originalSelect.dataset.flsSelectSpeed;
-      originalSelect.addEventListener("change", function(e) {
-        _this.selectChange(e);
-      });
-    }
-  }
-  // Конструктор псевдоселекту
-  selectBuild(originalSelect) {
-    const selectItem = originalSelect.parentElement;
-    if (originalSelect.id) {
-      selectItem.id = originalSelect.id;
-      originalSelect.removeAttribute("id");
-    }
-    selectItem.dataset.flsSelectId = originalSelect.dataset.flsSelectId;
-    originalSelect.dataset.flsSelectModif ? selectItem.classList.add(`select--${originalSelect.dataset.flsSelectModif}`) : null;
-    originalSelect.multiple ? selectItem.classList.add(this.selectClasses.classSelectMultiple) : selectItem.classList.remove(this.selectClasses.classSelectMultiple);
-    originalSelect.hasAttribute("data-fls-select-checkbox") && originalSelect.multiple ? selectItem.classList.add(this.selectClasses.classSelectCheckBox) : selectItem.classList.remove(this.selectClasses.classSelectCheckBox);
-    this.setSelectTitleValue(selectItem, originalSelect);
-    this.setOptions(selectItem, originalSelect);
-    originalSelect.hasAttribute("data-fls-select-search") ? this.searchActions(selectItem) : null;
-    originalSelect.hasAttribute("data-fls-select-open") ? this.selectAction(selectItem) : null;
-    this.selectDisabled(selectItem, originalSelect);
-  }
-  // Функція реакцій на події
-  selectsActions(e) {
-    const t = e.target, type = e.type;
-    const isSelect = t.closest(this.getSelectClass(this.selectClasses.classSelect));
-    const isTag = t.closest(this.getSelectClass(this.selectClasses.classSelectTag));
-    if (!isSelect && !isTag) return this.selectsСlose();
-    const selectItem = isSelect || document.querySelector(`.${this.selectClasses.classSelect}[data-fls-select-id="${isTag.dataset.flsSelectId}"]`);
-    const originalSelect = this.getSelectElement(selectItem).originalSelect;
-    if (originalSelect.disabled) return;
-    if (type === "click") {
-      const tag = t.closest(this.getSelectClass(this.selectClasses.classSelectTag));
-      const title = t.closest(this.getSelectClass(this.selectClasses.classSelectTitle));
-      const option = t.closest(this.getSelectClass(this.selectClasses.classSelectOption));
-      if (tag) {
-        const optionItem = document.querySelector(`.${this.selectClasses.classSelect}[data-fls-select-id="${tag.dataset.flsSelectId}"] .select__option[data-fls-select-value="${tag.dataset.flsSelectValue}"]`);
-        this.optionAction(selectItem, originalSelect, optionItem);
-      } else if (title) {
-        this.selectAction(selectItem);
-      } else if (option) {
-        this.optionAction(selectItem, originalSelect, option);
-      }
-    } else if (type === "focusin" || type === "focusout") {
-      if (isSelect) selectItem.classList.toggle(this.selectClasses.classSelectFocus, type === "focusin");
-    } else if (type === "keydown" && e.code === "Escape") {
-      this.selectsСlose();
-    }
-  }
-  // Функція закриття всіх селектів
-  selectsСlose(selectOneGroup) {
-    const selectsGroup = selectOneGroup ? selectOneGroup : document;
-    const selectActiveItems = selectsGroup.querySelectorAll(`${this.getSelectClass(this.selectClasses.classSelect)}${this.getSelectClass(this.selectClasses.classSelectOpen)}`);
-    if (selectActiveItems.length) {
-      selectActiveItems.forEach((selectActiveItem) => {
-        this.selectСlose(selectActiveItem);
-      });
-    }
-  }
-  // Функція закриття конкретного селекту
-  selectСlose(selectItem) {
-    const originalSelect = this.getSelectElement(selectItem).originalSelect;
-    const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
-    if (!selectOptions.classList.contains("_slide")) {
-      selectItem.classList.remove(this.selectClasses.classSelectOpen);
-      slideUp(selectOptions, originalSelect.dataset.flsSelectSpeed);
-      setTimeout(() => {
-        selectItem.style.zIndex = "";
-      }, originalSelect.dataset.flsSelectSpeed);
-    }
-  }
-  // Функція відкриття/закриття конкретного селекту
-  selectAction(selectItem) {
-    const originalSelect = this.getSelectElement(selectItem).originalSelect;
-    const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
-    selectOptions.querySelectorAll(`.${this.selectClasses.classSelectOption}`);
-    const selectOpenzIndex = originalSelect.dataset.flsSelectZIndex ? originalSelect.dataset.flsSelectZIndex : 3;
-    this.setOptionsPosition(selectItem);
-    if (originalSelect.closest("[data-fls-select-one]")) {
-      const selectOneGroup = originalSelect.closest("[data-fls-select-one]");
-      this.selectsСlose(selectOneGroup);
-    }
-    setTimeout(() => {
-      if (!selectOptions.classList.contains("--slide")) {
-        selectItem.classList.toggle(this.selectClasses.classSelectOpen);
-        slideToggle(selectOptions, originalSelect.dataset.flsSelectSpeed);
-        if (selectItem.classList.contains(this.selectClasses.classSelectOpen)) {
-          selectItem.style.zIndex = selectOpenzIndex;
-        } else {
-          setTimeout(() => {
-            selectItem.style.zIndex = "";
-          }, originalSelect.dataset.flsSelectSpeed);
-        }
-      }
-    }, 0);
-  }
-  // Сеттер значення заголовка селекту
-  setSelectTitleValue(selectItem, originalSelect) {
-    const selectItemBody = this.getSelectElement(selectItem, this.selectClasses.classSelectBody).selectElement;
-    const selectItemTitle = this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement;
-    if (selectItemTitle) selectItemTitle.remove();
-    selectItemBody.insertAdjacentHTML("afterbegin", this.getSelectTitleValue(selectItem, originalSelect));
-    originalSelect.hasAttribute("data-fls-select-search") ? this.searchActions(selectItem) : null;
-  }
-  // Конструктор значення заголовка
-  getSelectTitleValue(selectItem, originalSelect) {
-    let selectTitleValue = this.getSelectedOptionsData(originalSelect, 2).html;
-    if (originalSelect.multiple && originalSelect.hasAttribute("data-fls-select-tags")) {
-      selectTitleValue = this.getSelectedOptionsData(originalSelect).elements.map((option) => `<span role="button" data-fls-select-id="${selectItem.dataset.flsSelectId}" data-fls-select-value="${option.value}" class="_select-tag">${this.getSelectElementContent(option)}</span>`).join("");
-      if (originalSelect.dataset.flsSelectTags && document.querySelector(originalSelect.dataset.flsSelectTags)) {
-        document.querySelector(originalSelect.dataset.flsSelectTags).innerHTML = selectTitleValue;
-        if (originalSelect.hasAttribute("data-fls-select-search")) selectTitleValue = false;
-      }
-    }
-    selectTitleValue = selectTitleValue.length ? selectTitleValue : originalSelect.dataset.flsSelectPlaceholder ? originalSelect.dataset.flsSelectPlaceholder : "";
-    selectTitleValue = selectTitleValue.map((item) => item.replace(/"/g, "&quot;"));
-    let pseudoAttribute = "";
-    let pseudoAttributeClass = "";
-    if (originalSelect.hasAttribute("data-fls-select-pseudo-label")) {
-      pseudoAttribute = originalSelect.dataset.flsSelectPseudoLabel ? ` data-fls-select-pseudo-label="${originalSelect.dataset.flsSelectPseudoLabel}"` : ` data-fls-select-pseudo-label="Заповніть атрибут"`;
-      pseudoAttributeClass = ` ${this.selectClasses.classSelectPseudoLabel}`;
-    }
-    this.getSelectedOptionsData(originalSelect).values.length ? selectItem.classList.add(this.selectClasses.classSelectActive) : selectItem.classList.remove(this.selectClasses.classSelectActive);
-    if (originalSelect.hasAttribute("data-fls-select-search")) {
-      return `<div class="${this.selectClasses.classSelectTitle}"><span${pseudoAttribute} class="${this.selectClasses.classSelectValue}"><input autocomplete="off" type="text" placeholder="${selectTitleValue}" data-fls-select-placeholder="${selectTitleValue}" class="${this.selectClasses.classSelectInput}"></span></div>`;
-    } else {
-      const customClass = this.getSelectedOptionsData(originalSelect).elements.length && this.getSelectedOptionsData(originalSelect).elements[0].dataset.flsSelectClass ? ` ${this.getSelectedOptionsData(originalSelect).elements[0].dataset.flsSelectClass}` : "";
-      return `<button type="button" class="${this.selectClasses.classSelectTitle}"><span${pseudoAttribute} class="${this.selectClasses.classSelectValue}${pseudoAttributeClass}"><span class="${this.selectClasses.classSelectContent}${customClass}">${selectTitleValue}</span></span></button>`;
-    }
-  }
-  // Конструктор даних для значення заголовка
-  getSelectElementContent(selectOption) {
-    const selectOptionData = selectOption.dataset.flsSelectAsset ? `${selectOption.dataset.flsSelectAsset}` : "";
-    const selectOptionDataHTML = selectOptionData.indexOf("img") >= 0 ? `<img src="${selectOptionData}" alt="">` : selectOptionData;
-    let selectOptionContentHTML = ``;
-    selectOptionContentHTML += selectOptionData ? `<span class="${this.selectClasses.classSelectRow}">` : "";
-    selectOptionContentHTML += selectOptionData ? `<span class="${this.selectClasses.classSelectData}">` : "";
-    selectOptionContentHTML += selectOptionData ? selectOptionDataHTML : "";
-    selectOptionContentHTML += selectOptionData ? `</span>` : "";
-    selectOptionContentHTML += selectOptionData ? `<span class="${this.selectClasses.classSelectText}">` : "";
-    selectOptionContentHTML += selectOption.textContent;
-    selectOptionContentHTML += selectOptionData ? `</span>` : "";
-    selectOptionContentHTML += selectOptionData ? `</span>` : "";
-    return selectOptionContentHTML;
-  }
-  // Отримання даних плейсхолдера
-  getSelectPlaceholder(originalSelect) {
-    const selectPlaceholder = Array.from(originalSelect.options).find((option) => !option.value);
-    if (selectPlaceholder) {
-      return {
-        value: selectPlaceholder.textContent,
-        show: selectPlaceholder.hasAttribute("data-fls-select-show"),
-        label: {
-          show: selectPlaceholder.hasAttribute("data-fls-select-label"),
-          text: selectPlaceholder.dataset.flsSelectLabel
-        }
-      };
-    }
-  }
-  // Отримання даних із вибраних елементів
-  getSelectedOptionsData(originalSelect, type) {
-    let selectedOptions = [];
-    if (originalSelect.multiple) {
-      selectedOptions = Array.from(originalSelect.options).filter((option) => option.value).filter((option) => option.selected);
-    } else {
-      selectedOptions.push(originalSelect.options[originalSelect.selectedIndex]);
-    }
-    return {
-      elements: selectedOptions.map((option) => option),
-      values: selectedOptions.filter((option) => option.value).map((option) => option.value),
-      html: selectedOptions.map((option) => this.getSelectElementContent(option))
-    };
-  }
-  // Конструктор елементів списку
-  getOptions(originalSelect) {
-    const selectOptionsScroll = originalSelect.hasAttribute("data-fls-select-scroll") ? `` : "";
-    +originalSelect.dataset.flsSelectScroll ? +originalSelect.dataset.flsSelectScroll : null;
-    let selectOptions = Array.from(originalSelect.options);
-    if (selectOptions.length > 0) {
-      let selectOptionsHTML = ``;
-      if (this.getSelectPlaceholder(originalSelect) && !this.getSelectPlaceholder(originalSelect).show || originalSelect.multiple) {
-        selectOptions = selectOptions.filter((option) => option.value);
-      }
-      selectOptionsHTML += `<div ${selectOptionsScroll} ${""} class="${this.selectClasses.classSelectOptionsScroll}">`;
-      selectOptions.forEach((selectOption) => {
-        selectOptionsHTML += this.getOption(selectOption, originalSelect);
-      });
-      selectOptionsHTML += `</div>`;
-      return selectOptionsHTML;
-    }
-  }
-  // Конструктор конкретного елемента списку
-  getOption(selectOption, originalSelect) {
-    const selectOptionSelected = selectOption.selected && originalSelect.multiple ? ` ${this.selectClasses.classSelectOptionSelected}` : "";
-    const selectOptionHide = selectOption.selected && !originalSelect.hasAttribute("data-fls-select-show-selected") && !originalSelect.multiple ? `hidden` : ``;
-    const selectOptionClass = selectOption.dataset.flsSelectClass ? ` ${selectOption.dataset.flsSelectClass}` : "";
-    const selectOptionLink = selectOption.dataset.flsSelectHref ? selectOption.dataset.flsSelectHref : false;
-    const selectOptionLinkTarget = selectOption.hasAttribute("data-fls-select-href-blank") ? `target="_blank"` : "";
-    let selectOptionHTML = ``;
-    selectOptionHTML += selectOptionLink ? `<a ${selectOptionLinkTarget} ${selectOptionHide} href="${selectOptionLink}" data-fls-select-value="${selectOption.value}" class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}">` : `<button ${selectOptionHide} class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}" data-fls-select-value="${selectOption.value}" type="button">`;
-    selectOptionHTML += this.getSelectElementContent(selectOption);
-    selectOptionHTML += selectOptionLink ? `</a>` : `</button>`;
-    return selectOptionHTML;
-  }
-  // Сеттер елементів списку (options)
-  setOptions(selectItem, originalSelect) {
-    const selectItemOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
-    selectItemOptions.innerHTML = this.getOptions(originalSelect);
-  }
-  // Визначаємо, де видобразити випадаючий список
-  setOptionsPosition(selectItem) {
-    const originalSelect = this.getSelectElement(selectItem).originalSelect;
-    const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
-    const selectItemScroll = this.getSelectElement(selectItem, this.selectClasses.classSelectOptionsScroll).selectElement;
-    const customMaxHeightValue = +originalSelect.dataset.flsSelectScroll ? `${+originalSelect.dataset.flsSelectScroll}px` : ``;
-    const selectOptionsPosMargin = +originalSelect.dataset.flsSelectOptionsMargin ? +originalSelect.dataset.flsSelectOptionsMargin : 10;
-    if (!selectItem.classList.contains(this.selectClasses.classSelectOpen)) {
-      selectOptions.hidden = false;
-      const selectItemScrollHeight = selectItemScroll.offsetHeight ? selectItemScroll.offsetHeight : parseInt(window.getComputedStyle(selectItemScroll).getPropertyValue("max-height"));
-      const selectOptionsHeight = selectOptions.offsetHeight > selectItemScrollHeight ? selectOptions.offsetHeight : selectItemScrollHeight + selectOptions.offsetHeight;
-      const selectOptionsScrollHeight = selectOptionsHeight - selectItemScrollHeight;
-      selectOptions.hidden = true;
-      const selectItemHeight = selectItem.offsetHeight;
-      const selectItemPos = selectItem.getBoundingClientRect().top;
-      const selectItemTotal = selectItemPos + selectOptionsHeight + selectItemHeight + selectOptionsScrollHeight;
-      const selectItemResult = window.innerHeight - (selectItemTotal + selectOptionsPosMargin);
-      if (selectItemResult < 0) {
-        const newMaxHeightValue = selectOptionsHeight + selectItemResult;
-        if (newMaxHeightValue < 100) {
-          selectItem.classList.add("select--show-top");
-          selectItemScroll.style.maxHeight = selectItemPos < selectOptionsHeight ? `${selectItemPos - (selectOptionsHeight - selectItemPos)}px` : customMaxHeightValue;
-        } else {
-          selectItem.classList.remove("select--show-top");
-          selectItemScroll.style.maxHeight = `${newMaxHeightValue}px`;
-        }
-      }
-    } else {
-      setTimeout(() => {
-        selectItem.classList.remove("select--show-top");
-        selectItemScroll.style.maxHeight = customMaxHeightValue;
-      }, +originalSelect.dataset.flsSelectSpeed);
-    }
-  }
-  // Обробник кліку на пункт списку
-  optionAction(selectItem, originalSelect, optionItem) {
-    const optionsBox = selectItem.querySelector(this.getSelectClass(this.selectClasses.classSelectOptions));
-    if (optionsBox.classList.contains("_slide")) return;
-    if (originalSelect.multiple) {
-      optionItem.classList.toggle(this.selectClasses.classSelectOptionSelected);
-      const selectedEls = this.getSelectedOptionsData(originalSelect).elements;
-      for (const el of selectedEls) {
-        el.removeAttribute("selected");
-      }
-      const selectedUI = selectItem.querySelectorAll(this.getSelectClass(this.selectClasses.classSelectOptionSelected));
-      for (const el of selectedUI) {
-        const val = el.dataset.flsSelectValue;
-        const opt = originalSelect.querySelector(`option[value="${val}"]`);
-        if (opt) opt.setAttribute("selected", "selected");
-      }
-    } else {
-      if (!originalSelect.hasAttribute("data-fls-select-show-selected")) {
-        setTimeout(() => {
-          const hiddenOpt = selectItem.querySelector(`${this.getSelectClass(this.selectClasses.classSelectOption)}[hidden]`);
-          if (hiddenOpt) hiddenOpt.hidden = false;
-          optionItem.hidden = true;
-        }, this.config.speed);
-      }
-      originalSelect.value = optionItem.dataset.flsSelectValue || optionItem.textContent;
-      this.selectAction(selectItem);
-    }
-    this.setSelectTitleValue(selectItem, originalSelect);
-    this.setSelectChange(originalSelect);
-  }
-  // Реакція на зміну оригінального select
-  selectChange(e) {
-    const originalSelect = e.target;
-    this.selectBuild(originalSelect);
-    this.setSelectChange(originalSelect);
-  }
-  // Обробник зміни у селекті
-  setSelectChange(originalSelect) {
-    if (originalSelect.hasAttribute("data-fls-select-validate")) {
-      formValidate.validateInput(originalSelect);
-    }
-    if (originalSelect.hasAttribute("data-fls-select-submit") && originalSelect.value) {
-      let tempButton = document.createElement("button");
-      tempButton.type = "submit";
-      originalSelect.closest("form").append(tempButton);
-      tempButton.click();
-      tempButton.remove();
-    }
-    const selectItem = originalSelect.parentElement;
-    this.selectCallback(selectItem, originalSelect);
-  }
-  // Обробник disabled
-  selectDisabled(selectItem, originalSelect) {
-    if (originalSelect.disabled) {
-      selectItem.classList.add(this.selectClasses.classSelectDisabled);
-      this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement.disabled = true;
-    } else {
-      selectItem.classList.remove(this.selectClasses.classSelectDisabled);
-      this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement.disabled = false;
-    }
-  }
-  // Обробник пошуку за елементами списку
-  searchActions(selectItem) {
-    const selectInput = this.getSelectElement(selectItem, this.selectClasses.classSelectInput).selectElement;
-    const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
-    selectInput.addEventListener("input", () => {
-      const inputValue = selectInput.value.toLowerCase();
-      const selectOptionsItems = selectOptions.querySelectorAll(`.${this.selectClasses.classSelectOption}`);
-      selectOptionsItems.forEach((item) => {
-        const itemText = item.textContent.toLowerCase();
-        item.hidden = !itemText.includes(inputValue);
-      });
-      if (selectOptions.hidden) {
-        this.selectAction(selectItem);
-      }
-    });
-  }
-  // Коллбек функція
-  selectCallback(selectItem, originalSelect) {
-    document.dispatchEvent(new CustomEvent("selectCallback", {
-      detail: {
-        select: originalSelect
-      }
-    }));
-  }
-}
-document.querySelector("select[data-fls-select]") ? window.addEventListener("load", () => window.flsSelect = new SelectConstructor({})) : null;
 function isObject$1(value) {
   var type = typeof value;
   return value != null && (type == "object" || type == "function");
@@ -1800,435 +1534,441 @@ var SimpleBar = (
 if (canUseDOM) {
   SimpleBar.initHtmlApi();
 }
-if (document.querySelectorAll("[data-fls-simplebar]").length) {
-  document.querySelectorAll("[data-fls-simplebar]").forEach((scrollBlock) => {
-    new SimpleBar(scrollBlock, {
-      autoHide: false
-    });
-  });
-}
-function menuInit() {
-  document.addEventListener("click", function(e) {
-    if (bodyLockStatus) {
-      if (e.target.closest("[data-fls-menu]")) {
-        bodyLockToggle();
-        document.documentElement.toggleAttribute("data-fls-menu-open");
-      } else if (!e.target.closest(".mobile-menu") && !e.target.closest(".pc-menu") && document.documentElement.hasAttribute("data-fls-menu-open")) {
-        bodyUnlock(0);
-        document.documentElement.removeAttribute("data-fls-menu-open");
-      }
-    }
-  });
-}
-document.querySelector("[data-fls-menu]") ? window.addEventListener("load", menuInit) : null;
-document.addEventListener("click", (e) => {
-  if (bodyLockStatus) {
-    if (e.target.closest("[data-cart-toggle]")) {
-      bodyLockToggle();
-      document.documentElement.toggleAttribute("data-cart-open");
-    } else if (!e.target.closest(".basket-header") && document.documentElement.hasAttribute("data-cart-open")) {
-      bodyUnlock(0);
-      document.documentElement.removeAttribute("data-cart-open");
-    }
-  }
-  if (e.target.closest("[data-search-toggle]")) {
-    document.documentElement.toggleAttribute("data-search-open");
-  }
-});
-const navbarEl = document.querySelector(".navbar");
-function updateNavbarHeight() {
-  if (navbarEl) {
-    navbarEl.style.transition = "none";
-    const navbarHeight = navbarEl.offsetHeight;
-    document.documentElement.style.setProperty(
-      "--navbar-height",
-      `${navbarHeight}px`
-    );
-    navbarEl.style.transition = "";
-  }
-}
-document.addEventListener("DOMContentLoaded", () => {
-  updateNavbarHeight();
-});
-window.addEventListener("resize", () => {
-  updateNavbarHeight();
-});
-document.addEventListener("click", function(e) {
-  if (e.target.closest("[data-nav-lang]")) {
-    const nav = e.target.closest(".navbar");
-    if (nav) {
-      nav.classList.toggle("--lang-open");
-    }
-  }
-  if (e.target.closest("[data-nav-more]")) {
-    const nav = e.target.closest(".navbar");
-    if (nav) {
-      nav.classList.toggle("--nav-more-open");
-    }
-  } else if (!e.target.closest(".navbar__submenu")) {
-    const nav = document.querySelector(".navbar");
-    if (nav) {
-      nav.classList.remove("--nav-more-open");
-    }
-  }
-  if (e.target.closest(".footer__up")) {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }
-});
-class Popup {
-  constructor(options) {
-    let config = {
-      logging: true,
+class SelectConstructor {
+  constructor(props, data = null) {
+    let defaultConfig = {
       init: true,
-      //Для кнопок
-      attributeOpenButton: "data-fls-popup-link",
-      // Атрибут для кнопки, яка викликає попап
-      attributeCloseButton: "data-fls-popup-close",
-      // Атрибут для кнопки, що закриває попап
-      // Для сторонніх об'єктів
-      fixElementSelector: "[data-fls-lp]",
-      // Атрибут для елементів із лівим паддингом (які fixed)
-      // Для об'єкту попапа
-      attributeMain: "data-fls-popup",
-      youtubeAttribute: "data-fls-popup-youtube",
-      // Атрибут для коду youtube
-      youtubePlaceAttribute: "data-fls-popup-youtube-place",
-      // Атрибут для вставки ролика youtube
-      setAutoplayYoutube: true,
-      // Зміна класів
-      classes: {
-        popup: "popup",
-        // popupWrapper: 'popup__wrapper',
-        popupContent: "data-fls-popup-body",
-        popupActive: "data-fls-popup-active",
-        // Додається для попапа, коли він відкривається
-        bodyActive: "data-fls-popup-open"
-        // Додається для боді, коли попап відкритий
-      },
-      focusCatch: true,
-      // Фокус усередині попапа зациклений
-      closeEsc: true,
-      // Закриття ESC
-      bodyLock: true,
-      // Блокування скролла
-      hashSettings: {
-        location: false,
-        // Хеш в адресному рядку
-        goHash: false
-        // Перехід по наявності в адресному рядку
-      },
-      on: {
-        // Події
-        beforeOpen: function() {
-        },
-        afterOpen: function() {
-        },
-        beforeClose: function() {
-        },
-        afterClose: function() {
-        }
+      speed: 150
+    };
+    this.config = Object.assign(defaultConfig, props);
+    this.selectClasses = {
+      classSelect: "select",
+      classSelectBody: "select__body",
+      classSelectTitle: "select__title",
+      classSelectValue: "select__value",
+      classSelectLabel: "select__label",
+      classSelectInput: "select__input",
+      classSelectText: "select__text",
+      classSelectLink: "select__link",
+      classSelectOptions: "select__options",
+      classSelectOptionsScroll: "select__scroll",
+      classSelectOption: "select__option",
+      classSelectContent: "select__content",
+      classSelectRow: "select__row",
+      classSelectData: "select__asset",
+      classSelectDisabled: "--select-disabled",
+      classSelectTag: "--select-tag",
+      classSelectOpen: "--select-open",
+      classSelectActive: "--select-active",
+      classSelectFocus: "--select-focus",
+      classSelectMultiple: "--select-multiple",
+      classSelectCheckBox: "--select-checkbox",
+      classSelectOptionSelected: "--select-selected",
+      classSelectPseudoLabel: "--select-pseudo-label"
+    };
+    this._this = this;
+    if (this.config.init) {
+      const selectItems = data ? document.querySelectorAll(data) : document.querySelectorAll("select[data-fls-select]");
+      if (selectItems.length) {
+        this.selectsInit(selectItems);
       }
-    };
-    this.youTubeCode;
-    this.isOpen = false;
-    this.targetOpen = {
-      selector: false,
-      element: false
-    };
-    this.previousOpen = {
-      selector: false,
-      element: false
-    };
-    this.lastClosed = {
-      selector: false,
-      element: false
-    };
-    this._dataValue = false;
-    this.hash = false;
-    this._reopen = false;
-    this._selectorOpen = false;
-    this.lastFocusEl = false;
-    this._focusEl = [
-      "a[href]",
-      'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
-      "button:not([disabled]):not([aria-hidden])",
-      "select:not([disabled]):not([aria-hidden])",
-      "textarea:not([disabled]):not([aria-hidden])",
-      "area[href]",
-      "iframe",
-      "object",
-      "embed",
-      "[contenteditable]",
-      '[tabindex]:not([tabindex^="-"])'
-    ];
-    this.options = {
-      ...config,
-      ...options,
-      classes: {
-        ...config.classes,
-        ...options == null ? void 0 : options.classes
-      },
-      hashSettings: {
-        ...config.hashSettings,
-        ...options == null ? void 0 : options.hashSettings
-      },
-      on: {
-        ...config.on,
-        ...options == null ? void 0 : options.on
-      }
-    };
-    this.bodyLock = false;
-    this.options.init ? this.initPopups() : null;
+    }
   }
-  initPopups() {
-    this.buildPopup();
-    this.eventsPopup();
+  getSelectClass(className) {
+    return `.${className}`;
   }
-  buildPopup() {
+  getSelectElement(selectItem, className) {
+    return {
+      originalSelect: selectItem.querySelector("select"),
+      selectElement: selectItem.querySelector(this.getSelectClass(className))
+    };
   }
-  eventsPopup() {
-    document.addEventListener(
-      "click",
-      (function(e) {
-        const buttonOpen = e.target.closest(
-          `[${this.options.attributeOpenButton}]`
-        );
-        if (buttonOpen) {
-          e.preventDefault();
-          this._dataValue = buttonOpen.getAttribute(
-            this.options.attributeOpenButton
-          ) ? buttonOpen.getAttribute(this.options.attributeOpenButton) : "error";
-          this.youTubeCode = buttonOpen.getAttribute(
-            this.options.youtubeAttribute
-          ) ? buttonOpen.getAttribute(this.options.youtubeAttribute) : null;
-          if (this._dataValue !== "error") {
-            if (!this.isOpen) this.lastFocusEl = buttonOpen;
-            this.targetOpen.selector = `${this._dataValue}`;
-            this._selectorOpen = true;
-            this.open();
-            return;
-          }
-          return;
-        }
-        const buttonClose = e.target.closest(
-          `[${this.options.attributeCloseButton}]`
-        );
-        if (buttonClose || !e.target.closest(`[${this.options.classes.popupContent}]`) && this.isOpen) {
-          e.preventDefault();
-          this.close();
-          return;
-        }
-      }).bind(this)
-    );
-    document.addEventListener(
-      "keydown",
-      (function(e) {
-        if (this.options.closeEsc && e.which == 27 && e.code === "Escape" && this.isOpen) {
-          e.preventDefault();
-          this.close();
-          return;
-        }
-        if (this.options.focusCatch && e.which == 9 && this.isOpen) {
-          this._focusCatch(e);
-          return;
-        }
-      }).bind(this)
-    );
-    if (this.options.hashSettings.goHash) {
-      window.addEventListener(
-        "hashchange",
-        (function() {
-          if (window.location.hash) {
-            this._openToHash();
-          } else {
-            this.close(this.targetOpen.selector);
-          }
-        }).bind(this)
+  selectsInit(selectItems) {
+    selectItems.forEach((originalSelect, index) => {
+      this.selectInit(originalSelect, index + 1);
+    });
+    document.addEventListener("click", (e) => this.selectsActions(e));
+    document.addEventListener("keydown", (e) => this.selectsActions(e));
+    document.addEventListener("focusin", (e) => this.selectsActions(e));
+    document.addEventListener("focusout", (e) => this.selectsActions(e));
+  }
+  selectInit(originalSelect, index) {
+    index ? originalSelect.dataset.flsSelectId = index : null;
+    if (originalSelect.options.length) {
+      const _this = this;
+      let selectItem = document.createElement("div");
+      selectItem.classList.add(this.selectClasses.classSelect);
+      originalSelect.parentNode.insertBefore(selectItem, originalSelect);
+      selectItem.appendChild(originalSelect);
+      originalSelect.hidden = true;
+      selectItem.insertAdjacentHTML(
+        "beforeend",
+        `<div class="${this.selectClasses.classSelectBody}"><div hidden class="${this.selectClasses.classSelectOptions}"></div></div>`
       );
-      window.addEventListener(
-        "load",
-        (function() {
-          if (window.location.hash) {
-            this._openToHash();
-          }
-        }).bind(this)
-      );
+      this.selectBuild(originalSelect);
+      originalSelect.dataset.flsSelectSpeed = originalSelect.dataset.flsSelectSpeed ? originalSelect.dataset.flsSelectSpeed : this.config.speed;
+      this.config.speed = +originalSelect.dataset.flsSelectSpeed;
+      originalSelect.addEventListener("change", function(e) {
+        _this.selectChange(e);
+      });
     }
   }
-  open(selectorValue) {
-    if (bodyLockStatus) {
-      this.bodyLock = document.documentElement.hasAttribute("data-fls-scrolllock") && !this.isOpen ? true : false;
-      if (selectorValue && typeof selectorValue === "string" && selectorValue.trim() !== "") {
-        this.targetOpen.selector = selectorValue;
-        this._selectorOpen = true;
-      }
-      if (this.isOpen) {
-        this._reopen = true;
-        this.close();
-      }
-      if (!this._selectorOpen)
-        this.targetOpen.selector = this.lastClosed.selector;
-      if (!this._reopen) this.previousActiveElement = document.activeElement;
-      this.targetOpen.element = document.querySelector(
-        `[${this.options.attributeMain}=${this.targetOpen.selector}]`
-      );
-      if (this.targetOpen.element) {
-        const codeVideo = this.youTubeCode || this.targetOpen.element.getAttribute(
-          `${this.options.youtubeAttribute}`
-        );
-        if (codeVideo) {
-          const urlVideo = `https://www.youtube.com/embed/${codeVideo}?rel=0&showinfo=0&autoplay=1`;
-          const iframe = document.createElement("iframe");
-          const autoplay = this.options.setAutoplayYoutube ? "autoplay;" : "";
-          iframe.setAttribute("allowfullscreen", "");
-          iframe.setAttribute("allow", `${autoplay}; encrypted-media`);
-          iframe.setAttribute("src", urlVideo);
-          if (!this.targetOpen.element.querySelector(
-            `[${this.options.youtubePlaceAttribute}]`
-          )) {
-            this.targetOpen.element.querySelector("[data-fls-popup-content]").setAttribute(`${this.options.youtubePlaceAttribute}`, "");
-          }
-          this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).appendChild(iframe);
-        }
-        if (this.options.hashSettings.location) {
-          this._getHash();
-          this._setHash();
-        }
-        this.options.on.beforeOpen(this);
-        document.dispatchEvent(
-          new CustomEvent("beforePopupOpen", {
-            detail: {
-              popup: this
-            }
-          })
-        );
-        this.targetOpen.element.setAttribute(
-          this.options.classes.popupActive,
-          ""
-        );
-        document.documentElement.setAttribute(
-          this.options.classes.bodyActive,
-          ""
-        );
-        if (!this._reopen) {
-          !this.bodyLock ? bodyLock() : null;
-        } else this._reopen = false;
-        this.targetOpen.element.setAttribute("aria-hidden", "false");
-        this.previousOpen.selector = this.targetOpen.selector;
-        this.previousOpen.element = this.targetOpen.element;
-        this._selectorOpen = false;
-        this.isOpen = true;
-        setTimeout(() => {
-          this._focusTrap();
-        }, 50);
-        this.options.on.afterOpen(this);
-        document.dispatchEvent(
-          new CustomEvent("afterPopupOpen", {
-            detail: {
-              popup: this
-            }
-          })
-        );
-      }
+  selectBuild(originalSelect) {
+    const selectItem = originalSelect.parentElement;
+    if (originalSelect.id) {
+      selectItem.id = originalSelect.id;
+      originalSelect.removeAttribute("id");
     }
+    selectItem.dataset.flsSelectId = originalSelect.dataset.flsSelectId;
+    originalSelect.dataset.flsSelectModif ? selectItem.classList.add(
+      `select--${originalSelect.dataset.flsSelectModif}`
+    ) : null;
+    originalSelect.multiple ? selectItem.classList.add(this.selectClasses.classSelectMultiple) : selectItem.classList.remove(this.selectClasses.classSelectMultiple);
+    originalSelect.hasAttribute("data-fls-select-checkbox") && originalSelect.multiple ? selectItem.classList.add(this.selectClasses.classSelectCheckBox) : selectItem.classList.remove(this.selectClasses.classSelectCheckBox);
+    this.setSelectTitleValue(selectItem, originalSelect);
+    this.setOptions(selectItem, originalSelect);
+    originalSelect.hasAttribute("data-fls-select-open") ? this.selectAction(selectItem) : null;
+    this.selectDisabled(selectItem, originalSelect);
   }
-  close(selectorValue) {
-    if (selectorValue && typeof selectorValue === "string" && selectorValue.trim() !== "") {
-      this.previousOpen.selector = selectorValue;
-    }
-    if (!this.isOpen || !bodyLockStatus) {
-      return;
-    }
-    this.options.on.beforeClose(this);
-    document.dispatchEvent(
-      new CustomEvent("beforePopupClose", {
-        detail: {
-          popup: this
-        }
-      })
+  setSelectTitleValue(selectItem, originalSelect) {
+    const selectItemBody = this.getSelectElement(
+      selectItem,
+      this.selectClasses.classSelectBody
+    ).selectElement;
+    const selectItemTitle = this.getSelectElement(
+      selectItem,
+      this.selectClasses.classSelectTitle
+    ).selectElement;
+    if (selectItemTitle) selectItemTitle.remove();
+    selectItemBody.insertAdjacentHTML(
+      "afterbegin",
+      this.getSelectTitleValue(selectItem, originalSelect)
     );
-    if (this.targetOpen.element.querySelector(
-      `[${this.options.youtubePlaceAttribute}]`
-    )) {
-      setTimeout(() => {
-        this.targetOpen.element.querySelector(
-          `[${this.options.youtubePlaceAttribute}]`
-        ).innerHTML = "";
-      }, 500);
-    }
-    this.previousOpen.element.removeAttribute(this.options.classes.popupActive);
-    this.previousOpen.element.setAttribute("aria-hidden", "true");
-    if (!this._reopen) {
-      document.documentElement.removeAttribute(this.options.classes.bodyActive);
-      !this.bodyLock ? bodyUnlock() : null;
-      this.isOpen = false;
-    }
-    this._removeHash();
-    if (this._selectorOpen) {
-      this.lastClosed.selector = this.previousOpen.selector;
-      this.lastClosed.element = this.previousOpen.element;
-    }
-    this.options.on.afterClose(this);
-    document.dispatchEvent(
-      new CustomEvent("afterPopupClose", {
-        detail: {
-          popup: this
-        }
-      })
+  }
+  getSelectTitleValue(selectItem, originalSelect) {
+    let selectTitleValue = this.getSelectedOptionsData(originalSelect, 2).html;
+    selectTitleValue = selectTitleValue.length ? selectTitleValue : originalSelect.dataset.flsSelectPlaceholder ? originalSelect.dataset.flsSelectPlaceholder : "";
+    selectTitleValue = selectTitleValue.map(
+      (item) => item.replace(/"/g, "&quot;")
     );
-    setTimeout(() => {
-      this._focusTrap();
-    }, 50);
-  }
-  // Отримання хешу
-  _getHash() {
-    if (this.options.hashSettings.location) {
-      this.hash = `#${this.targetOpen.selector}`;
+    let pseudoAttribute = "";
+    let pseudoAttributeClass = "";
+    if (originalSelect.hasAttribute("data-fls-select-pseudo-label")) {
+      pseudoAttribute = originalSelect.dataset.flsSelectPseudoLabel ? ` data-fls-select-pseudo-label="${originalSelect.dataset.flsSelectPseudoLabel}"` : ` data-fls-select-pseudo-label="Заповніть атрибут"`;
+      pseudoAttributeClass = ` ${this.selectClasses.classSelectPseudoLabel}`;
     }
+    return `<button type="button" class="${this.selectClasses.classSelectTitle}">
+			<span${pseudoAttribute} class="${this.selectClasses.classSelectValue}${pseudoAttributeClass}">
+				<span class="${this.selectClasses.classSelectContent}">${selectTitleValue}</span>
+			</span>
+		</button>`;
   }
-  _openToHash() {
-    let classInHash = window.location.hash.replace("#", "");
-    const openButton = document.querySelector(
-      `[${this.options.attributeOpenButton}="${classInHash}"]`
-    );
-    if (openButton) {
-      this.youTubeCode = openButton.getAttribute(this.options.youtubeAttribute) ? openButton.getAttribute(this.options.youtubeAttribute) : null;
-    }
-    if (classInHash) this.open(classInHash);
-  }
-  // Встановлення хеша
-  _setHash() {
-    history.pushState("", "", this.hash);
-  }
-  _removeHash() {
-    history.pushState("", "", window.location.href.split("#")[0]);
-  }
-  _focusCatch(e) {
-    const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
-    const focusArray = Array.prototype.slice.call(focusable);
-    const focusedIndex = focusArray.indexOf(document.activeElement);
-    if (e.shiftKey && focusedIndex === 0) {
-      focusArray[focusArray.length - 1].focus();
-      e.preventDefault();
-    }
-    if (!e.shiftKey && focusedIndex === focusArray.length - 1) {
-      focusArray[0].focus();
-      e.preventDefault();
-    }
-  }
-  _focusTrap() {
-    const focusable = this.previousOpen.element.querySelectorAll(this._focusEl);
-    if (!this.isOpen && this.lastFocusEl) {
-      this.lastFocusEl.focus();
+  getSelectedOptionsData(originalSelect, type) {
+    let selectedOptions = [];
+    if (originalSelect.multiple) {
+      selectedOptions = Array.from(originalSelect.options).filter((option) => option.value).filter((option) => option.selected);
     } else {
-      focusable[0].focus();
+      selectedOptions.push(
+        originalSelect.options[originalSelect.selectedIndex]
+      );
     }
+    return {
+      elements: selectedOptions.map((option) => option),
+      values: selectedOptions.filter((option) => option.value).map((option) => option.value),
+      html: selectedOptions.map(
+        (option) => this.getSelectElementContent(option)
+      )
+    };
+  }
+  getSelectElementContent(selectOption) {
+    const selectOptionData = selectOption.dataset.flsSelectAsset ? `${selectOption.dataset.flsSelectAsset}` : "";
+    const selectOptionDataHTML = selectOptionData.indexOf("img") >= 0 ? `<img src="${selectOptionData}" alt="">` : selectOptionData;
+    let selectOptionContentHTML = ``;
+    selectOptionContentHTML += selectOptionData ? `<span class="${this.selectClasses.classSelectRow}">` : "";
+    selectOptionContentHTML += selectOptionData ? `<span class="${this.selectClasses.classSelectData}">` : "";
+    selectOptionContentHTML += selectOptionData ? selectOptionDataHTML : "";
+    selectOptionContentHTML += selectOptionData ? `</span>` : "";
+    selectOptionContentHTML += selectOptionData ? `<span class="${this.selectClasses.classSelectText}">` : "";
+    selectOptionContentHTML += selectOption.textContent;
+    selectOptionContentHTML += selectOptionData ? `</span></span>` : "";
+    return selectOptionContentHTML;
+  }
+  setOptions(selectItem, originalSelect) {
+    const selectItemOptions = this.getSelectElement(
+      selectItem,
+      this.selectClasses.classSelectOptions
+    ).selectElement;
+    selectItemOptions.innerHTML = this.getOptions(originalSelect);
+    const scrollEl = selectItem.querySelector(".select__scroll");
+    if (scrollEl) {
+      selectItemOptions.hidden = false;
+      scrollEl.style.setProperty(
+        "--content-height",
+        `${scrollEl.offsetHeight}px`
+      );
+      selectItemOptions.hidden = true;
+      if (!scrollEl.SimpleBar) new SimpleBar(scrollEl);
+    }
+    if (originalSelect.hasAttribute("data-fls-select-search")) {
+      const placeholder = originalSelect.dataset.flsSelectPlaceholder || "Пошук";
+      const searchHTML = `
+        <div action="#" class="select__search search search--solid">
+            <input type="text" name="search" placeholder="${placeholder}" class="search__input input">
+            <div class="search__submit _icon-search"></div>
+        </div>
+    `;
+      selectItemOptions.insertAdjacentHTML("afterbegin", searchHTML);
+      this.searchActions(selectItem);
+    }
+  }
+  getOptions(originalSelect) {
+    let selectOptions = Array.from(originalSelect.options);
+    let html = `<div class="select__scroll" ${originalSelect.dataset.flsSelectScroll ? "data-fls-simplebar" : ""}>`;
+    selectOptions.forEach((option) => {
+      if (option.value) html += this.getOption(option, originalSelect);
+    });
+    html += "</div>";
+    return html;
+  }
+  getOption(selectOption, originalSelect) {
+    const selectOptionSelected = selectOption.selected && originalSelect.multiple ? ` ${this.selectClasses.classSelectOptionSelected}` : "";
+    const selectOptionHide = selectOption.selected && !originalSelect.hasAttribute("data-fls-select-show-selected") && !originalSelect.multiple ? `hidden` : ``;
+    const selectOptionClass = selectOption.dataset.flsSelectClass ? ` ${selectOption.dataset.flsSelectClass}` : "";
+    const selectOptionLink = selectOption.dataset.flsSelectHref ? selectOption.dataset.flsSelectHref : false;
+    const selectOptionLinkTarget = selectOption.hasAttribute(
+      "data-fls-select-href-blank"
+    ) ? `target="_blank"` : "";
+    let selectOptionHTML = ``;
+    selectOptionHTML += selectOptionLink ? `<a ${selectOptionLinkTarget} ${selectOptionHide} href="${selectOptionLink}" data-fls-select-value="${selectOption.value}" class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}">` : `<button ${selectOptionHide} class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}" data-fls-select-value="${selectOption.value}" type="button">`;
+    selectOptionHTML += this.getSelectElementContent(selectOption);
+    selectOptionHTML += selectOptionLink ? `</a>` : `</button>`;
+    return selectOptionHTML;
+  }
+  searchActions(selectItem) {
+    const selectInput = selectItem.querySelector(
+      `.${this.selectClasses.classSelectInput}`
+    );
+    const selectOptions = this.getSelectElement(
+      selectItem,
+      this.selectClasses.classSelectOptions
+    ).selectElement;
+    if (!selectInput) return;
+    selectInput.addEventListener("input", () => {
+      const inputValue = selectInput.value.toLowerCase();
+      const selectOptionsItems = selectOptions.querySelectorAll(
+        `.${this.selectClasses.classSelectOption}`
+      );
+      selectOptionsItems.forEach((item) => {
+        const itemText = item.textContent.toLowerCase();
+        item.hidden = !itemText.includes(inputValue);
+      });
+    });
+  }
+  optionAction(selectItem, originalSelect, optionItem) {
+    const optionsBox = selectItem.querySelector(
+      this.getSelectClass(this.selectClasses.classSelectOptions)
+    );
+    if (optionsBox.classList.contains("_slide")) return;
+    if (originalSelect.multiple) {
+      optionItem.classList.toggle(this.selectClasses.classSelectOptionSelected);
+      const selectedEls = this.getSelectedOptionsData(originalSelect).elements;
+      for (const el of selectedEls) el.removeAttribute("selected");
+      const selectedUI = selectItem.querySelectorAll(
+        this.getSelectClass(this.selectClasses.classSelectOptionSelected)
+      );
+      for (const el of selectedUI) {
+        const val = el.dataset.flsSelectValue;
+        const opt = originalSelect.querySelector(`option[value="${val}"]`);
+        if (opt) opt.setAttribute("selected", "selected");
+      }
+    } else {
+      originalSelect.value = optionItem.dataset.flsSelectValue || optionItem.textContent;
+      this.selectAction(selectItem);
+    }
+    this.setSelectTitleValue(selectItem, originalSelect);
+    this.setSelectChange(originalSelect);
+  }
+  selectChange(e) {
+    const originalSelect = e.target;
+    this.selectBuild(originalSelect);
+    this.setSelectChange(originalSelect);
+  }
+  setSelectChange(originalSelect) {
+    if (originalSelect.hasAttribute("data-fls-select-validate")) {
+      formValidate.validateInput(originalSelect);
+    }
+    if (originalSelect.hasAttribute("data-fls-select-submit") && originalSelect.value) {
+      let tempButton = document.createElement("button");
+      tempButton.type = "submit";
+      originalSelect.closest("form").append(tempButton);
+      tempButton.click();
+      tempButton.remove();
+    }
+    const selectItem = originalSelect.parentElement;
+    this.selectCallback(selectItem, originalSelect);
+  }
+  selectDisabled(selectItem, originalSelect) {
+    if (originalSelect.disabled) {
+      selectItem.classList.add(this.selectClasses.classSelectDisabled);
+      this.getSelectElement(
+        selectItem,
+        this.selectClasses.classSelectTitle
+      ).selectElement.disabled = true;
+    } else {
+      selectItem.classList.remove(this.selectClasses.classSelectDisabled);
+      this.getSelectElement(
+        selectItem,
+        this.selectClasses.classSelectTitle
+      ).selectElement.disabled = false;
+    }
+  }
+  selectsActions(e) {
+    var _a2;
+    const t = e.target;
+    const type = e.type;
+    const isSelect = t.closest(
+      this.getSelectClass(this.selectClasses.classSelect)
+    );
+    const isTag = t.closest(
+      this.getSelectClass(this.selectClasses.classSelectTag)
+    );
+    if (!isSelect && !isTag) return this.selectsСlose();
+    const selectItem = isSelect || document.querySelector(
+      `.${this.selectClasses.classSelect}[data-fls-select-id="${(_a2 = isTag == null ? void 0 : isTag.dataset) == null ? void 0 : _a2.flsSelectId}"]`
+    );
+    const originalSelect = this.getSelectElement(selectItem).originalSelect;
+    if (originalSelect.disabled) return;
+    if (type === "click") {
+      const title = t.closest(
+        this.getSelectClass(this.selectClasses.classSelectTitle)
+      );
+      const option = t.closest(
+        this.getSelectClass(this.selectClasses.classSelectOption)
+      );
+      if (title) {
+        this.selectAction(selectItem);
+      } else if (option) {
+        this.optionAction(selectItem, originalSelect, option);
+      }
+    } else if (type === "focusin" || type === "focusout") {
+      if (isSelect)
+        selectItem.classList.toggle(
+          this.selectClasses.classSelectFocus,
+          type === "focusin"
+        );
+    } else if (type === "keydown" && e.code === "Escape") {
+      this.selectsСlose();
+    }
+  }
+  selectsСlose(selectOneGroup) {
+    const selectsGroup = selectOneGroup ? selectOneGroup : document;
+    const activeItems = selectsGroup.querySelectorAll(
+      `${this.getSelectClass(
+        this.selectClasses.classSelect
+      )}${this.getSelectClass(this.selectClasses.classSelectOpen)}`
+    );
+    if (activeItems.length) {
+      activeItems.forEach((selectActiveItem) => {
+        this.selectСlose(selectActiveItem);
+      });
+    }
+  }
+  selectСlose(selectItem) {
+    const originalSelect = this.getSelectElement(selectItem).originalSelect;
+    const selectOptions = this.getSelectElement(
+      selectItem,
+      this.selectClasses.classSelectOptions
+    ).selectElement;
+    if (!selectOptions.classList.contains("_slide")) {
+      selectItem.classList.remove(this.selectClasses.classSelectOpen);
+      slideUp(selectOptions, originalSelect.dataset.flsSelectSpeed);
+      setTimeout(() => {
+        selectItem.style.zIndex = "";
+      }, originalSelect.dataset.flsSelectSpeed);
+    }
+  }
+  selectAction(selectItem) {
+    const originalSelect = this.getSelectElement(selectItem).originalSelect;
+    const selectOptions = this.getSelectElement(
+      selectItem,
+      this.selectClasses.classSelectOptions
+    ).selectElement;
+    const zIndex = originalSelect.dataset.flsSelectZIndex ? originalSelect.dataset.flsSelectZIndex : 3;
+    this.setOptionsPosition(selectItem);
+    if (originalSelect.closest("[data-fls-select-one]")) {
+      const selectOneGroup = originalSelect.closest("[data-fls-select-one]");
+      this.selectsСlose(selectOneGroup);
+    }
+    setTimeout(() => {
+      selectItem.classList.toggle(this.selectClasses.classSelectOpen);
+      slideToggle(selectOptions, originalSelect.dataset.flsSelectSpeed);
+      if (selectItem.classList.contains(this.selectClasses.classSelectOpen)) {
+        selectItem.style.zIndex = zIndex;
+      } else {
+        setTimeout(() => {
+          selectItem.style.zIndex = "";
+        }, originalSelect.dataset.flsSelectSpeed);
+      }
+    }, 0);
+  }
+  setOptionsPosition(selectItem) {
+    const originalSelect = this.getSelectElement(selectItem).originalSelect;
+    const selectOptions = this.getSelectElement(
+      selectItem,
+      this.selectClasses.classSelectOptions
+    ).selectElement;
+    const selectItemScroll = selectOptions.querySelector(
+      `.${this.selectClasses.classSelectOptionsScroll}`
+    ) || selectOptions;
+    const margin = +originalSelect.dataset.flsSelectOptionsMargin || 10;
+    if (!selectItem.classList.contains(this.selectClasses.classSelectOpen)) {
+      selectOptions.hidden = false;
+      const selectItemScrollHeight = selectItemScroll.offsetHeight ? selectItemScroll.offsetHeight : parseInt(
+        window.getComputedStyle(selectItemScroll).getPropertyValue("max-height")
+      );
+      const selectOptionsHeight = selectOptions.offsetHeight > selectItemScrollHeight ? selectOptions.offsetHeight : selectItemScrollHeight + selectOptions.offsetHeight;
+      const selectOptionsScrollHeight = selectOptionsHeight - selectItemScrollHeight;
+      selectOptions.hidden = true;
+      const selectItemHeight = selectItem.offsetHeight;
+      const selectItemPos = selectItem.getBoundingClientRect().top;
+      const total = selectItemPos + selectOptionsHeight + selectItemHeight + selectOptionsScrollHeight;
+      const result = window.innerHeight - (total + margin);
+      if (result < 0) {
+        const newMaxHeightValue = selectOptionsHeight + result;
+        if (newMaxHeightValue < 100) {
+          selectItem.classList.add("select--show-top");
+          selectItemScroll.style.maxHeight = `${selectItemPos - margin}px`;
+        } else {
+          selectItem.classList.remove("select--show-top");
+        }
+      }
+    } else {
+      setTimeout(() => {
+        selectItem.classList.remove("select--show-top");
+      }, +originalSelect.dataset.flsSelectSpeed);
+    }
+  }
+  selectCallback(selectItem, originalSelect) {
+    document.dispatchEvent(
+      new CustomEvent("selectCallback", {
+        detail: { select: originalSelect }
+      })
+    );
   }
 }
-window.flsPopup = new Popup({});
+document.querySelector("select[data-fls-select]") ? window.addEventListener(
+  "load",
+  () => window.flsSelect = new SelectConstructor({})
+) : null;
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.querySelectorAll("[data-fls-simplebar]").length) {
+    document.querySelectorAll("[data-fls-simplebar]").forEach((scrollBlock) => {
+      new SimpleBar(scrollBlock, {
+        autoHide: false
+      });
+    });
+  }
+});
 function spoilers() {
   const spoilersArray = document.querySelectorAll("[data-fls-spoilers]");
   if (spoilersArray.length > 0) {
@@ -2267,7 +2007,7 @@ function spoilers() {
       }
     }, setSpoilerAction2 = function(e) {
       const el = e.target;
-      if (el.closest("summary") && el.closest("[data-fls-spoilers]")) {
+      if (el.closest("summary") && el.closest("[data-fls-spoilers]") && !el.closest("a")) {
         e.preventDefault();
         if (el.closest("[data-fls-spoilers]").classList.contains("--spoiler-init")) {
           const spoilerTitle = el.closest("summary");
@@ -5096,149 +4836,689 @@ document.addEventListener("DOMContentLoaded", function() {
       catalogSlider.mount();
     });
   }
-});
-function showMore() {
-  const showMoreBlocks = document.querySelectorAll("[data-fls-showmore]");
-  let showMoreBlocksRegular;
-  let mdQueriesArray;
-  if (showMoreBlocks.length) {
-    showMoreBlocksRegular = Array.from(showMoreBlocks).filter(function(item, index, self2) {
-      return !item.dataset.flsShowmoreMedia;
-    });
-    showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
-    document.addEventListener("click", showMoreActions);
-    window.addEventListener("resize", showMoreActions);
-    mdQueriesArray = dataMediaQueries(showMoreBlocks, "flsShowmoreMedia");
-    if (mdQueriesArray && mdQueriesArray.length) {
-      mdQueriesArray.forEach((mdQueriesItem) => {
-        mdQueriesItem.matchMedia.addEventListener("change", function() {
-          initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-        });
+  var bonusesSliderEls = document.querySelectorAll(".bonuses-profile__slider");
+  if (bonusesSliderEls) {
+    bonusesSliderEls.forEach(function(sliderEl) {
+      var bonusesSlider = new Splide(sliderEl, {
+        perPage: 4,
+        arrows: false,
+        pagination: true,
+        gap: 20,
+        updateOnMove: true,
+        focus: 0,
+        padding: {
+          right: 225
+        },
+        breakpoints: {
+          1499.98: {
+            padding: 0
+          },
+          991.98: {
+            perPage: 3
+          },
+          767.98: {
+            perPage: 4,
+            gap: 6,
+            padding: {
+              right: 0
+            }
+          }
+        }
       });
-      initItemsMedia(mdQueriesArray);
-    }
-  }
-  function initItemsMedia(mdQueriesArray2) {
-    mdQueriesArray2.forEach((mdQueriesItem) => {
-      initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+      sliderEl.splide = bonusesSlider;
+      bonusesSlider.mount();
     });
   }
-  function initItems(showMoreBlocks2, matchMedia2) {
-    showMoreBlocks2.forEach((showMoreBlock) => {
-      initItem(showMoreBlock, matchMedia2);
+  var productSliderEls = document.querySelectorAll(".hero-product__slider");
+  if (productSliderEls) {
+    productSliderEls.forEach(function(sliderEl) {
+      var productSlider = new Splide(sliderEl, {
+        perPage: 1,
+        arrows: true,
+        pagination: false,
+        gap: 20,
+        updateOnMove: true,
+        focus: 0,
+        classes: {
+          prev: "splide__arrow--prev _icon-ch-left",
+          next: "splide__arrow--next _icon-ch-right"
+        },
+        breakpoints: {
+          767.98: {
+            arrows: false,
+            pagination: true
+          }
+        }
+      });
+      sliderEl.splide = productSlider;
+      productSlider.mount();
     });
   }
-  function initItem(showMoreBlock, matchMedia2 = false) {
-    showMoreBlock = matchMedia2 ? showMoreBlock.item : showMoreBlock;
-    let showMoreContent = showMoreBlock.querySelectorAll(
-      "[data-fls-showmore-content]"
-    );
-    let showMoreButton = showMoreBlock.querySelectorAll(
-      "[data-fls-showmore-button]"
-    );
-    showMoreContent = Array.from(showMoreContent).filter(
-      (item) => item.closest("[data-fls-showmore]") === showMoreBlock
-    )[0];
-    showMoreButton = Array.from(showMoreButton).filter(
-      (item) => item.closest("[data-fls-showmore]") === showMoreBlock
-    )[0];
-    const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
-    if (showMoreBlock.dataset.flsShowmore === "items") {
-      let showMoreTypeValue = showMoreContent.dataset.flsShowmoreContent ? parseInt(showMoreContent.dataset.flsShowmoreContent) : 3;
-      const totalItems = showMoreContent.children.length;
-      if (showMoreTypeValue > totalItems) {
-        showMoreTypeValue = totalItems;
-      }
-      const hiddenItems = totalItems - showMoreTypeValue;
-      if (hiddenItems > 0) {
-        showMoreButton.querySelector("span").setAttribute("data-hidden-count", hiddenItems);
-        showMoreButton.hidden = false;
-      } else {
-        showMoreButton.removeAttribute("data-hidden-count");
-        showMoreButton.hidden = true;
-      }
-    }
-    if (matchMedia2.matches || !matchMedia2) {
-      if (hiddenHeight < getOriginalHeight(showMoreContent)) {
-        slideUp(
-          showMoreContent,
-          0,
-          showMoreBlock.classList.contains("--showmore-active") ? getOriginalHeight(showMoreContent) : hiddenHeight
-        );
-        showMoreButton.hidden = false;
-      } else {
-        slideDown(showMoreContent, 0, hiddenHeight);
-        showMoreButton.hidden = true;
-      }
-    }
-  }
-  function getHeight(showMoreBlock, showMoreContent) {
-    let hiddenHeight = 0;
-    const showMoreType = showMoreBlock.dataset.flsShowmore ? showMoreBlock.dataset.flsShowmore : "size";
-    const rowGap = parseFloat(getComputedStyle(showMoreContent).rowGap) ? parseFloat(getComputedStyle(showMoreContent).rowGap) : 0;
-    if (showMoreType === "items") {
-      let showMoreTypeValue = showMoreContent.dataset.flsShowmoreContent ? parseInt(showMoreContent.dataset.flsShowmoreContent) : 3;
-      const showMoreItems = showMoreContent.children;
-      const totalItems = showMoreItems.length;
-      if (showMoreTypeValue > totalItems) {
-        showMoreTypeValue = totalItems;
-      }
-      for (let i = 0; i < showMoreTypeValue; i++) {
-        const showMoreItem = showMoreItems[i];
-        if (!showMoreItem) break;
-        const marginTop = parseFloat(getComputedStyle(showMoreItem).marginTop) || 0;
-        const marginBottom = parseFloat(getComputedStyle(showMoreItem).marginBottom) || 0;
-        hiddenHeight += showMoreItem.offsetHeight + marginTop;
-        if (i < showMoreTypeValue - 1) {
-          hiddenHeight += marginBottom;
+});
+class Popup {
+  constructor(options) {
+    let config = {
+      logging: true,
+      init: true,
+      //Для кнопок
+      attributeOpenButton: "data-fls-popup-link",
+      // Атрибут для кнопки, яка викликає попап
+      attributeCloseButton: "data-fls-popup-close",
+      // Атрибут для кнопки, що закриває попап
+      // Для сторонніх об'єктів
+      fixElementSelector: "[data-fls-lp]",
+      // Атрибут для елементів із лівим паддингом (які fixed)
+      // Для об'єкту попапа
+      attributeMain: "data-fls-popup",
+      youtubeAttribute: "data-fls-popup-youtube",
+      // Атрибут для коду youtube
+      youtubePlaceAttribute: "data-fls-popup-youtube-place",
+      // Атрибут для вставки ролика youtube
+      setAutoplayYoutube: true,
+      // Зміна класів
+      classes: {
+        popup: "popup",
+        // popupWrapper: 'popup__wrapper',
+        popupContent: "data-fls-popup-body",
+        popupActive: "data-fls-popup-active",
+        // Додається для попапа, коли він відкривається
+        bodyActive: "data-fls-popup-open"
+        // Додається для боді, коли попап відкритий
+      },
+      focusCatch: true,
+      // Фокус усередині попапа зациклений
+      closeEsc: true,
+      // Закриття ESC
+      bodyLock: true,
+      // Блокування скролла
+      hashSettings: {
+        location: false,
+        // Хеш в адресному рядку
+        goHash: false
+        // Перехід по наявності в адресному рядку
+      },
+      on: {
+        // Події
+        beforeOpen: function() {
+        },
+        afterOpen: function() {
+        },
+        beforeClose: function() {
+        },
+        afterClose: function() {
         }
       }
-      rowGap ? hiddenHeight += (showMoreTypeValue - 1) * rowGap : null;
+    };
+    this.youTubeCode;
+    this.isOpen = false;
+    this.targetOpen = {
+      selector: false,
+      element: false
+    };
+    this.previousOpen = {
+      selector: false,
+      element: false
+    };
+    this.lastClosed = {
+      selector: false,
+      element: false
+    };
+    this._dataValue = false;
+    this.hash = false;
+    this._reopen = false;
+    this._selectorOpen = false;
+    this.lastFocusEl = false;
+    this._focusEl = [
+      "a[href]",
+      'input:not([disabled]):not([type="hidden"]):not([aria-hidden])',
+      "button:not([disabled]):not([aria-hidden])",
+      "select:not([disabled]):not([aria-hidden])",
+      "textarea:not([disabled]):not([aria-hidden])",
+      "area[href]",
+      "iframe",
+      "object",
+      "embed",
+      "[contenteditable]",
+      '[tabindex]:not([tabindex^="-"])'
+    ];
+    this.options = {
+      ...config,
+      ...options,
+      classes: {
+        ...config.classes,
+        ...options == null ? void 0 : options.classes
+      },
+      hashSettings: {
+        ...config.hashSettings,
+        ...options == null ? void 0 : options.hashSettings
+      },
+      on: {
+        ...config.on,
+        ...options == null ? void 0 : options.on
+      }
+    };
+    this.bodyLock = false;
+    this.options.init ? this.initPopups() : null;
+  }
+  initPopups() {
+    this.buildPopup();
+    this.eventsPopup();
+  }
+  buildPopup() {
+  }
+  eventsPopup() {
+    document.addEventListener(
+      "click",
+      (function(e) {
+        const buttonOpen = e.target.closest(
+          `[${this.options.attributeOpenButton}]`
+        );
+        if (buttonOpen) {
+          e.preventDefault();
+          this._dataValue = buttonOpen.getAttribute(
+            this.options.attributeOpenButton
+          ) ? buttonOpen.getAttribute(this.options.attributeOpenButton) : "error";
+          this.youTubeCode = buttonOpen.getAttribute(
+            this.options.youtubeAttribute
+          ) ? buttonOpen.getAttribute(this.options.youtubeAttribute) : null;
+          if (this._dataValue !== "error") {
+            if (!this.isOpen) this.lastFocusEl = buttonOpen;
+            this.targetOpen.selector = `${this._dataValue}`;
+            this._selectorOpen = true;
+            this.open();
+            return;
+          }
+          return;
+        }
+        const buttonClose = e.target.closest(
+          `[${this.options.attributeCloseButton}]`
+        );
+        if (buttonClose || !e.target.closest(`[${this.options.classes.popupContent}]`) && this.isOpen) {
+          e.preventDefault();
+          this.close();
+          return;
+        }
+      }).bind(this)
+    );
+    document.addEventListener(
+      "keydown",
+      (function(e) {
+        if (this.options.closeEsc && e.which == 27 && e.code === "Escape" && this.isOpen) {
+          e.preventDefault();
+          this.close();
+          return;
+        }
+        if (this.options.focusCatch && e.which == 9 && this.isOpen) {
+          this._focusCatch(e);
+          return;
+        }
+      }).bind(this)
+    );
+    if (this.options.hashSettings.goHash) {
+      window.addEventListener(
+        "hashchange",
+        (function() {
+          if (window.location.hash) {
+            this._openToHash();
+          } else {
+            this.close(this.targetOpen.selector);
+          }
+        }).bind(this)
+      );
+      window.addEventListener(
+        "load",
+        (function() {
+          if (window.location.hash) {
+            this._openToHash();
+          }
+        }).bind(this)
+      );
+    }
+  }
+  open(selectorValue) {
+    if (bodyLockStatus) {
+      this.bodyLock = document.documentElement.hasAttribute("data-fls-scrolllock") && !this.isOpen ? true : false;
+      if (selectorValue && typeof selectorValue === "string" && selectorValue.trim() !== "") {
+        this.targetOpen.selector = selectorValue;
+        this._selectorOpen = true;
+      }
+      if (this.isOpen) {
+        this._reopen = true;
+        this.close();
+      }
+      if (!this._selectorOpen)
+        this.targetOpen.selector = this.lastClosed.selector;
+      if (!this._reopen) this.previousActiveElement = document.activeElement;
+      this.targetOpen.element = document.querySelector(
+        `[${this.options.attributeMain}=${this.targetOpen.selector}]`
+      );
+      if (this.targetOpen.element) {
+        const codeVideo = this.youTubeCode || this.targetOpen.element.getAttribute(
+          `${this.options.youtubeAttribute}`
+        );
+        if (codeVideo) {
+          const urlVideo = `https://www.youtube.com/embed/${codeVideo}?rel=0&showinfo=0&autoplay=1`;
+          const iframe = document.createElement("iframe");
+          const autoplay = this.options.setAutoplayYoutube ? "autoplay;" : "";
+          iframe.setAttribute("allowfullscreen", "");
+          iframe.setAttribute("allow", `${autoplay}; encrypted-media`);
+          iframe.setAttribute("src", urlVideo);
+          if (!this.targetOpen.element.querySelector(
+            `[${this.options.youtubePlaceAttribute}]`
+          )) {
+            this.targetOpen.element.querySelector("[data-fls-popup-content]").setAttribute(`${this.options.youtubePlaceAttribute}`, "");
+          }
+          this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).appendChild(iframe);
+        }
+        if (this.options.hashSettings.location) {
+          this._getHash();
+          this._setHash();
+        }
+        this.options.on.beforeOpen(this);
+        document.dispatchEvent(
+          new CustomEvent("beforePopupOpen", {
+            detail: {
+              popup: this
+            }
+          })
+        );
+        this.targetOpen.element.setAttribute(
+          this.options.classes.popupActive,
+          ""
+        );
+        document.documentElement.setAttribute(
+          this.options.classes.bodyActive,
+          ""
+        );
+        if (!this._reopen) {
+          !this.bodyLock ? bodyLock() : null;
+        } else this._reopen = false;
+        this.targetOpen.element.setAttribute("aria-hidden", "false");
+        this.previousOpen.selector = this.targetOpen.selector;
+        this.previousOpen.element = this.targetOpen.element;
+        this._selectorOpen = false;
+        this.isOpen = true;
+        setTimeout(() => {
+          this._focusTrap();
+        }, 50);
+        this.options.on.afterOpen(this);
+        document.dispatchEvent(
+          new CustomEvent("afterPopupOpen", {
+            detail: {
+              popup: this
+            }
+          })
+        );
+      }
+    }
+  }
+  close(selectorValue) {
+    if (selectorValue && typeof selectorValue === "string" && selectorValue.trim() !== "") {
+      this.previousOpen.selector = selectorValue;
+    }
+    if (!this.isOpen || !bodyLockStatus) {
+      return;
+    }
+    this.options.on.beforeClose(this);
+    document.dispatchEvent(
+      new CustomEvent("beforePopupClose", {
+        detail: {
+          popup: this
+        }
+      })
+    );
+    if (this.targetOpen.element.querySelector(
+      `[${this.options.youtubePlaceAttribute}]`
+    )) {
+      setTimeout(() => {
+        this.targetOpen.element.querySelector(
+          `[${this.options.youtubePlaceAttribute}]`
+        ).innerHTML = "";
+      }, 500);
+    }
+    this.previousOpen.element.removeAttribute(this.options.classes.popupActive);
+    this.previousOpen.element.setAttribute("aria-hidden", "true");
+    if (!this._reopen) {
+      document.documentElement.removeAttribute(this.options.classes.bodyActive);
+      !this.bodyLock ? bodyUnlock() : null;
+      this.isOpen = false;
+    }
+    this._removeHash();
+    if (this._selectorOpen) {
+      this.lastClosed.selector = this.previousOpen.selector;
+      this.lastClosed.element = this.previousOpen.element;
+    }
+    this.options.on.afterClose(this);
+    document.dispatchEvent(
+      new CustomEvent("afterPopupClose", {
+        detail: {
+          popup: this
+        }
+      })
+    );
+    setTimeout(() => {
+      this._focusTrap();
+    }, 50);
+  }
+  // Отримання хешу
+  _getHash() {
+    if (this.options.hashSettings.location) {
+      this.hash = `#${this.targetOpen.selector}`;
+    }
+  }
+  _openToHash() {
+    let classInHash = window.location.hash.replace("#", "");
+    const openButton = document.querySelector(
+      `[${this.options.attributeOpenButton}="${classInHash}"]`
+    );
+    if (openButton) {
+      this.youTubeCode = openButton.getAttribute(this.options.youtubeAttribute) ? openButton.getAttribute(this.options.youtubeAttribute) : null;
+    }
+    if (classInHash) this.open(classInHash);
+  }
+  // Встановлення хеша
+  _setHash() {
+    history.pushState("", "", this.hash);
+  }
+  _removeHash() {
+    history.pushState("", "", window.location.href.split("#")[0]);
+  }
+  _focusCatch(e) {
+    const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
+    const focusArray = Array.prototype.slice.call(focusable);
+    const focusedIndex = focusArray.indexOf(document.activeElement);
+    if (e.shiftKey && focusedIndex === 0) {
+      focusArray[focusArray.length - 1].focus();
+      e.preventDefault();
+    }
+    if (!e.shiftKey && focusedIndex === focusArray.length - 1) {
+      focusArray[0].focus();
+      e.preventDefault();
+    }
+  }
+  _focusTrap() {
+    const focusable = this.previousOpen.element.querySelectorAll(this._focusEl);
+    if (!this.isOpen && this.lastFocusEl) {
+      this.lastFocusEl.focus();
     } else {
-      const showMoreTypeValue = showMoreContent.dataset.flsShowmoreContent ? showMoreContent.dataset.flsShowmoreContent : 150;
-      hiddenHeight = showMoreTypeValue;
-    }
-    return hiddenHeight;
-  }
-  function getOriginalHeight(showMoreContent) {
-    let parentHidden;
-    let hiddenHeight = showMoreContent.offsetHeight;
-    showMoreContent.style.removeProperty("height");
-    if (showMoreContent.closest(`[hidden]`)) {
-      parentHidden = showMoreContent.closest(`[hidden]`);
-      parentHidden.hidden = false;
-    }
-    let originalHeight = showMoreContent.offsetHeight;
-    parentHidden ? parentHidden.hidden = true : null;
-    showMoreContent.style.height = `${hiddenHeight}px`;
-    return originalHeight;
-  }
-  function showMoreActions(e) {
-    const targetEvent = e.target;
-    const targetType = e.type;
-    if (targetType === "click") {
-      if (targetEvent.closest("[data-fls-showmore-button]")) {
-        const showMoreButton = targetEvent.closest(
-          "[data-fls-showmore-button]"
-        );
-        const showMoreBlock = showMoreButton.closest("[data-fls-showmore]");
-        const showMoreContent = showMoreBlock.querySelector(
-          "[data-fls-showmore-content]"
-        );
-        const showMoreSpeed = showMoreBlock.dataset.flsShowmoreButton ? showMoreBlock.dataset.flsShowmoreButton : "500";
-        const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
-        if (!showMoreContent.classList.contains("--slide")) {
-          showMoreBlock.classList.contains("--showmore-active") ? slideUp(showMoreContent, showMoreSpeed, hiddenHeight) : slideDown(showMoreContent, showMoreSpeed, hiddenHeight);
-          showMoreBlock.classList.toggle("--showmore-active");
-        }
-      }
-    } else if (targetType === "resize") {
-      showMoreBlocksRegular && showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
-      mdQueriesArray && mdQueriesArray.length ? initItemsMedia(mdQueriesArray) : null;
+      focusable[0].focus();
     }
   }
 }
-window.addEventListener("load", showMore);
+window.flsPopup = new Popup({});
+function menuInit() {
+  document.addEventListener("click", function(e) {
+    if (bodyLockStatus) {
+      if (e.target.closest("[data-fls-menu]")) {
+        bodyLockToggle();
+        document.documentElement.toggleAttribute("data-fls-menu-open");
+      } else if (!e.target.closest(".mobile-menu") && !e.target.closest(".pc-menu") && document.documentElement.hasAttribute("data-fls-menu-open")) {
+        bodyUnlock(0);
+        document.documentElement.removeAttribute("data-fls-menu-open");
+      }
+    }
+  });
+}
+document.querySelector("[data-fls-menu]") ? window.addEventListener("load", menuInit) : null;
+document.addEventListener("click", (e) => {
+  if (bodyLockStatus) {
+    if (e.target.closest("[data-cart-toggle]")) {
+      bodyLockToggle();
+      document.documentElement.toggleAttribute("data-cart-open");
+    } else if (!e.target.closest(".basket-header") && document.documentElement.hasAttribute("data-cart-open")) {
+      bodyUnlock(0);
+      document.documentElement.removeAttribute("data-cart-open");
+    }
+  }
+  if (e.target.closest("[data-search-toggle]")) {
+    document.documentElement.toggleAttribute("data-search-open");
+  }
+});
+const navbarEl = document.querySelector(".navbar");
+function updateNavbarHeight() {
+  if (navbarEl) {
+    navbarEl.style.transition = "none";
+    const navbarHeight = navbarEl.offsetHeight;
+    document.documentElement.style.setProperty(
+      "--navbar-height",
+      `${navbarHeight}px`
+    );
+    navbarEl.style.transition = "";
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  updateNavbarHeight();
+});
+window.addEventListener("resize", () => {
+  updateNavbarHeight();
+});
+document.addEventListener("click", function(e) {
+  if (e.target.closest("[data-nav-lang]")) {
+    const nav = e.target.closest(".navbar");
+    if (nav) {
+      nav.classList.toggle("--lang-open");
+    }
+  }
+  if (e.target.closest("[data-nav-more]")) {
+    const nav = e.target.closest(".navbar");
+    if (nav) {
+      nav.classList.toggle("--nav-more-open");
+    }
+  } else if (!e.target.closest(".navbar__submenu")) {
+    const nav = document.querySelector(".navbar");
+    if (nav) {
+      nav.classList.remove("--nav-more-open");
+    }
+  }
+  if (e.target.closest(".footer__up")) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+  if (e.target.closest(".pass__btn")) {
+    const passBtn = e.target.closest(".pass__btn");
+    const passBlock = passBtn.closest(".pass");
+    if (passBlock) {
+      const passInput = passBlock.querySelector(".pass__input");
+      if (!passInput) {
+        return;
+      }
+      if (passInput.type === "password") {
+        passInput.type = "text";
+        passBtn.classList.add("--active");
+      } else {
+        passInput.type = "password";
+        passBtn.classList.remove("--active");
+      }
+    }
+  }
+});
+const pinnedEl = document.querySelector(".pinned-actions");
+function updatePinnedHeight() {
+  if (pinnedEl) {
+    pinnedEl.style.transition = "none";
+    const pinnedHeight = pinnedEl.offsetHeight;
+    document.documentElement.style.setProperty(
+      "--pinned-height",
+      `${pinnedHeight}px`
+    );
+    pinnedEl.style.transition = "";
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  updatePinnedHeight();
+  const showingEls = document.querySelectorAll("[data-showing]");
+  if (showingEls) {
+    showingEls.forEach((container) => {
+      const showingCount = parseInt(container.getAttribute("data-showing"));
+      const items = container.querySelectorAll("[data-showing-item]");
+      const btn = container.querySelector("[data-showing-btn]");
+      const countEl = container.querySelector(".count");
+      function updateHidden() {
+        const hiddenCount = Array.from(items).filter(
+          (item) => item.classList.contains("--hidden")
+        ).length;
+        if (countEl) countEl.textContent = hiddenCount > 0 ? hiddenCount : "";
+      }
+      function hideExtra() {
+        items.forEach((item, index) => {
+          if (index >= showingCount) {
+            item.classList.add("--hidden");
+          } else {
+            item.classList.remove("--hidden");
+          }
+        });
+        container.classList.remove("--show");
+        updateHidden();
+      }
+      function showAll() {
+        items.forEach((item) => item.classList.remove("--hidden"));
+        container.classList.add("--show");
+        updateHidden();
+      }
+      if (items.length <= showingCount) {
+        if (btn) btn.classList.add("--hidden");
+      } else {
+        hideExtra();
+        if (btn) {
+          btn.addEventListener("click", () => {
+            const hasHidden = Array.from(items).some(
+              (item) => item.classList.contains("--hidden")
+            );
+            if (hasHidden) {
+              showAll();
+            } else {
+              hideExtra();
+            }
+          });
+        }
+      }
+    });
+  }
+});
+window.addEventListener("resize", () => {
+  updatePinnedHeight();
+});
+class DynamicAdapt {
+  constructor() {
+    this.type = "max";
+    this.init();
+  }
+  init() {
+    this.objects = [];
+    this.daClassname = "--dynamic";
+    this.nodes = [...document.querySelectorAll("[data-fls-dynamic]")];
+    this.nodes.forEach((node) => {
+      const data = node.dataset.flsDynamic.trim();
+      const dataArray = data.split(`,`);
+      const object = {};
+      object.element = node;
+      object.parent = node.parentNode;
+      object.destinationParent = dataArray[3] ? node.closest(dataArray[3].trim()) || document : document;
+      dataArray[3] ? dataArray[3].trim() : null;
+      const objectSelector = dataArray[0] ? dataArray[0].trim() : null;
+      if (objectSelector) {
+        const foundDestination = object.destinationParent.querySelector(objectSelector);
+        if (foundDestination) {
+          object.destination = foundDestination;
+        }
+      }
+      object.breakpoint = dataArray[1] ? dataArray[1].trim() : `767.98`;
+      object.place = dataArray[2] ? dataArray[2].trim() : `last`;
+      object.index = this.indexInParent(object.parent, object.element);
+      this.objects.push(object);
+    });
+    this.arraySort(this.objects);
+    this.mediaQueries = this.objects.map(({ breakpoint }) => `(${this.type}-width: ${breakpoint / 16}em),${breakpoint}`).filter((item, index, self2) => self2.indexOf(item) === index);
+    this.mediaQueries.forEach((media) => {
+      const mediaSplit = media.split(",");
+      const matchMedia2 = window.matchMedia(mediaSplit[0]);
+      const mediaBreakpoint = mediaSplit[1];
+      const objectsFilter = this.objects.filter(({ breakpoint }) => breakpoint === mediaBreakpoint);
+      matchMedia2.addEventListener("change", () => {
+        this.mediaHandler(matchMedia2, objectsFilter);
+      });
+      this.mediaHandler(matchMedia2, objectsFilter);
+    });
+  }
+  mediaHandler(matchMedia2, objects) {
+    if (matchMedia2.matches) {
+      objects.forEach((object) => {
+        if (object.destination) {
+          this.moveTo(object.place, object.element, object.destination);
+        }
+      });
+    } else {
+      objects.forEach(({ parent, element, index }) => {
+        if (element.classList.contains(this.daClassname)) {
+          this.moveBack(parent, element, index);
+        }
+      });
+    }
+  }
+  moveTo(place, element, destination) {
+    element.classList.add(this.daClassname);
+    const index = place === "last" || place === "first" ? place : parseInt(place, 10);
+    if (index === "last" || index >= destination.children.length) {
+      destination.append(element);
+    } else if (index === "first") {
+      destination.prepend(element);
+    } else {
+      destination.children[index].before(element);
+    }
+  }
+  moveBack(parent, element, index) {
+    element.classList.remove(this.daClassname);
+    if (parent.children[index] !== void 0) {
+      parent.children[index].before(element);
+    } else {
+      parent.append(element);
+    }
+  }
+  indexInParent(parent, element) {
+    return [...parent.children].indexOf(element);
+  }
+  arraySort(arr) {
+    if (this.type === "min") {
+      arr.sort((a, b) => {
+        if (a.breakpoint === b.breakpoint) {
+          if (a.place === b.place) {
+            return 0;
+          }
+          if (a.place === "first" || b.place === "last") {
+            return -1;
+          }
+          if (a.place === "last" || b.place === "first") {
+            return 1;
+          }
+          return 0;
+        }
+        return a.breakpoint - b.breakpoint;
+      });
+    } else {
+      arr.sort((a, b) => {
+        if (a.breakpoint === b.breakpoint) {
+          if (a.place === b.place) {
+            return 0;
+          }
+          if (a.place === "first" || b.place === "last") {
+            return 1;
+          }
+          if (a.place === "last" || b.place === "first") {
+            return -1;
+          }
+          return 0;
+        }
+        return b.breakpoint - a.breakpoint;
+      });
+      return;
+    }
+  }
+}
+if (document.querySelector("[data-fls-dynamic]")) {
+  window.addEventListener("load", () => new DynamicAdapt());
+}
 function formRating() {
   const ratings = document.querySelectorAll("[data-fls-rating]");
   if (ratings) {
@@ -5294,6 +5574,288 @@ function formRating() {
   }
 }
 document.querySelector("[data-fls-rating]") ? window.addEventListener("load", formRating) : null;
+function showMore() {
+  const showMoreBlocks = document.querySelectorAll("[data-fls-showmore]");
+  let showMoreBlocksRegular;
+  let mdQueriesArray;
+  if (showMoreBlocks.length) {
+    showMoreBlocksRegular = Array.from(showMoreBlocks).filter(
+      (item) => !item.dataset.flsShowmoreMedia
+    );
+    if (showMoreBlocksRegular.length) initItems(showMoreBlocksRegular);
+    document.addEventListener("click", showMoreActions);
+    window.addEventListener("resize", showMoreActions);
+    mdQueriesArray = dataMediaQueries(showMoreBlocks, "flsShowmoreMedia");
+    if (mdQueriesArray && mdQueriesArray.length) {
+      mdQueriesArray.forEach((mdQueriesItem) => {
+        mdQueriesItem.matchMedia.addEventListener("change", () => {
+          initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+        });
+      });
+      initItemsMedia(mdQueriesArray);
+    }
+  }
+  function initItemsMedia(mdQueriesArray2) {
+    mdQueriesArray2.forEach((mdQueriesItem) => {
+      initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+    });
+  }
+  function initItems(showMoreBlocks2, matchMedia2) {
+    showMoreBlocks2.forEach((showMoreBlock) => {
+      initItem(showMoreBlock, matchMedia2);
+    });
+  }
+  function initItem(showMoreBlock, matchMedia2 = false) {
+    showMoreBlock = matchMedia2 ? showMoreBlock.item : showMoreBlock;
+    let showMoreContent = showMoreBlock.querySelector(
+      "[data-fls-showmore-content]"
+    );
+    let showMoreButton = showMoreBlock.querySelector(
+      "[data-fls-showmore-button]"
+    );
+    if (!showMoreContent || !showMoreButton) return;
+    showMoreContent.style.overflow = "hidden";
+    const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
+    if (matchMedia2.matches || !matchMedia2) {
+      const originalHeight = getOriginalHeight(showMoreContent);
+      if (hiddenHeight < originalHeight) {
+        slideUp(
+          showMoreContent,
+          0,
+          showMoreBlock.classList.contains("--showmore-active") ? originalHeight : hiddenHeight
+        );
+        showMoreButton.hidden = false;
+      } else {
+        showMoreContent.style.height = originalHeight + "px";
+        showMoreButton.hidden = true;
+      }
+    }
+  }
+  function getHeight(showMoreBlock, showMoreContent) {
+    const showMoreType = showMoreBlock.dataset.flsShowmore || "size";
+    const computedStyle = window.getComputedStyle(showMoreContent);
+    const cssVarHeight = computedStyle.getPropertyValue("--showmore-height").trim();
+    if (showMoreType === "items") {
+      let showMoreTypeValue = showMoreContent.dataset.flsShowmoreContent ? parseInt(showMoreContent.dataset.flsShowmoreContent) : 3;
+      const showMoreItems = showMoreContent.children;
+      const totalItems = showMoreItems.length;
+      if (showMoreTypeValue > totalItems) showMoreTypeValue = totalItems;
+      let hiddenHeight = 0;
+      for (let i = 0; i < showMoreTypeValue; i++) {
+        const style2 = window.getComputedStyle(showMoreItems[i]);
+        hiddenHeight += showMoreItems[i].offsetHeight + parseFloat(style2.marginBottom);
+      }
+      return hiddenHeight;
+    } else {
+      let showMoreTypeValue;
+      if (cssVarHeight) {
+        showMoreTypeValue = parseInt(cssVarHeight);
+      } else if (showMoreContent.dataset.flsShowmoreContent) {
+        showMoreTypeValue = parseInt(
+          showMoreContent.dataset.flsShowmoreContent
+        );
+      } else {
+        showMoreTypeValue = 150;
+      }
+      return showMoreTypeValue;
+    }
+  }
+  function getOriginalHeight(showMoreContent) {
+    let parentHidden;
+    const currentHeight = showMoreContent.offsetHeight;
+    showMoreContent.style.removeProperty("height");
+    if (showMoreContent.closest("[hidden]")) {
+      parentHidden = showMoreContent.closest("[hidden]");
+      parentHidden.hidden = false;
+    }
+    const originalHeight = showMoreContent.scrollHeight;
+    if (parentHidden) parentHidden.hidden = true;
+    showMoreContent.style.height = `${currentHeight}px`;
+    return originalHeight;
+  }
+  function showMoreActions(e) {
+    const targetEvent = e.target;
+    const targetType = e.type;
+    if (targetType === "click") {
+      const showMoreButton = targetEvent.closest("[data-fls-showmore-button]");
+      if (showMoreButton) {
+        const showMoreBlock = showMoreButton.closest("[data-fls-showmore]");
+        const showMoreContent = showMoreBlock.querySelector(
+          "[data-fls-showmore-content]"
+        );
+        const speed = showMoreBlock.dataset.flsShowmoreButton ? showMoreBlock.dataset.flsShowmoreButton : "500";
+        console.log([...showMoreContent.children].map((el) => el.offsetHeight));
+        const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
+        if (!showMoreContent.classList.contains("--slide")) {
+          if (showMoreBlock.classList.contains("--showmore-active")) {
+            slideUp(showMoreContent, speed, hiddenHeight);
+          } else {
+            slideDown(showMoreContent, speed, hiddenHeight);
+          }
+          showMoreBlock.classList.toggle("--showmore-active");
+        }
+      }
+    } else if (targetType === "resize") {
+      if (showMoreBlocksRegular && showMoreBlocksRegular.length) {
+        initItems(showMoreBlocksRegular);
+      }
+      if (mdQueriesArray && mdQueriesArray.length) {
+        initItemsMedia(mdQueriesArray);
+      }
+    }
+  }
+}
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    showMore();
+  }, 0);
+});
+function pageNavigation() {
+  document.addEventListener("click", pageNavigationAction);
+  document.addEventListener("watcherCallback", pageNavigationAction);
+  function pageNavigationAction(e) {
+    if (e.type === "click") {
+      const targetElement = e.target;
+      if (targetElement.closest("[data-fls-scrollto]")) {
+        const gotoLink = targetElement.closest("[data-fls-scrollto]");
+        const gotoLinkSelector = gotoLink.dataset.flsScrollto ? gotoLink.dataset.flsScrollto : "";
+        const noHeader = gotoLink.hasAttribute("data-fls-scrollto-header") ? true : false;
+        const gotoSpeed = gotoLink.dataset.flsScrolltoSpeed ? gotoLink.dataset.flsScrolltoSpeed : 500;
+        const offsetTop = gotoLink.dataset.flsScrolltoTop ? parseInt(gotoLink.dataset.flsScrolltoTop) : 100;
+        const targetBlock = document.querySelector(gotoLinkSelector);
+        if (targetBlock) {
+          const tabsBlock = targetBlock.closest("[data-fls-tabs]");
+          if (tabsBlock) {
+            const tabsItem = targetBlock.closest("[data-fls-tabs-item]");
+            if (tabsItem && tabsItem.hidden) {
+              const tabsTitles = tabsBlock.querySelectorAll(
+                "[data-fls-tabs-title]"
+              );
+              const tabsItems = tabsBlock.querySelectorAll(
+                "[data-fls-tabs-item]"
+              );
+              for (let i = 0; i < tabsItems.length; i++) {
+                if (tabsItems[i] === tabsItem) {
+                  const activeTitle = tabsBlock.querySelector(
+                    "[data-fls-tabs-title].--tab-active"
+                  );
+                  if (activeTitle) {
+                    activeTitle.classList.remove("--tab-active");
+                  }
+                  tabsTitles[i].classList.add("--tab-active");
+                  setTabsStatus(tabsBlock);
+                  break;
+                }
+              }
+            }
+          }
+        }
+        if (window.fullpage) {
+          const fullpageSection = document.querySelector(`${gotoLinkSelector}`).closest("[data-fls-fullpage-section]");
+          const fullpageSectionId = fullpageSection ? +fullpageSection.dataset.flsFullpageId : null;
+          if (fullpageSectionId !== null) {
+            window.fullpage.switchingSection(fullpageSectionId);
+            if (document.documentElement.hasAttribute("data-fls-menu-open")) {
+              bodyUnlock();
+              document.documentElement.removeAttribute("data-fls-menu-open");
+            }
+          }
+        } else {
+          gotoBlock(gotoLinkSelector, noHeader, gotoSpeed, offsetTop);
+        }
+        e.preventDefault();
+      }
+    } else if (e.type === "watcherCallback" && e.detail) {
+      const entry = e.detail.entry;
+      const targetElement = entry.target;
+      if (targetElement.dataset.flsWatcher === "navigator") {
+        document.querySelector(
+          `[data-fls-scrollto]._navigator-active`
+        );
+        let navigatorCurrentItem;
+        if (targetElement.id && document.querySelector(`[data-fls-scrollto="#${targetElement.id}"]`)) {
+          navigatorCurrentItem = document.querySelector(
+            `[data-fls-scrollto="#${targetElement.id}"]`
+          );
+        } else if (targetElement.classList.length) {
+          for (let index = 0; index < targetElement.classList.length; index++) {
+            const element = targetElement.classList[index];
+            if (document.querySelector(`[data-fls-scrollto=".${element}"]`)) {
+              navigatorCurrentItem = document.querySelector(
+                `[data-fls-scrollto=".${element}"]`
+              );
+              break;
+            }
+          }
+        }
+        if (entry.isIntersecting) {
+          navigatorCurrentItem ? navigatorCurrentItem.classList.add("--navigator-active") : null;
+        } else {
+          navigatorCurrentItem ? navigatorCurrentItem.classList.remove("--navigator-active") : null;
+        }
+      }
+    }
+  }
+  if (getHash()) {
+    let goToHash;
+    if (document.querySelector(`#${getHash()}`)) {
+      goToHash = `#${getHash()}`;
+    } else if (document.querySelector(`.${getHash()}`)) {
+      goToHash = `.${getHash()}`;
+    }
+    goToHash ? gotoBlock(goToHash) : null;
+  }
+}
+function setTabsStatus(tabsBlock) {
+  let tabsTitles = tabsBlock.querySelectorAll("[data-fls-tabs-title]");
+  let tabsContent = tabsBlock.querySelectorAll("[data-fls-tabs-item]");
+  const tabsBlockIndex = tabsBlock.dataset.flsTabsIndex;
+  function isTabsAnamate(tabsBlock2) {
+    if (tabsBlock2.hasAttribute("data-fls-tabs-animate")) {
+      return tabsBlock2.dataset.flsTabsAnimate > 0 ? Number(tabsBlock2.dataset.flsTabsAnimate) : 500;
+    }
+  }
+  const tabsBlockAnimate = isTabsAnamate(tabsBlock);
+  if (tabsContent.length > 0) {
+    const isHash = tabsBlock.hasAttribute("data-fls-tabs-hash");
+    tabsContent = Array.from(tabsContent).filter(
+      (item) => item.closest("[data-fls-tabs]") === tabsBlock
+    );
+    tabsTitles = Array.from(tabsTitles).filter(
+      (item) => item.closest("[data-fls-tabs]") === tabsBlock
+    );
+    tabsContent.forEach((tabsContentItem, index) => {
+      if (tabsTitles[index].classList.contains("--tab-active")) {
+        if (tabsBlockAnimate) {
+          slideDown(tabsContentItem, tabsBlockAnimate);
+        } else {
+          tabsContentItem.hidden = false;
+        }
+        if (isHash && !tabsContentItem.closest(".popup")) {
+          setHash(`tab-${tabsBlockIndex}-${index}`);
+        }
+      } else {
+        if (tabsBlockAnimate) {
+          slideUp(tabsContentItem, tabsBlockAnimate);
+        } else {
+          tabsContentItem.hidden = true;
+        }
+      }
+    });
+  }
+  tabsBlock.dispatchEvent(new Event("tabSwitch"));
+}
+window.addEventListener("load", pageNavigation);
+function updateImageHeight() {
+  const bundleProducts = document.querySelector(".bundle-products");
+  const itemImage = bundleProducts == null ? void 0 : bundleProducts.querySelector(".item-product__image");
+  if (bundleProducts && itemImage) {
+    const imageHeight = itemImage.offsetHeight;
+    bundleProducts.style.setProperty("--item-image-height", `${imageHeight}px`);
+  }
+}
+document.addEventListener("DOMContentLoaded", updateImageHeight);
+window.addEventListener("resize", updateImageHeight);
 class CustomMap {
   constructor() {
     this.map = null;
@@ -5601,20 +6163,14 @@ class CustomMap {
   }
   createCustomMarker(coords, imageSrc, label) {
     if (!this.map) return null;
-    const svgMarker = {
-      path: "M0.24875 33.75C0.24875 27.63 1.74875 21.99 4.74875 16.83C7.74875 11.67 11.8588 7.58999 17.0788 4.58999C22.2988 1.58999 27.9388 0.0599891 33.9987 -1.08711e-05C40.0588 -0.0600109 45.6987 1.46999 50.9188 4.58999C56.1387 7.70999 60.2487 11.79 63.2487 16.83C66.2487 21.87 67.7487 27.51 67.7487 33.75C67.7487 36.33 67.1187 39.33 65.8587 42.75C64.5987 46.17 63.0087 49.62 61.0887 53.1C59.1687 56.58 56.9787 60.12 54.5187 63.72C52.0587 67.32 49.6587 70.68 47.3187 73.8C44.9787 76.92 42.7887 79.68 40.7487 82.08C38.7087 84.48 37.0888 86.43 35.8888 87.93L33.9987 90C33.5187 89.52 32.8888 88.8 32.1088 87.84C31.3288 86.88 29.7388 84.99 27.3388 82.17C24.9388 79.35 22.7188 76.53 20.6788 73.71C18.6388 70.89 16.2688 67.59 13.5688 63.81C10.8688 60.03 8.64875 56.43 6.90875 53.01C5.16875 49.59 3.57875 46.2 2.13875 42.84C0.69875 39.48 0.06875 36.45 0.24875 33.75ZM11.4988 33.75C11.4988 39.99 13.6888 45.3 18.0688 49.68C22.4488 54.06 27.7588 56.25 33.9987 56.25C40.2388 56.25 45.5487 54.06 49.9287 49.68C54.3087 45.3 56.4987 39.99 56.4987 33.75C56.4987 27.51 54.3087 22.23 49.9287 17.91C45.5487 13.59 40.2388 11.37 33.9987 11.25C27.7588 11.13 22.4488 13.35 18.0688 17.91C13.6888 22.47 11.4988 27.75 11.4988 33.75Z",
-      fillColor: "#E2102E",
-      // Завжди червоний
-      fillOpacity: 1,
-      strokeWeight: 0,
-      rotation: 0,
-      scale: 0.6,
-      anchor: new google.maps.Point(12, 24)
-    };
     const marker = new google.maps.Marker({
       position: coords,
       map: this.map,
-      icon: svgMarker,
+      icon: {
+        url: "/assets/img/contacts/marker.png",
+        scaledSize: new google.maps.Size(89, 97),
+        anchor: new google.maps.Point(40, 99)
+      },
       title: label,
       animation: null,
       clickable: false
@@ -5639,9 +6195,7 @@ class CustomMap {
   }
   handleDetailOpen(detailElement) {
     const coordsAttr = detailElement.getAttribute("data-map-coords");
-    const imageSrc = detailElement.getAttribute("data-map-image");
-    const label = detailElement.getAttribute("data-map-label");
-    if (!coordsAttr || !imageSrc || !label) {
+    if (!coordsAttr) {
       return;
     }
     const [lat, lng] = coordsAttr.split(",").map((coord) => parseFloat(coord.trim()));
@@ -5649,21 +6203,9 @@ class CustomMap {
       return;
     }
     const coords = { lat, lng };
-    this.updateMapInfo(imageSrc, label);
     this.moveToCoords(coords);
-    this.addMarkerIfNotExists(coords, imageSrc, label, detailElement);
+    this.addMarkerIfNotExists(coords, detailElement);
     detailElement.setAttribute("data-map-active", "true");
-  }
-  updateMapInfo(imageSrc, label) {
-    const imageElement = document.querySelector(".contacts__map-image");
-    const labelElement = document.querySelector(".contacts__map-info span");
-    if (imageElement && imageSrc) {
-      imageElement.style.backgroundImage = `url('${imageSrc}')`;
-      imageElement.classList.add("loaded");
-    }
-    if (labelElement && label) {
-      labelElement.textContent = label;
-    }
   }
   moveToCoords(coords) {
     if (!this.map) return;
@@ -5676,7 +6218,7 @@ class CustomMap {
       return pos.lat() === coords.lat && pos.lng() === coords.lng;
     });
     if (!markerExists) {
-      const marker = this.createCustomMarker(coords, imageSrc, label);
+      const marker = this.createCustomMarker(coords);
       if (marker) {
         this.markers.push(marker);
       }
@@ -6860,8 +7402,8 @@ function scope(target, options, originalOptions) {
     return e;
   }
   function calcPointToPercentage(calcPoint) {
-    var location = calcPoint - offset(scope_Base, options.ort);
-    var proposal = location * 100 / baseSize();
+    var location2 = calcPoint - offset(scope_Base, options.ort);
+    var proposal = location2 * 100 / baseSize();
     proposal = limit(proposal);
     return options.dir ? 100 - proposal : proposal;
   }
@@ -7400,8 +7942,8 @@ function scope(target, options, originalOptions) {
     delete scope_Target.noUiSlider;
   }
   function getNextStepsForHandle(handleNumber) {
-    var location = scope_Locations[handleNumber];
-    var nearbySteps = scope_Spectrum.getNearbySteps(location);
+    var location2 = scope_Locations[handleNumber];
+    var nearbySteps = scope_Spectrum.getNearbySteps(location2);
     var value = scope_Values[handleNumber];
     var increment = nearbySteps.thisStep.step;
     var decrement = null;
@@ -7423,9 +7965,9 @@ function scope(target, options, originalOptions) {
     } else {
       decrement = value - nearbySteps.stepBefore.highestStep;
     }
-    if (location === 100) {
+    if (location2 === 100) {
       increment = null;
-    } else if (location === 0) {
+    } else if (location2 === 0) {
       decrement = null;
     }
     var stepDecimals = scope_Spectrum.countStepDecimals();
