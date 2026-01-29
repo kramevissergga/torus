@@ -4788,16 +4788,29 @@ document.addEventListener("DOMContentLoaded", function() {
           next: "splide__arrow--next _icon-ch-right"
         },
         breakpoints: {
-          1199.98: {
-            perPage: 4
-          },
+          1199.98: { perPage: 4 },
           767.98: {
             gap: 6,
             pagination: true,
+            arrows: false
+          }
+        }
+      });
+      catalogSlider.on("mounted updated", function() {
+        var slidesCount = catalogSlider.length;
+        var perPage = catalogSlider.options.perPage;
+        var shouldHaveArrows = catalogSlider.options.arrows;
+        if (slidesCount <= perPage) {
+          catalogSlider.options = {
             arrows: false,
-            padding: {
-              right: 0
-            }
+            drag: false
+          };
+        } else {
+          if (shouldHaveArrows) {
+            catalogSlider.options = {
+              arrows: true,
+              drag: true
+            };
           }
         }
       });
@@ -4805,10 +4818,12 @@ document.addEventListener("DOMContentLoaded", function() {
       catalogSlider.mount();
     });
   }
-  var catalogSliderEls = document.querySelectorAll(".feedback-section__slider");
-  if (catalogSliderEls) {
-    catalogSliderEls.forEach(function(sliderEl) {
-      var catalogSlider = new Splide(sliderEl, {
+  var feedbackSliderEls = document.querySelectorAll(
+    ".feedback-section__slider"
+  );
+  if (feedbackSliderEls) {
+    feedbackSliderEls.forEach(function(sliderEl) {
+      var feedbackSlider = new Splide(sliderEl, {
         perPage: 3,
         arrows: true,
         pagination: false,
@@ -4832,8 +4847,8 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         }
       });
-      sliderEl.splide = catalogSlider;
-      catalogSlider.mount();
+      sliderEl.splide = feedbackSlider;
+      feedbackSlider.mount();
     });
   }
   var bonusesSliderEls = document.querySelectorAll(".bonuses-profile__slider");
