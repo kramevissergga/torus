@@ -2795,6 +2795,22 @@ body::after {
   font-weight: 600;
   min-width: 0;
   gap: 0.125rem;
+  position: relative;
+}
+.navbar__item span {
+  color: #fff;
+  font-size: 0.625rem;
+  border-radius: 0.625rem;
+  min-width: 1rem;
+  height: 1rem;
+  background-color: #f00;
+  padding: 0.125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -0.25rem;
+  right: 0.9375rem;
 }
 .navbar__item::before {
   font-size: 1.875rem;
@@ -7419,6 +7435,13 @@ body::after {
     font-size: 0.875rem;
     line-height: 1.2;
   }
+  .page__home {
+    display: flex;
+    flex-direction: column;
+  }
+  .home > * {
+    order: 5;
+  }
   .home__menu {
     order: 3;
   }
@@ -7427,6 +7450,9 @@ body::after {
   }
   .home__categories {
     order: 1;
+  }
+  .home__products-section {
+    order: 4;
   }
   .menu-home__item {
     font-size: 0.75rem;
