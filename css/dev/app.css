@@ -767,6 +767,9 @@ input[type="number"] {
 .--showmore-active .seo-section__content::before {
   opacity: 0;
 }
+.seo-section:has([data-fls-showmore-button][hidden]) .seo-section__content::before {
+  opacity: 0;
+}
 .seo-section__text {
   line-height: 1.25;
 }
