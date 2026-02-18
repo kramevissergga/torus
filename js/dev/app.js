@@ -4697,7 +4697,6 @@ document.addEventListener("DOMContentLoaded", function() {
         pagination: true,
         gap: 20,
         updateOnMove: true,
-        focus: 0,
         padding: {
           right: 120
         },
@@ -4710,6 +4709,9 @@ document.addEventListener("DOMContentLoaded", function() {
             padding: {
               right: 0
             }
+          },
+          499.98: {
+            perPage: 3
           }
         }
       });
@@ -4782,7 +4784,6 @@ document.addEventListener("DOMContentLoaded", function() {
         pagination: false,
         gap: 20,
         updateOnMove: true,
-        focus: 0,
         classes: {
           prev: "splide__arrow--prev _icon-ch-left",
           next: "splide__arrow--next _icon-ch-right"
@@ -4793,6 +4794,9 @@ document.addEventListener("DOMContentLoaded", function() {
             gap: 6,
             pagination: true,
             arrows: false
+          },
+          499.98: {
+            perPage: 3
           }
         }
       });
