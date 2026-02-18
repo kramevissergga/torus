@@ -4803,19 +4803,17 @@ document.addEventListener("DOMContentLoaded", function() {
       catalogSlider.on("mounted updated", function() {
         var slidesCount = catalogSlider.length;
         var perPage = catalogSlider.options.perPage;
-        var shouldHaveArrows = catalogSlider.options.arrows;
-        if (slidesCount <= perPage) {
+        var shouldDisable = slidesCount <= perPage;
+        if (shouldDisable && catalogSlider.options.drag !== false) {
           catalogSlider.options = {
             arrows: false,
             drag: false
           };
-        } else {
-          if (shouldHaveArrows) {
-            catalogSlider.options = {
-              arrows: true,
-              drag: true
-            };
-          }
+        } else if (!shouldDisable && catalogSlider.options.drag === false) {
+          catalogSlider.options = {
+            arrows: true,
+            drag: true
+          };
         }
       });
       sliderEl.splide = catalogSlider;
@@ -8137,10 +8135,10 @@ function rangeInit(rangeSlider) {
       let setRangeValues2 = function() {
         let rangeStartValue;
         let rangeEndValue;
-        if (rangeStart.value != "") {
+        if (rangeFrom.value != "") {
           rangeStartValue = rangeFrom.value;
         }
-        if (rangeEnd.value != "") {
+        if (rangeTo.value != "") {
           rangeEndValue = rangeTo.value;
         }
         rangeLine.noUiSlider.set([rangeStartValue, rangeEndValue]);
@@ -8170,8 +8168,8 @@ function rangeInit(rangeSlider) {
         rangeFrom.value = `${values[0]}`;
         rangeTo.value = `${values[1]}`;
       });
+      setRangeValues2();
     }
-    setRangeValues();
   }
 }
 document.addEventListener("click", (e) => {
@@ -8179,8 +8177,9 @@ document.addEventListener("click", (e) => {
     if (e.target.closest("[data-filter-toggle]")) {
       bodyLockToggle();
       document.documentElement.toggleAttribute("data-filter-open");
-    } else if (!e.target.closest(".filters-catalog__wrapper") && document.documentElement.hasAttribute("data-filter-open")) {
+    } else if (!e.target.closest(".filter-catalog__wrapper") && document.documentElement.hasAttribute("data-filter-open")) {
       bodyUnlock(0);
+      console.log("+");
       document.documentElement.removeAttribute("data-filter-open");
     }
   }
