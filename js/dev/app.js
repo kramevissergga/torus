@@ -4779,7 +4779,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (catalogSliderEls) {
     catalogSliderEls.forEach(function(sliderEl) {
       var catalogSlider = new Splide(sliderEl, {
-        perPage: 6,
+        perPage: 5,
         arrows: true,
         pagination: false,
         gap: 20,
@@ -4791,12 +4791,13 @@ document.addEventListener("DOMContentLoaded", function() {
         breakpoints: {
           1199.98: { perPage: 4 },
           767.98: {
-            gap: 6,
+            gap: 4,
+            perPage: 3,
             pagination: true,
             arrows: false
           },
           499.98: {
-            perPage: 3
+            perPage: 2
           }
         }
       });
@@ -4818,6 +4819,54 @@ document.addEventListener("DOMContentLoaded", function() {
       });
       sliderEl.splide = catalogSlider;
       catalogSlider.mount();
+    });
+  }
+  var brandsCatalogSliderEls = document.querySelectorAll(
+    ".brands-catalog__slider"
+  );
+  if (brandsCatalogSliderEls) {
+    brandsCatalogSliderEls.forEach(function(sliderEl) {
+      var brandsCatalogSlider = new Splide(sliderEl, {
+        perPage: 6,
+        arrows: true,
+        pagination: false,
+        gap: 20,
+        updateOnMove: true,
+        classes: {
+          prev: "splide__arrow--prev _icon-ch-left",
+          next: "splide__arrow--next _icon-ch-right"
+        },
+        breakpoints: {
+          1199.98: { perPage: 4 },
+          767.98: {
+            gap: 10,
+            perPage: 3,
+            pagination: true,
+            arrows: false
+          },
+          499.98: {
+            perPage: 2
+          }
+        }
+      });
+      brandsCatalogSlider.on("mounted updated", function() {
+        var slidesCount = brandsCatalogSlider.length;
+        var perPage = brandsCatalogSlider.options.perPage;
+        var shouldDisable = slidesCount <= perPage;
+        if (shouldDisable && brandsCatalogSlider.options.drag !== false) {
+          brandsCatalogSlider.options = {
+            arrows: false,
+            drag: false
+          };
+        } else if (!shouldDisable && brandsCatalogSlider.options.drag === false) {
+          brandsCatalogSlider.options = {
+            arrows: true,
+            drag: true
+          };
+        }
+      });
+      sliderEl.splide = brandsCatalogSlider;
+      brandsCatalogSlider.mount();
     });
   }
   var feedbackSliderEls = document.querySelectorAll(
@@ -5265,13 +5314,41 @@ class Popup {
 window.flsPopup = new Popup({});
 function menuInit() {
   document.addEventListener("click", function(e) {
+    const menuSettings = [
+      {
+        trigger: "[data-fls-menu]",
+        container: ".pc-menu",
+        attribute: "data-fls-menu-open"
+      },
+      {
+        trigger: "[data-cat-menu-toggle]",
+        container: ".categories-menu",
+        attribute: "data-cat-menu-open"
+      }
+    ];
     if (bodyLockStatus) {
-      if (e.target.closest("[data-fls-menu]")) {
-        bodyLockToggle();
-        document.documentElement.toggleAttribute("data-fls-menu-open");
-      } else if (!e.target.closest(".mobile-menu") && !e.target.closest(".pc-menu") && document.documentElement.hasAttribute("data-fls-menu-open")) {
-        bodyUnlock(0);
-        document.documentElement.removeAttribute("data-fls-menu-open");
+      let stateChanged = false;
+      menuSettings.forEach((menu) => {
+        const isTrigger = e.target.closest(menu.trigger);
+        const isInsideMenu = e.target.closest(menu.container);
+        const isOpen = document.documentElement.hasAttribute(menu.attribute);
+        if (isTrigger) {
+          document.documentElement.toggleAttribute(menu.attribute);
+          stateChanged = true;
+        } else if (!isInsideMenu && isOpen) {
+          document.documentElement.removeAttribute(menu.attribute);
+          stateChanged = true;
+        }
+      });
+      if (stateChanged) {
+        const anyOpen = menuSettings.some(
+          (menu) => document.documentElement.hasAttribute(menu.attribute)
+        );
+        if (anyOpen) {
+          if (!document.documentElement.classList.contains("lock")) bodyLock();
+        } else {
+          bodyUnlock(0);
+        }
       }
     }
   });
