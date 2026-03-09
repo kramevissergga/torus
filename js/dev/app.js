@@ -4709,9 +4709,6 @@ document.addEventListener("DOMContentLoaded", function() {
             padding: {
               right: 0
             }
-          },
-          499.98: {
-            perPage: 3
           }
         }
       });
@@ -4792,12 +4789,8 @@ document.addEventListener("DOMContentLoaded", function() {
           1199.98: { perPage: 4 },
           767.98: {
             gap: 4,
-            perPage: 3,
             pagination: true,
             arrows: false
-          },
-          499.98: {
-            perPage: 2
           }
         }
       });
