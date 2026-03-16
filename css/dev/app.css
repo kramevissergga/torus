@@ -431,17 +431,20 @@ input[type="number"] {
   aspect-ratio: 304/198;
   display: flex;
   justify-content: center;
+  min-width: 0;
   align-items: end;
 }
 .item-product__pic {
   width: 100%;
   display: flex;
   justify-content: center;
+  min-width: 0;
 }
 .item-product__pic img {
   transition: all 0.3s;
   aspect-ratio: 1/1;
   width: 59.210526%;
+  min-width: 0;
 }
 .item-product__header {
   position: absolute;
@@ -7311,6 +7314,7 @@ body::after {
   }
   .categories-home__label {
     font-size: 0.625rem;
+    word-break: break-all;
   }
   .categories-home__count {
     font-size: 0.625rem;
